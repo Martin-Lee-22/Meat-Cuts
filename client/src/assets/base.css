@@ -1,0 +1,54 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --primary-color: red;
+  --secondary-color: blue;
+  --tertiary-color: green;
+  --background-color: yellow;
+
+  --font-size: 1rem;
+}
+
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1, h2, h3, h4, h5, h6
+button, input, label {
+  line-height: 1.1;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat", serif;
+}
+
+p, span, ::placeholder, input[type="text"] {
+  font-family: "Roboto Flex", sans-serif;
+  font-weight: 500;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input, button,
+textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}

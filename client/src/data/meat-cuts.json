@@ -1,0 +1,34 @@
+[
+    {
+        "id": 0,
+        "type": "Cow"
+    },
+    {
+        "id": 1,
+        "type": "Chicken"
+    },
+    {
+        "id": 2,
+        "type": "Pig"
+    },
+    {
+        "id": 3,
+        "type": "Sheep"
+    },
+    {
+        "id": 4,
+        "type": "Horse"
+    },
+    {
+        "id": 5,
+        "type": "Duck"
+    },
+    {
+        "id": 6,
+        "type": "Rabbit"
+    },
+    {
+        "id": 6,
+        "type": "Goat"
+    }
+]

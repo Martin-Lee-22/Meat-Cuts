@@ -1,0 +1,266 @@
+[
+    {
+        "id": 0,
+        "name": "Spaghetti",
+        "description": "Delicious spaghetti recipe",
+        "ingredients": [
+            "1 pound spaghetti",
+            "1 cup tomato sauce",
+            "1/2 cup grated Parmesan cheese",
+            "Salt and pepper to taste"
+        ],
+        "steps": [
+            "Cook the spaghetti according to the package instructions.",
+            "In a separate pan, heat the tomato sauce and season with salt and pepper.",
+            "Drain the cooked spaghetti and add it to the sauce.",
+            "Serve the spaghetti with grated Parmesan cheese on top."
+        ],
+        "tags": ["pasta", "spaghetti", "tomato sauce", "grated cheese"],
+        "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc685?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "duration": 30,
+        "servings": 4,
+        "calories": 600,
+        "difficulty": "Easy",
+        "rating": 4.5,
+        "reviews": [
+            {
+                "name": "John Doe",
+                "comment": "This recipe is amazing! I tried it and it was delicious!",
+                "rating": 5
+            },
+            {
+                "name": "Jane Smith",
+                "comment": "I love this recipe! It's simple and delicious.",
+                "rating": 4
+            },
+            {
+                "name": "Bob Johnson",
+                "comment": "The instructions were clear and easy to follow.",
+                "rating": 4.5
+            }
+        ],
+        "views": 15000,
+        "author": "Bobby Lee",
+        "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+        "id": 0,
+        "name": "Spaghetti",
+        "description": "Delicious spaghetti recipe",
+        "ingredients": [
+            "1 pound spaghetti",
+            "1 cup tomato sauce",
+            "1/2 cup grated Parmesan cheese",
+            "Salt and pepper to taste"
+        ],
+        "steps": [
+            "Cook the spaghetti according to the package instructions.",
+            "In a separate pan, heat the tomato sauce and season with salt and pepper.",
+            "Drain the cooked spaghetti and add it to the sauce.",
+            "Serve the spaghetti with grated Parmesan cheese on top."
+        ],
+        "tags": ["pasta", "spaghetti", "tomato sauce", "grated cheese"],
+        "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc685?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "duration": 30,
+        "servings": 4,
+        "calories": 600,
+        "difficulty": "Easy",
+        "rating": 4.5,
+        "reviews": [
+            {
+                "name": "John Doe",
+                "comment": "This recipe is amazing! I tried it and it was delicious!",
+                "rating": 5
+            },
+            {
+                "name": "Jane Smith",
+                "comment": "I love this recipe! It's simple and delicious.",
+                "rating": 4
+            },
+            {
+                "name": "Bob Johnson",
+                "comment": "The instructions were clear and easy to follow.",
+                "rating": 4.5
+            }
+        ],
+        "views": 15000,
+        "author": "Bobby Lee",
+        "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+        "id": 0,
+        "name": "Spaghetti",
+        "description": "Delicious spaghetti recipe",
+        "ingredients": [
+            "1 pound spaghetti",
+            "1 cup tomato sauce",
+            "1/2 cup grated Parmesan cheese",
+            "Salt and pepper to taste"
+        ],
+        "steps": [
+            "Cook the spaghetti according to the package instructions.",
+            "In a separate pan, heat the tomato sauce and season with salt and pepper.",
+            "Drain the cooked spaghetti and add it to the sauce.",
+            "Serve the spaghetti with grated Parmesan cheese on top."
+        ],
+        "tags": ["pasta", "spaghetti", "tomato sauce", "grated cheese"],
+        "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc685?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "duration": 30,
+        "servings": 4,
+        "calories": 600,
+        "difficulty": "Easy",
+        "rating": 4.5,
+        "reviews": [
+            {
+                "name": "John Doe",
+                "comment": "This recipe is amazing! I tried it and it was delicious!",
+                "rating": 5
+            },
+            {
+                "name": "Jane Smith",
+                "comment": "I love this recipe! It's simple and delicious.",
+                "rating": 4
+            },
+            {
+                "name": "Bob Johnson",
+                "comment": "The instructions were clear and easy to follow.",
+                "rating": 4.5
+            }
+        ],
+        "views": 15000,
+        "author": "Bobby Lee",
+        "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+        "id": 0,
+        "name": "Spaghetti",
+        "description": "Delicious spaghetti recipe",
+        "ingredients": [
+            "1 pound spaghetti",
+            "1 cup tomato sauce",
+            "1/2 cup grated Parmesan cheese",
+            "Salt and pepper to taste"
+        ],
+        "steps": [
+            "Cook the spaghetti according to the package instructions.",
+            "In a separate pan, heat the tomato sauce and season with salt and pepper.",
+            "Drain the cooked spaghetti and add it to the sauce.",
+            "Serve the spaghetti with grated Parmesan cheese on top."
+        ],
+        "tags": ["pasta", "spaghetti", "tomato sauce", "grated cheese"],
+        "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc685?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "duration": 30,
+        "servings": 4,
+        "calories": 600,
+        "difficulty": "Easy",
+        "rating": 4.5,
+        "reviews": [
+            {
+                "name": "John Doe",
+                "comment": "This recipe is amazing! I tried it and it was delicious!",
+                "rating": 5
+            },
+            {
+                "name": "Jane Smith",
+                "comment": "I love this recipe! It's simple and delicious.",
+                "rating": 4
+            },
+            {
+                "name": "Bob Johnson",
+                "comment": "The instructions were clear and easy to follow.",
+                "rating": 4.5
+            }
+        ],
+        "views": 15000,
+        "author": "Bobby Lee",
+        "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+        "id": 0,
+        "name": "Spaghetti",
+        "description": "Delicious spaghetti recipe",
+        "ingredients": [
+            "1 pound spaghetti",
+            "1 cup tomato sauce",
+            "1/2 cup grated Parmesan cheese",
+            "Salt and pepper to taste"
+        ],
+        "steps": [
+            "Cook the spaghetti according to the package instructions.",
+            "In a separate pan, heat the tomato sauce and season with salt and pepper.",
+            "Drain the cooked spaghetti and add it to the sauce.",
+            "Serve the spaghetti with grated Parmesan cheese on top."
+        ],
+        "tags": ["pasta", "spaghetti", "tomato sauce", "grated cheese"],
+        "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc685?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "duration": 30,
+        "servings": 4,
+        "calories": 600,
+        "difficulty": "Easy",
+        "rating": 4.5,
+        "reviews": [
+            {
+                "name": "John Doe",
+                "comment": "This recipe is amazing! I tried it and it was delicious!",
+                "rating": 5
+            },
+            {
+                "name": "Jane Smith",
+                "comment": "I love this recipe! It's simple and delicious.",
+                "rating": 4
+            },
+            {
+                "name": "Bob Johnson",
+                "comment": "The instructions were clear and easy to follow.",
+                "rating": 4.5
+            }
+        ],
+        "views": 15000,
+        "author": "Bobby Lee",
+        "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+        "id": 0,
+        "name": "Spaghetti",
+        "description": "Delicious spaghetti recipe",
+        "ingredients": [
+            "1 pound spaghetti",
+            "1 cup tomato sauce",
+            "1/2 cup grated Parmesan cheese",
+            "Salt and pepper to taste"
+        ],
+        "steps": [
+            "Cook the spaghetti according to the package instructions.",
+            "In a separate pan, heat the tomato sauce and season with salt and pepper.",
+            "Drain the cooked spaghetti and add it to the sauce.",
+            "Serve the spaghetti with grated Parmesan cheese on top."
+        ],
+        "tags": ["pasta", "spaghetti", "tomato sauce", "grated cheese"],
+        "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc685?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "duration": 30,
+        "servings": 4,
+        "calories": 600,
+        "difficulty": "Easy",
+        "rating": 4.5,
+        "reviews": [
+            {
+                "name": "John Doe",
+                "comment": "This recipe is amazing! I tried it and it was delicious!",
+                "rating": 5
+            },
+            {
+                "name": "Jane Smith",
+                "comment": "I love this recipe! It's simple and delicious.",
+                "rating": 4
+            },
+            {
+                "name": "Bob Johnson",
+                "comment": "The instructions were clear and easy to follow.",
+                "rating": 4.5
+            }
+        ],
+        "views": 15000,
+        "author": "Bobby Lee",
+        "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    }
+]
