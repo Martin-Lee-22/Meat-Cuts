@@ -4,6 +4,7 @@ import { ref } from "vue"
 
 export const useRecipeStore = defineStore('recipe', () => {
     const recipe = ref<recipe>({} as recipe)
+    const showRecipe = ref(false)
 
     /**
      * Retrieves the current value of the recipe object.
@@ -38,5 +39,21 @@ export const useRecipeStore = defineStore('recipe', () => {
         recipe.value = {} as recipe
     }
 
-    return { getRecipe, isRecipeEmpty, setRecipe, resetRecipe }
+    /**
+     * Toggles the visibility state of the recipe.
+     * Changes the boolean value of `showRecipe` to its opposite.
+     */
+    function toggleRecipe(){
+        showRecipe.value = !showRecipe.value
+    }
+
+    /**
+     * Retrieves the current visibility state of the recipe.
+     * @returns {boolean} true if the recipe is visible, false otherwise
+     */
+    function getShowRecipe(){
+        return showRecipe.value
+    }
+
+    return { getRecipe, isRecipeEmpty, setRecipe, resetRecipe, toggleRecipe, getShowRecipe }
 })

@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import RecipesListItem from './RecipesListItem.vue';
-    import { getRecipesAPI, getRecipes } from '@/api/recipes';
+    import { getRecipesAPI, getRecipes, isRecipesEmpty } from '@/api/recipes';
+    import { staggerListOnEnter } from '@/shared/animations';
     import { useCutsStore } from '@/stores/cuts';
     import { watch } from 'vue';
 
@@ -16,21 +17,7 @@
 </script>
 
 <template>
-    <div class="recipes-list-container">
-        <RecipesListItem v-for="recipe in getRecipes()" :key="recipe.id" :recipe="recipe"/>
-    </div>
+    <TransitionGroup appear @enter="staggerListOnEnter" v-if="!isRecipesEmpty()">
+        <RecipesListItem v-for="(recipe, index) in getRecipes()" :key="recipe.id" :recipe="recipe" :index="index"/>
+    </TransitionGroup>
 </template>
-
-<style lang="css" scoped>
-    .recipes-list-container{
-        width: 100%;
-        padding: 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-content: flex-start;
-        row-gap: 10px;
-        column-gap: 8px;
-        overflow-y: scroll;
-    }
-</style>

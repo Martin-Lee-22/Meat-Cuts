@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    <div class="animal-item" @click="props.setAnimal(props.animal)" :data-index="index">
+    <div class="animal-item" @click="props.setAnimal(props.animal)" :data-index="props.index">
         {{props.animal.type}}
     </div>
 </template>

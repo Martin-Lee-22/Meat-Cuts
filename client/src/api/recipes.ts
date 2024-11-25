@@ -22,4 +22,12 @@ function getRecipes(){
     return recipes.value
 }
 
-export {getRecipes, getRecipesAPI}
+/**
+ * Returns true if the recipes array is empty, false otherwise.
+ * @returns {boolean} true if recipes is empty
+ */
+function isRecipesEmpty(){
+    return recipes.value.length === 0
+}
+
+export {getRecipes, getRecipesAPI, isRecipesEmpty}

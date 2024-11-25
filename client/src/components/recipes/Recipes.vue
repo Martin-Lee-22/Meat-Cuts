@@ -3,8 +3,7 @@
     import { useResizeStore } from '@/stores/resize';
     import { onUpdated, useTemplateRef} from 'vue';
     import RecipesHeader from './RecipesHeader.vue';
-    import RecipesList from './RecipesList.vue';
-    import RecipeListSkeleton from './component/RecipeListSkeleton.vue';
+    import RecipesContent from './RecipesContent.vue';
 
     const cutsStore = useCutsStore();
     const resizeStore = useResizeStore();
@@ -32,20 +31,14 @@
 <template>
         <section class="recipes-container" v-if="!cutsStore.isCutEmpty()" :style="{width: resizeStore.getSecondElementWidth() + '%'}" ref="recipes-section">
             <RecipesHeader/>
-            <Suspense>
-                <template #default>
-                    <RecipesList/>
-                </template>
-                <template #fallback>
-                    <RecipeListSkeleton/>
-                </template>
-            </Suspense>
+            <RecipesContent/>
         </section>
 </template>
 
 <style lang="css" scoped>
     .recipes-container{
-        position: relative;
+        position: absolute;
+        right: 0;
         height: inherit;
         &::before{
             content: '';

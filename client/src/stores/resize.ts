@@ -7,7 +7,7 @@ export const useResizeStore = defineStore('resize', () => {
     const initialWidth = 100 // Initial width of the first element
     const initialChangeWidth = 60
     const minFirstElementWidth = 30
-    const maxFirstElementWidth = 70
+    const maxFirstElementWidth = 60
 
     const firstElementWidth = ref(initialWidth)
     const secondElementWidth = ref(0)

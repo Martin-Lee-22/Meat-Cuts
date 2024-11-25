@@ -10,6 +10,7 @@ import BaseSearchBar from '../base/BaseSearchBar.vue';
 
 <style lang="css" scoped>
     .recipes-header{
+        min-height: 8%;
         display: flex;
         flex-direction: row;
         justify-content: center;
