@@ -45,6 +45,25 @@
     transform: translateX(400px);
 }
 
+/* Move Horizontally*/
+
+.horizontal-move-enter-active,
+.horizontal-move-leave-active {
+    transition: 0.5s ease-in-out;
+}
+.horizontal-move-enter-from{
+    left: 100%;
+}
+.horizontal-move-enter-to{
+    left: 0.25%;
+}
+.horizontal-move-leave-from{
+    left: 0.25%;
+}
+.horizontal-move-leave-to {
+    left: 100%;
+}
+
 
 /* CSS ANIMATIONS*/
 

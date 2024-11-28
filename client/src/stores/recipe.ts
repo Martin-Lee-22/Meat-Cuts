@@ -43,7 +43,7 @@ export const useRecipeStore = defineStore('recipe', () => {
      * Toggles the visibility state of the recipe.
      * Changes the boolean value of `showRecipe` to its opposite.
      */
-    function toggleRecipe(){
+    function toggleShowRecipe(){
         showRecipe.value = !showRecipe.value
     }
 
@@ -55,5 +55,5 @@ export const useRecipeStore = defineStore('recipe', () => {
         return showRecipe.value
     }
 
-    return { getRecipe, isRecipeEmpty, setRecipe, resetRecipe, toggleRecipe, getShowRecipe }
+    return { getRecipe, isRecipeEmpty, setRecipe, resetRecipe, toggleShowRecipe, getShowRecipe }
 })

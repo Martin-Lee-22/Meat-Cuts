@@ -30,7 +30,6 @@
 
 <template>
         <section class="recipes-container" v-if="!cutsStore.isCutEmpty()" :style="{width: resizeStore.getSecondElementWidth() + '%'}" ref="recipes-section">
-            <RecipesHeader/>
             <RecipesContent/>
         </section>
 </template>

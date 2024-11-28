@@ -1,18 +1,22 @@
 <script setup lang="ts">
     import RecipeListSkeleton from './component/RecipeListSkeleton.vue';
+import RecipesHeader from './RecipesHeader.vue';
     import RecipesList from './RecipesList.vue';
 </script>
 
 <template>
-    <div class="recipes-list-container">
-        <Suspense>
-            <template #default>
-                <RecipesList/>
-            </template>
-            <template #fallback>
-                <RecipeListSkeleton/>
-            </template>
-        </Suspense>
+    <div>
+        <RecipesHeader/>
+        <div class="recipes-list-container">
+            <Suspense>
+                <template #default>
+                    <RecipesList/>
+                </template>
+                <template #fallback>
+                    <RecipeListSkeleton/>
+                </template>
+            </Suspense>
+        </div>
     </div>
 </template>
 

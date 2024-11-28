@@ -5,7 +5,7 @@
     import { useRecipeStore } from '@/stores/recipe';
 
     const props = defineProps(['recipe', 'index']);
-    const recipe: recipe = props.recipe;
+    const recipeData: recipe = props.recipe;
 
     const recipeStore = useRecipeStore();
 
@@ -13,8 +13,8 @@
      * Sets the current recipe in the recipe store and toggles the recipe panel
      */
     function onClick(){
-        recipeStore.setRecipe(recipe)
-        recipeStore.toggleRecipe()
+        recipeStore.setRecipe(recipeData)
+        recipeStore.toggleShowRecipe()
     }
 </script>
 

@@ -1,12 +1,20 @@
 <script setup lang="ts">
     import RecipesLists from './RecipesLists.vue';
     import Recipe from '../recipe/Recipe.vue';
+    import { useRecipeStore } from '@/stores/recipe';
+import { watch } from 'vue';
+
+    const recipeStore = useRecipeStore();
+
+    watch(recipeStore.getShowRecipe, () => {
+        console.log(recipeStore.getShowRecipe())
+    })
 </script>
 
 <template>
     <article class="recipes-content-container">
         <RecipesLists/>
-        <Recipe/>
+        <Recipe v-if="recipeStore.getShowRecipe()"/>
     </article>
 </template>
 
