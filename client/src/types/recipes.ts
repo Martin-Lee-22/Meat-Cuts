@@ -7,7 +7,10 @@ type ingredients = {
 type review = {
     name: string,
     comment: string,
-    rating: number
+    rating: number,
+    date: Date,
+    likes: number,
+    dislikes: number
 }
 
 type recipe = {
@@ -28,7 +31,8 @@ type recipe = {
         authorImage: string,
         views: number,
         animal: string,
-        cut: string
+        cut: string,
+        published: Date
 }
 
-export type {recipe}
+export type {recipe, review}

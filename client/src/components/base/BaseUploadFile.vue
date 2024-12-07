@@ -1,11 +1,37 @@
 <script setup lang="ts">
+    import { onMounted, ref, useTemplateRef } from 'vue';
+
+    const input = useTemplateRef('file-upload')
+    const previewImgSrc = ref('')
+
+    /**
+     * Previews a photo by reading the selected file from an input element.
+     * If a file is selected, it uses FileReader to read the file as a data URL
+     * and sets the resulting data URL to the previewImgSrc ref for display.
+     */
+    const previewPhoto = () => {
+        const file = input.value!.files;
+        if (file) {
+            const fileReader = new FileReader();
+            fileReader.onload = function (event) {
+                if(event.target?.result) previewImgSrc.value = event.target.result as string
+            }
+            fileReader.readAsDataURL(file[0]);
+        }
+    }
+
+    onMounted(()=>{
+        input.value?.addEventListener("change", previewPhoto);
+    })
+    
 </script>
 
 <template>
-    <div class="upload-file-container">
-        <span class="material-symbols-outlined">upload</span>
-        <input type="file" id="image" name="image">
-        <label for="image" class="upload-file-label">Upload Image (.jpg, .png)</label>
+    <div class="upload-file-container" :style="{backgroundImage: 'url(' + previewImgSrc +')'}">
+        <span class="material-symbols-outlined big-upload" v-if="!previewImgSrc" >upload</span>
+        <input type="file" id="image" name="image" accept="image/png, image/jpeg" ref="file-upload">
+        <label for="image" class="upload-file-label" v-if="!previewImgSrc">Drag & Drop image here or click to upload image.</label>
+        <span class="material-symbols-outlined small-upload" v-if="previewImgSrc">upload</span>
     </div>
 </template>
 
@@ -16,39 +42,59 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-size:contain;
+        background-position: center;
+        background-repeat:no-repeat;
         background-color: rgb(240, 240, 240);
-        width: 95%;
+        width: 99%;
         height: 325px;
         border-radius: 8px;
         &:hover{
-            border: 2px solid rgb(188, 197, 252);
+            outline: 2px solid rgb(188, 197, 252);
         }
         & input{
             height: 100%;
             width: 100%;
-            opacity: 1;
+            opacity: 0;
             &:hover{
                 cursor: pointer;
             }
         }
         & span{
             position: absolute;
-            text-align: center;
             box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-            top: 45%;
-            left: 50%;
-            font-size: 4rem;
-            color: rgb(200, 199, 199);
-            transform: translate(-50%, -50%);
+            color: rgb(173, 171, 171);
             border-radius: 5px;
             background-color: rgb(223, 222, 222);
+            &:hover{
+            cursor: pointer;
         }
+        }
+        & label{
+            margin-top: 8px;
+            text-align: center;
+            font-weight: 600;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+    .big-upload{
+        top: 45%;
+        left: 50%;
+        font-size: 4rem;
+        transform: translate(-50%, -50%);
+    }
+    .small-upload{
+        bottom: 10px;
+        right: 10px;
+        color: white;
     }
     .upload-file-label{
         position: absolute;
-            top: 62%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: rgb(128, 128, 128);
+        top: 62%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: rgb(128, 128, 128);
     }
 </style>

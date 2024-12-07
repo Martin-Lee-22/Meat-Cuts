@@ -23,7 +23,7 @@ import { watch } from 'vue';
         float: right;
         width: 99.5%;
         position: relative;
-        height: 92%;
+        height: 100%;
         overflow-y: scroll;
         overflow-x: hidden;
     }
