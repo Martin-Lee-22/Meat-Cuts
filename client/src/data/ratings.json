@@ -1,0 +1,28 @@
+[
+    {
+        "id": 0,
+        "heading": "Excellent",
+        "rating": 5
+    },
+    {
+        "id": 1,
+        "heading": "Very Good",
+        "rating": 4
+    },
+    {
+        "id": 2,
+        "heading": "Average",
+        "rating": 3
+    },
+    {
+        "id": 3,
+        "heading": "Poor",
+        "rating": 2
+    },
+    {
+        "id": 4,
+        "heading": "Terrible",
+        "rating": 1
+    }
+    
+]

@@ -7,7 +7,7 @@ import { watch } from 'vue';
     const recipeStore = useRecipeStore();
 
     watch(recipeStore.getShowRecipe, () => {
-        console.log(recipeStore.getShowRecipe())
+
     })
 </script>
 

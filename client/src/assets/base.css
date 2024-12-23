@@ -34,7 +34,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Montserrat", serif;
 }
 
-p, span, ::placeholder, input[type="text"], input[type="number"], label, option, select, textarea, time {
+p, span, ::placeholder, input[type="text"], input[type="number"],input[type="submit"], label, option, select, textarea, time, tr {
   font-family: "Roboto Flex", sans-serif;
   font-weight: 500;
 }
@@ -51,4 +51,12 @@ input, button,
 textarea, select {
   font-family: inherit;
   font-size: inherit;
+}
+
+/* Global styling for all inputs */
+input{
+  border: 1px solid rgb(224, 224, 224);
+  &:active, &:focus{
+    outline: 1px solid rgb(186, 186, 186);
+  }
 }

@@ -7,7 +7,7 @@
     <div v-if="!editMode"><p>{{title}}: <span>{{data}}</span></p></div>
     <div v-else>
         <label :for=title>{{title}}:</label>
-        <BaseSelect :title=title :data=data :options="options"/>
+        <BaseSelect :title=title :selected=data :options="options"/>
     </div>
 </template>
 

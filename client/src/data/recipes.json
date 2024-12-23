@@ -21,7 +21,7 @@
         "servings": 4,
         "calories": 600,
         "difficulty": "Easy",
-        "rating": 4.5,
+        "rating": 4,
         "reviews": [
             {
                 "name": "John Doe",
@@ -42,7 +42,7 @@
             {
                 "name": "Bob Johnson",
                 "comment": "The instructions were clear and easy to follow.",
-                "rating": 4.5,
+                "rating": 4,
                 "date": "2022-01-01",
                 "likes": 10,
                 "dislikes": 2
@@ -51,7 +51,8 @@
         "views": 15000,
         "author": "Bobby Lee",
         "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "published": "2018-01-10"
+        "published": "2018-01-10",
+        "article": "example article"
     },
     {
         "id": 1,
@@ -75,7 +76,7 @@
         "servings": 4,
         "calories": 600,
         "difficulty": "Easy",
-        "rating": 4.5,
+        "rating": 4,
         "reviews": [
             {
                 "name": "John Doe",
@@ -96,7 +97,7 @@
             {
                 "name": "Bob Johnson",
                 "comment": "The instructions were clear and easy to follow.",
-                "rating": 4.5,
+                "rating": 4,
                 "date": "2022-01-01",
                 "likes": 10,
                 "dislikes": 2
@@ -105,7 +106,8 @@
         "views": 15000,
         "author": "Bobby Lee",
         "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "published": "2018-01-10"
+        "published": "2018-01-10",
+        "article": "example article"
     },
     {
         "id": 2,
@@ -129,7 +131,7 @@
         "servings": 4,
         "calories": 600,
         "difficulty": "Easy",
-        "rating": 4.5,
+        "rating": 4,
         "reviews": [
             {
                 "name": "John Doe",
@@ -150,7 +152,7 @@
             {
                 "name": "Bob Johnson",
                 "comment": "The instructions were clear and easy to follow.",
-                "rating": 4.5,
+                "rating": 4,
                 "date": "2022-01-01",
                 "likes": 10,
                 "dislikes": 2
@@ -159,7 +161,8 @@
         "views": 15000,
         "author": "Bobby Lee",
         "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "published": "2018-01-10"
+        "published": "2018-01-10",
+        "article": "example article"
     },
     {
         "id": 3,
@@ -183,7 +186,7 @@
         "servings": 4,
         "calories": 600,
         "difficulty": "Easy",
-        "rating": 4.5,
+        "rating": 4,
         "reviews": [
             {
                 "name": "John Doe",
@@ -204,7 +207,7 @@
             {
                 "name": "Bob Johnson",
                 "comment": "The instructions were clear and easy to follow.",
-                "rating": 4.5,
+                "rating": 4,
                 "date": "2022-01-01",
                 "likes": 10,
                 "dislikes": 2
@@ -213,7 +216,8 @@
         "views": 15000,
         "author": "Bobby Lee",
         "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "published": "2018-01-10"
+        "published": "2018-01-10",
+        "article": "example article"
     },
     {
         "id": 4,
@@ -237,7 +241,7 @@
         "servings": 4,
         "calories": 600,
         "difficulty": "Easy",
-        "rating": 4.5,
+        "rating": 4,
         "reviews": [
             {
                 "name": "John Doe",
@@ -258,7 +262,7 @@
             {
                 "name": "Bob Johnson",
                 "comment": "The instructions were clear and easy to follow.",
-                "rating": 4.5,
+                "rating": 4,
                 "date": "2022-01-01",
                 "likes": 10,
                 "dislikes": 2
@@ -267,7 +271,8 @@
         "views": 15000,
         "author": "Bobby Lee",
         "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "published": "2018-01-10"
+        "published": "2018-01-10",
+        "article": "example article"
     },
     {
         "id": 5,
@@ -291,7 +296,7 @@
         "servings": 4,
         "calories": 600,
         "difficulty": "Easy",
-        "rating": 4.5,
+        "rating": 4,
         "reviews": [
             {
                 "name": "John Doe",
@@ -312,7 +317,7 @@
             {
                 "name": "Bob Johnson",
                 "comment": "The instructions were clear and easy to follow.",
-                "rating": 4.5,
+                "rating": 4,
                 "date": "2022-01-01",
                 "likes": 10,
                 "dislikes": 2
@@ -321,6 +326,7 @@
         "views": 15000,
         "author": "Bobby Lee",
         "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "published": "2018-01-10"
+        "published": "2018-01-10",
+        "article": "example article"
     }
 ]

@@ -13,6 +13,12 @@ type review = {
     dislikes: number
 }
 
+type rating = {
+    id: number,
+    heading: string,
+    rating: number
+}
+
 type recipe = {
         id: number,
         name: string,
@@ -32,7 +38,8 @@ type recipe = {
         views: number,
         animal: string,
         cut: string,
-        published: Date
+        published: Date,
+        article: string
 }
 
-export type {recipe, review}
+export type {recipe, review, rating}

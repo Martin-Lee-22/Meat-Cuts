@@ -1,3 +1,5 @@
+import type { Ref } from "vue";
+
 function formatDate(date: Date) {
     const options: Intl.DateTimeFormatOptions = {
         year: 'numeric',

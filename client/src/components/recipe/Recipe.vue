@@ -5,7 +5,7 @@
     import RecipeHeader from './header/RecipeHeader.vue';
     import RecipeBody from './body/RecipeBody.vue';
     import type { recipe } from '@/types/recipes';
-import RecipeReviews from './reviews/RecipeReviews.vue';
+    import RecipeReviews from './reviews/RecipeReviews.vue';
 
     const container = useTemplateRef('container')
     const recipeStore = useRecipeStore()

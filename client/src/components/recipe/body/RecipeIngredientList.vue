@@ -20,7 +20,6 @@ import RecipeIngredientListItem from './RecipeIngredientListItem.vue';
 
 <style lang="css" scoped>
     .recipe-ingredient-list-container{
-        padding-left: 18px;
         & ul{
             margin-top: 15px;
             list-style: none;

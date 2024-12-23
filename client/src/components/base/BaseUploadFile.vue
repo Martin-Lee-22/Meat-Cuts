@@ -30,7 +30,7 @@
     <div class="upload-file-container" :style="{backgroundImage: 'url(' + previewImgSrc +')'}">
         <span class="material-symbols-outlined big-upload" v-if="!previewImgSrc" >upload</span>
         <input type="file" id="image" name="image" accept="image/png, image/jpeg" ref="file-upload">
-        <label for="image" class="upload-file-label" v-if="!previewImgSrc">Drag & Drop image here or click to upload image.</label>
+        <label for="image" class="upload-file-label" v-if="!previewImgSrc">Drop or Click to upload image.</label>
         <span class="material-symbols-outlined small-upload" v-if="previewImgSrc">upload</span>
     </div>
 </template>
@@ -45,7 +45,6 @@
         background-size:contain;
         background-position: center;
         background-repeat:no-repeat;
-        background-color: rgb(240, 240, 240);
         width: 99%;
         height: 325px;
         border-radius: 8px;

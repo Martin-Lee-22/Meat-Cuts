@@ -1,51 +1,37 @@
 <script setup lang="ts">
-    import {onUpdated, ref, useTemplateRef, watch } from 'vue';
+    import {ref, useTemplateRef, watch } from 'vue';
 
     const showMenu = ref(false)
-    const menuContainer = useTemplateRef('more-menu-container')
+    const moreContainer = useTemplateRef('base-more-container')
 
-    // const onClickOutside = (element: HTMLElement | null) => {
-    //     document.addEventListener('click', e => {
-    //         if (element && !element.contains(e.target as Node)) console.log('Clicked outside!')
-    //     });
-    // };
-
-    // onMounted(()=>{
-    //     document.addEventListener('click', e => {
-    //         if(e.target !== container.value) {console.log('Clicked outside!')
-    //             console.log(container.value)
-    //             console.log(e.target)
-    //             showMenu.value = false
-    //         }
-    //     })
-    // })
-
-    function onClickOutside(e: MouseEvent) {
-        console.log(e.target)
-        console.log(menuContainer.value)
-        if(e.target !== menuContainer.value) {
-            console.log('clikked outside!')
-            document.removeEventListener('click', onClickOutside)
-        }
+    /**
+     * Listens for mouseup events outside of the menu container and sets showMenu to false
+     * @param {MouseEvent} e - The mouse event triggered on mouse up.
+     */
+    function onOutsideClick(e: MouseEvent) {
+        const target = e.target as HTMLElement
+        if(!moreContainer.value?.contains(target)) showMenu.value = false
     }
 
-    onUpdated(() => {
-        if(showMenu.value){
-            document.addEventListener('click', onClickOutside)
+    watch(showMenu, () => {
+        if(showMenu.value) {
+            document.addEventListener('mouseup', onOutsideClick)
+        } else {
+            document.removeEventListener('mouseup', onOutsideClick)
         }
     })
 
 </script>
 
 <template>
-    <div class="base-more-container">
+    <div class="base-more-container"  ref="base-more-container">
         <div v-if="showMenu" class="more-menu-container" ref="more-menu-container">
             <div class="more-menu-item" @click="showMenu = !showMenu">
                 <span class="material-symbols-outlined">flag</span>
                 <span>Report</span>
             </div>
         </div>
-        <button @click="showMenu = !showMenu">
+        <button @click="showMenu = !showMenu;">
             <span class="material-symbols-outlined">more_horiz</span>
         </button>
     </div>
@@ -67,8 +53,9 @@
     .more-menu-item{
         display: flex;
         align-items: center;
-        column-gap: 10px;
-        width: fit-content;
+        justify-content: space-around;
+        width: 100%;
+        min-width: 100px;
         padding: 0.25rem;
         border-radius: 5px;
         &:hover{
@@ -87,7 +74,6 @@
     button{
         padding: 0 3px 0 3px;
         border: none;
-        border: 1px solid red;
         background-color: transparent;
         border-radius: 50%;
         color: rgb(189, 189, 189);

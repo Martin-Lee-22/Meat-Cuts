@@ -32,16 +32,17 @@
     }
     p{
         margin-top: 6px;
-        font-size: 1.15rem;
+        font-size: 1rem;
         font-weight: 300;
     }
     button{
-        margin-right: 5px;
+        float: right;
     }
     textarea{
         width: 100%;
         font-family: "Roboto Flex", sans-serif;
         font-weight: 300;
         font-size: 0.95rem;
+        resize: vertical; 
     }
 </style>

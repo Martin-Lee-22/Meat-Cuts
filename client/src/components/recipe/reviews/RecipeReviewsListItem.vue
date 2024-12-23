@@ -1,9 +1,9 @@
 <script setup lang="ts">
-    import BaseMore from '@/components/base/BaseMore.vue';
-import BaseStarsRating from '@/components/base/BaseStarsRating.vue';
+    import BaseStarsRating from '@/components/base/BaseStarsRating.vue';
     import BaseThumbsUpDown from '@/components/base/BaseThumbsUpDown.vue';
     import type { review } from '@/types/recipes';
-import { formatDate } from '@/utils/helperFunctions';
+    import { formatDate } from '@/utils/helperFunctions';
+    import RecipeReviewsListItemMore from '@/components/recipe/reviews/RecipeReviewsListItemMore.vue';
 
     const props = defineProps<{review: review}>();
 
@@ -16,10 +16,10 @@ import { formatDate } from '@/utils/helperFunctions';
         <span class="reviewer-name">{{review.name}}</span>
         <!-- <time>{{review.date}}</time> -->
         <time>{{formatDate(exampleDate)}}</time>
-        <BaseStarsRating :rating="review.rating"/>
+        <BaseStarsRating :rating="review.rating" :editMode="false"/>
         <p>{{review.comment}}</p>
         <BaseThumbsUpDown :likes="review.likes" :dislikes="review.dislikes"/>
-        <BaseMore/>
+        <RecipeReviewsListItemMore/>
     </li>
 </template>
 
@@ -30,6 +30,7 @@ import { formatDate } from '@/utils/helperFunctions';
         flex-wrap: wrap;
         row-gap: 4px;
         padding: 0.85rem;
+        padding-left: 0;
         border-bottom: 1px solid rgb(228, 225, 225);
         position: relative;
     }

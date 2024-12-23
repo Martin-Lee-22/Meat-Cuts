@@ -13,7 +13,7 @@
     <li>
         <input v-if="!editMode" type="checkbox" @change="checked = !checked" >
         <p v-if="!editMode" class="ingredient" :style="{'text-decoration': checked && !editMode ? 'line-through' : 'none'}">{{props.ingredient}}</p>
-        <input v-else type="text" :value="props.ingredient">
+        <textarea v-else :value="props.ingredient"/>
         <button class="delete-button" v-if="editMode"><span class="material-symbols-outlined">delete</span></button>
     </li>
 </template>
@@ -22,13 +22,16 @@
     li{
         display: flex;
         flex-direction: row;
+        align-items: center;
         column-gap: 8px;
     }
-    input[type="text"]{
-        font-size: 0.85rem;
-        font-weight: 400;
+    textarea{
+        font-size: 0.9rem;
         width: 100%;
-        padding: 5px 0 5px 5px;
+        resize: none;
+        font-family: "Roboto Flex", sans-serif;
+        font-weight: 300;
+        padding: 0.25rem;
     }
     .ingredient{
         font-weight: 300;
