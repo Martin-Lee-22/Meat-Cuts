@@ -4,10 +4,9 @@
     import type { review } from '@/types/recipes';
     import { formatDate } from '@/utils/helperFunctions';
     import RecipeReviewsListItemMore from '@/components/recipe/reviews/RecipeReviewsListItemMore.vue';
+    import RecipeReviewsListItemComment from './RecipeReviewsListItemComment.vue';
 
-    const props = defineProps<{review: review}>();
-
-    const exampleDate = new Date();
+    defineProps<{review: review, index: number}>();
 
 </script>
 
@@ -15,9 +14,9 @@
     <li class="recipe-reviews-list-item">
         <span class="reviewer-name">{{review.name}}</span>
         <!-- <time>{{review.date}}</time> -->
-        <time>{{formatDate(exampleDate)}}</time>
+        <time>{{formatDate(review.date)}}</time>
         <BaseStarsRating :rating="review.rating" :editMode="false"/>
-        <p>{{review.comment}}</p>
+        <RecipeReviewsListItemComment :comment="review.comment" :index="index"/>
         <BaseThumbsUpDown :likes="review.likes" :dislikes="review.dislikes"/>
         <RecipeReviewsListItemMore/>
     </li>

@@ -2,7 +2,7 @@
     import RecipesLists from './RecipesLists.vue';
     import Recipe from '../recipe/Recipe.vue';
     import { useRecipeStore } from '@/stores/recipe';
-import { watch } from 'vue';
+    import { watch } from 'vue';
 
     const recipeStore = useRecipeStore();
 

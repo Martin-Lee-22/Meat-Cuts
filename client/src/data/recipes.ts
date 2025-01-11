@@ -1,7 +1,11 @@
-[
+import type { recipe } from "@/types/recipes"
+
+const recipes:recipe[] = [
     {
         "id": 0,
-        "name": "Spaghetti",
+        "animal": "cow",
+        "cut": "steak",
+        "name": "123456789012345678901234567890123456789012345678901234567890",
         "description": "Delicious spaghetti recipe",
         "ingredients": [
             "1 pound spaghetti",
@@ -24,39 +28,53 @@
         "rating": 4,
         "reviews": [
             {
+                "id": 0,
                 "name": "John Doe",
-                "comment": "This recipe is amazing! I tried it and it was delicious!",
+                "comment": "This recipe is amazing! I tried it and it was delicious! alksdjfalksdjfas flkajflkasdj flkasj flaksjdf laksdjflkasj flkwajeofl awef jaw;ifj aw;lkf j;aslj fawoei f;owaeh f;oweh fo;aw efo;we a;of jaw;l efaj we;fo wa;ofh o;wa hf;owa fwiae fo;whe fjaweljf;alkf ajw efjw;aofkj awejfae awekfj lweafo;weijhgew afjew;alkfj awefljwae;fhlaw;lefkj awefj;owaejf;awe f efjkweajf;lkwajef;lk awejf;wlaef",
                 "rating": 5,
-                "date": "2022-01-01",
+                "date": new Date("2024-03-25"),
                 "likes": 10,
                 "dislikes": 2
             },
             {
+                "id": 1,
                 "name": "Jane Smith",
                 "comment": "I love this recipe! It's simple and delicious.",
                 "rating": 4,
-                "date": "2022-01-01",
+                "date": new Date("2023-03-25"),
                 "likes": 10,
                 "dislikes": 2
             },
             {
+                "id": 2,
                 "name": "Bob Johnson",
                 "comment": "The instructions were clear and easy to follow.",
                 "rating": 4,
-                "date": "2022-01-01",
+                "date": new Date("2022-03-25"),
+                "likes": 10,
+                "dislikes": 2
+            },
+            {
+                "id": 3,
+                "name": "Asmon Gold",
+                "comment": "I prefer steak.",
+                "rating": 1,
+                "date": new Date("2024-03-25"),
                 "likes": 10,
                 "dislikes": 2
             }
         ],
+        "published": new Date("2018-01-10"),
         "views": 15000,
         "author": "Bobby Lee",
         "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "published": "2018-01-10",
         "article": "example article"
     },
     {
         "id": 1,
         "name": "Spaghetti",
+        "animal": "chicken",
+        "cut": "breast",
         "description": "Delicious spaghetti recipe",
         "ingredients": [
             "1 pound spaghetti",
@@ -79,39 +97,44 @@
         "rating": 4,
         "reviews": [
             {
+                "id": 0,
                 "name": "John Doe",
-                "comment": "This recipe is amazing! I tried it and it was delicious!",
+                "comment": "This recipe is amazing! I tried it and it was delicious! alksdjfalksdjfas flkajflkasdj flkasj flaksjdf laksdjflkasj flkwajeofl awef jaw;ifj aw;lkf j;aslj fawoei f;owaeh f;oweh fo;aw efo;we a;of jaw;l efaj we;fo wa;ofh o;wa hf;owa fwiae fo;whe fjaweljf;alkf ajw efjw;aofkj awejfae awekfj lweafo;weijhgew afjew;alkfj awefljwae;fhlaw;lefkj awefj;owaejf;awe f efjkweajf;lkwajef;lk awejf;wlaef",
                 "rating": 5,
-                "date": "2022-01-01",
+                "date": new Date("2024-03-25"),
                 "likes": 10,
                 "dislikes": 2
             },
             {
+                "id": 1,
                 "name": "Jane Smith",
                 "comment": "I love this recipe! It's simple and delicious.",
                 "rating": 4,
-                "date": "2022-01-01",
+                "date": new Date("2023-03-25"),
                 "likes": 10,
                 "dislikes": 2
             },
             {
+                "id": 2,
                 "name": "Bob Johnson",
                 "comment": "The instructions were clear and easy to follow.",
                 "rating": 4,
-                "date": "2022-01-01",
+                "date": new Date("2022-03-25"),
                 "likes": 10,
                 "dislikes": 2
             }
         ],
+        "published": new Date("2019-01-10"),
         "views": 15000,
         "author": "Bobby Lee",
         "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "published": "2018-01-10",
         "article": "example article"
     },
     {
         "id": 2,
         "name": "Spaghetti",
+        "animal": "sheep",
+        "cut": "rack",
         "description": "Delicious spaghetti recipe",
         "ingredients": [
             "1 pound spaghetti",
@@ -134,39 +157,44 @@
         "rating": 4,
         "reviews": [
             {
+                "id": 0,
                 "name": "John Doe",
-                "comment": "This recipe is amazing! I tried it and it was delicious!",
+                "comment": "This recipe is amazing! I tried it and it was delicious! alksdjfalksdjfas flkajflkasdj flkasj flaksjdf laksdjflkasj flkwajeofl awef jaw;ifj aw;lkf j;aslj fawoei f;owaeh f;oweh fo;aw efo;we a;of jaw;l efaj we;fo wa;ofh o;wa hf;owa fwiae fo;whe fjaweljf;alkf ajw efjw;aofkj awejfae awekfj lweafo;weijhgew afjew;alkfj awefljwae;fhlaw;lefkj awefj;owaejf;awe f efjkweajf;lkwajef;lk awejf;wlaef",
                 "rating": 5,
-                "date": "2022-01-01",
+                "date": new Date("2024-03-25"),
                 "likes": 10,
                 "dislikes": 2
             },
             {
+                "id": 1,
                 "name": "Jane Smith",
                 "comment": "I love this recipe! It's simple and delicious.",
                 "rating": 4,
-                "date": "2022-01-01",
+                "date": new Date("2023-03-25"),
                 "likes": 10,
                 "dislikes": 2
             },
             {
+                "id": 2,
                 "name": "Bob Johnson",
                 "comment": "The instructions were clear and easy to follow.",
                 "rating": 4,
-                "date": "2022-01-01",
+                "date": new Date("2022-03-25"),
                 "likes": 10,
                 "dislikes": 2
             }
         ],
+        "published": new Date("2017-01-10"),
         "views": 15000,
         "author": "Bobby Lee",
         "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "published": "2018-01-10",
         "article": "example article"
     },
     {
         "id": 3,
         "name": "Spaghetti",
+        "animal": "duck",
+        "cut": "wing",
         "description": "Delicious spaghetti recipe",
         "ingredients": [
             "1 pound spaghetti",
@@ -189,39 +217,44 @@
         "rating": 4,
         "reviews": [
             {
+                "id": 0,
                 "name": "John Doe",
-                "comment": "This recipe is amazing! I tried it and it was delicious!",
+                "comment": "This recipe is amazing! I tried it and it was delicious! alksdjfalksdjfas flkajflkasdj flkasj flaksjdf laksdjflkasj flkwajeofl awef jaw;ifj aw;lkf j;aslj fawoei f;owaeh f;oweh fo;aw efo;we a;of jaw;l efaj we;fo wa;ofh o;wa hf;owa fwiae fo;whe fjaweljf;alkf ajw efjw;aofkj awejfae awekfj lweafo;weijhgew afjew;alkfj awefljwae;fhlaw;lefkj awefj;owaejf;awe f efjkweajf;lkwajef;lk awejf;wlaef",
                 "rating": 5,
-                "date": "2022-01-01",
+                "date": new Date("2024-03-25"),
                 "likes": 10,
                 "dislikes": 2
             },
             {
+                "id": 1,
                 "name": "Jane Smith",
                 "comment": "I love this recipe! It's simple and delicious.",
                 "rating": 4,
-                "date": "2022-01-01",
+                "date": new Date("2023-03-25"),
                 "likes": 10,
                 "dislikes": 2
             },
             {
+                "id": 2,
                 "name": "Bob Johnson",
                 "comment": "The instructions were clear and easy to follow.",
                 "rating": 4,
-                "date": "2022-01-01",
+                "date": new Date("2022-03-25"),
                 "likes": 10,
                 "dislikes": 2
             }
         ],
+        "published": new Date("2016-01-10"),
         "views": 15000,
         "author": "Bobby Lee",
         "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "published": "2018-01-10",
         "article": "example article"
     },
     {
         "id": 4,
         "name": "Spaghetti",
+        "animal": "horse",
+        "cut": "leg",
         "description": "Delicious spaghetti recipe",
         "ingredients": [
             "1 pound spaghetti",
@@ -244,39 +277,44 @@
         "rating": 4,
         "reviews": [
             {
+                "id": 0,
                 "name": "John Doe",
-                "comment": "This recipe is amazing! I tried it and it was delicious!",
+                "comment": "This recipe is amazing! I tried it and it was delicious! alksdjfalksdjfas flkajflkasdj flkasj flaksjdf laksdjflkasj flkwajeofl awef jaw;ifj aw;lkf j;aslj fawoei f;owaeh f;oweh fo;aw efo;we a;of jaw;l efaj we;fo wa;ofh o;wa hf;owa fwiae fo;whe fjaweljf;alkf ajw efjw;aofkj awejfae awekfj lweafo;weijhgew afjew;alkfj awefljwae;fhlaw;lefkj awefj;owaejf;awe f efjkweajf;lkwajef;lk awejf;wlaef",
                 "rating": 5,
-                "date": "2022-01-01",
+                "date": new Date("2024-03-25"),
                 "likes": 10,
                 "dislikes": 2
             },
             {
+                "id": 1,
                 "name": "Jane Smith",
                 "comment": "I love this recipe! It's simple and delicious.",
                 "rating": 4,
-                "date": "2022-01-01",
+                "date": new Date("2023-03-25"),
                 "likes": 10,
                 "dislikes": 2
             },
             {
+                "id": 2,
                 "name": "Bob Johnson",
                 "comment": "The instructions were clear and easy to follow.",
                 "rating": 4,
-                "date": "2022-01-01",
+                "date": new Date("2022-03-25"),
                 "likes": 10,
                 "dislikes": 2
             }
         ],
+        "published": new Date("2015-01-10"),
         "views": 15000,
         "author": "Bobby Lee",
         "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "published": "2018-01-10",
         "article": "example article"
     },
     {
         "id": 5,
         "name": "Spaghetti",
+        "animal": "pig",
+        "cut": "pork chops",
         "description": "Delicious spaghetti recipe",
         "ingredients": [
             "1 pound spaghetti",
@@ -299,34 +337,39 @@
         "rating": 4,
         "reviews": [
             {
+                "id": 0,
                 "name": "John Doe",
-                "comment": "This recipe is amazing! I tried it and it was delicious!",
+                "comment": "This recipe is amazing! I tried it and it was delicious! alksdjfalksdjfas flkajflkasdj flkasj flaksjdf laksdjflkasj flkwajeofl awef jaw;ifj aw;lkf j;aslj fawoei f;owaeh f;oweh fo;aw efo;we a;of jaw;l efaj we;fo wa;ofh o;wa hf;owa fwiae fo;whe fjaweljf;alkf ajw efjw;aofkj awejfae awekfj lweafo;weijhgew afjew;alkfj awefljwae;fhlaw;lefkj awefj;owaejf;awe f efjkweajf;lkwajef;lk awejf;wlaef",
                 "rating": 5,
-                "date": "2022-01-01",
+                "date": new Date("2024-03-25"),
                 "likes": 10,
                 "dislikes": 2
             },
             {
+                "id": 1,
                 "name": "Jane Smith",
                 "comment": "I love this recipe! It's simple and delicious.",
                 "rating": 4,
-                "date": "2022-01-01",
+                "date": new Date("2023-03-25"),
                 "likes": 10,
                 "dislikes": 2
             },
             {
+                "id": 2,
                 "name": "Bob Johnson",
                 "comment": "The instructions were clear and easy to follow.",
                 "rating": 4,
-                "date": "2022-01-01",
+                "date": new Date("2022-03-25"),
                 "likes": 10,
                 "dislikes": 2
             }
         ],
+        "published": new Date("2014-01-10"),
         "views": 15000,
         "author": "Bobby Lee",
         "authorImage": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "published": "2018-01-10",
         "article": "example article"
     }
 ]
+
+export {recipes}

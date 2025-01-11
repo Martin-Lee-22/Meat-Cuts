@@ -3,9 +3,12 @@
     import Rating from './component/Rating.vue';
     import TagList from './component/TagList.vue';
     import { useRecipeStore } from '@/stores/recipe';
+    import { formatLength } from '@/utils/helperFunctions';
 
-    const props = defineProps(['recipe', 'index']);
-    const recipeData: recipe = props.recipe;
+    const props = defineProps<{recipe: recipe, index: number}>();
+    
+    const maxLength = 37
+    const name = formatLength(props.recipe.name, maxLength)
 
     const recipeStore = useRecipeStore();
 
@@ -13,16 +16,16 @@
      * Sets the current recipe in the recipe store and toggles the recipe panel
      */
     function onClick(){
-        recipeStore.setRecipe(recipeData)
+        recipeStore.setRecipe(props.recipe)
         recipeStore.toggleShowRecipe()
     }
 </script>
 
 <template>
-    <div class="recipes-list-item-container" @click="onClick" :data-index="props.index">
+    <div class="recipes-list-item-container" @click="onClick" :data-index="index">
         <img src="https://picsum.photos/175/255" alt="random image"/>
         <div class="recipe-list-item-info-container">
-            <h5 class="recipes-list-item-title">{{recipe.name}}</h5>
+            <h5 class="recipes-list-item-title">{{name}}</h5>
             <Rating :rating="recipe.rating"/>
             <TagList :recipe="recipe"/>
         </div>
@@ -59,10 +62,14 @@
         color: white;
         border-radius: 5px;
         padding: 0 0.5rem 0 0.5rem;
+        overflow-wrap: break-word;
         & p{
             margin-top: 0.25em;
             font-size: 0.6rem;
             font-weight: 200;
+        }
+        & h5{
+            
         }
     }
 </style>

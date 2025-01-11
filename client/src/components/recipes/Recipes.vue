@@ -2,7 +2,6 @@
     import { useCutsStore } from '@/stores/cuts';
     import { useResizeStore } from '@/stores/resize';
     import { onUpdated, useTemplateRef} from 'vue';
-    import RecipesHeader from './RecipesHeader.vue';
     import RecipesContent from './RecipesContent.vue';
 
     const cutsStore = useCutsStore();

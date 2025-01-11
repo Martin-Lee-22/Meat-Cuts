@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import data from '../data/recipes.json'
+import {recipes as data} from '@/data/recipes';
 import type { recipe } from '@/types/recipes';
 
 const recipes = ref<recipe[]>([])

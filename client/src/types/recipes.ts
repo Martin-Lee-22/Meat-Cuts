@@ -5,6 +5,7 @@ type ingredients = {
 }
 
 type review = {
+    id: number,
     name: string,
     comment: string,
     rating: number,

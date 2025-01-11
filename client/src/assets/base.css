@@ -15,6 +15,7 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
+  scroll-behavior: smooth;
 }
 
 /* Set core body defaults */
@@ -34,9 +35,9 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Montserrat", serif;
 }
 
-p, span, ::placeholder, input[type="text"], input[type="number"],input[type="submit"], label, option, select, textarea, time, tr {
+a, p, span, ::placeholder, input[type="text"], input[type="number"],input[type="submit"], input[type="checkbox"] ,label, option, select, textarea, time, tr {
   font-family: "Roboto Flex", sans-serif;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 /* Make images easier to work with */

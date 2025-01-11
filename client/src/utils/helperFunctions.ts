@@ -1,12 +1,90 @@
-import type { Ref } from "vue";
-
+/**
+ * Formats a date as a string in the format "Year-Month-Day".
+ * @param {Date} date - The date to be formatted.
+ * @returns {string} The formatted string.
+ */
 function formatDate(date: Date) {
-    const options: Intl.DateTimeFormatOptions = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    };
-    return date.toLocaleDateString('en-US', options);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based, so we add 1
+    const day = String(date.getDate()).padStart(2, '0'); // Pad day with leading zero if needed
+
+    return `${year}-${month}-${day}`;
 }
 
-export { formatDate };
+/**
+ * Checks if the given string is a valid date in the format "Month Day, Year", where:
+ * - Month is the full name of the month (e.g. January, February, ...)
+ * - Day is a number from 1 to 31
+ * - Year is a four-digit number
+ * @param {string} dateStr - The date string to be checked.
+ * @returns {boolean} true if the date string is valid, false otherwise.
+ */
+function isValidDateFormat(dateStr: string) {
+    // Regular expression for detecting the format "Month Day, Year"
+    const regex = /^(January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4}$/;
+    return regex.test(dateStr);
+}
+
+/**
+ * Counts the number of lines of text within a specified element.
+ * 
+ * @param {string} parentElement - The name attribute of the parent element whose height is used for calculation.
+ * @param {string} textElement - The name attribute of the text element whose line height is used for calculation.
+ * @param {number} index - An index to uniquely identify elements by appending it to their name attributes.
+ * @returns {number} The number of lines calculated based on the height of the parent and the line height of the text.
+ * Returns 0 if the parent or text element is not found.
+ */
+
+function countLines(parentElement: string, textElement: string, index:number) {
+    var parent = document.querySelector(`[name="${parentElement + index}"]`);
+    var text =  document.querySelector(`[name="${textElement + index}"]`);
+    if(parent && text) {
+        var height = window.getComputedStyle(parent).height.replace('px', '')
+        var lineHeight = window.getComputedStyle(text).lineHeight.replace('px', '')
+        var lines = parseInt(height) / parseInt(lineHeight)
+        return lines
+    }
+    return 0
+}
+
+/**
+     * Format the number of data to a more human-readable format.
+     * If greater than 10,000 and less than 1,000,000, use 'K data' (e.g. 12.5K data)
+     * If greater than 1,000,000 use 'M data' (e.g. 1.2M data)
+     * Otherwise, use the number of data (e.g. 500 data)
+     * @return {string}
+     */
+function formatViews(data: number){
+    if(data > 10000 && data < 1000000){
+        return (data / 1000) + 'K views';
+    }
+    if(data > 1000000){
+        return (data / 1000000) + 'M views';
+    }
+    return data + ' views';
+}
+
+/**
+ * Formats a string to a given length, appending an ellipsis if it exceeds the length
+ * @param {string} data - A string that needs to be formatted
+ * @param {number} maxLength - The maximum length of the string
+ * @returns {string} The formatted string
+ */
+function formatLength(data: string, maxLength: number){
+    if(data.length > 15) return data.substring(0, maxLength) + '...'
+    return data
+}
+
+/**
+ * Adjusts the font size of a specified HTML element based on its content length.
+ *
+ * @param elementID - The ID of the HTML element whose font size is to be adjusted.
+ * @param baseFontSize - The initial font size to start from.
+ * @param reduceSize - The divisor used to reduce the font size based on the content length.
+ */
+function formatElementTextSize(elementID: string, baseFontSize: number, reduceSize: number){
+    const element = document.getElementById(elementID)
+    if(element) element.style.fontSize = baseFontSize - element.innerHTML.length / reduceSize + 'px';
+}
+
+export { formatDate, countLines, isValidDateFormat, formatLength, formatElementTextSize };

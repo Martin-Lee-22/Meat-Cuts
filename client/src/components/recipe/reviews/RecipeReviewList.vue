@@ -1,20 +1,43 @@
 <script setup lang="ts">
     import type { review } from '@/types/recipes';
-import RecipeReviewsListItem from './RecipeReviewsListItem.vue';
-import BaseSelect from '@/components/base/BaseSelect.vue';
+    import RecipeReviewsListItem from './RecipeReviewsListItem.vue';
+    import BaseSelect from '@/components/base/BaseSelect.vue';
+    import {ref } from 'vue';
     
-    const props = defineProps<{reviews: review[]}>();
+    defineProps<{reviews: review[]}>();
+    const sortFunction = ref();
+
+    function sortByDateAsc(a:any, b:any){
+        return a.date - b.date;
+    };
+
+    function sortByDateDesc(a:any, b:any){
+        return b.date - a.date;
+    };
+
+    function sortByRatingAsc(a: any, b: any){
+        return a.rating - b.rating
+    }
+    function sortByRatingDesc(a: any, b: any){
+        return b.rating - a.rating
+    }
+    const options = [
+        {name:'Date (newest)', function: sortByDateDesc}, 
+        {name:'Date (oldest)', function: sortByDateAsc},
+        {name:'Highest Rating', function:sortByRatingDesc},
+        {name:'Lowest Rating', function:sortByRatingAsc},
+    ]
 </script>
 
 <template>
     <div class="recipe-reviews-list-container">
         <div>
             <span>Sort by:</span>
-            <BaseSelect :title="'Sort by:'" :data="'Date'" :options="['Date', 'Rating']"/>
+            <BaseSelect v-model="sortFunction" :options="options" default="Date (newest)"/>
         </div>
         <div class="recipe-reviews-list-inner-container">
             <ul>
-                <RecipeReviewsListItem v-for="review in reviews" :review="review"/>
+                <RecipeReviewsListItem v-for="(review, index) in reviews.sort(sortFunction)" :key="review.id" :index="index" :review="review"/>
             </ul>
         </div>
     </div>
@@ -40,6 +63,8 @@ import BaseSelect from '@/components/base/BaseSelect.vue';
         margin-right: 0.3rem;
     }
     select{
-        border: none;
+        border: 0.5px solid lightgray;
+        outline: none;
+        padding: 0.2rem;
     }
 </style>

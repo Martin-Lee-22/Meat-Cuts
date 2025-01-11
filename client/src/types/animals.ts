@@ -1,12 +1,12 @@
-type animal = {
+export type animal = {
     id: number,
     type: string,
     cuts: cut[]
 }
 
-type cut = {
-    cut: string,
-    path: string
+export type cut = {
+    id: number,
+    title: string,
+    shape: string,
+    coords: string
 }
-
-export type {animal, cut}

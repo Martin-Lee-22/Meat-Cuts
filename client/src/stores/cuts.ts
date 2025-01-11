@@ -49,7 +49,7 @@ export const useCutsStore = defineStore('cuts', () => {
      * @returns {Ref<Object>} The current animal object.
      */
         function getAnimal(){
-            return animal
+            return animal.value
         }
 
     /**
@@ -57,7 +57,7 @@ export const useCutsStore = defineStore('cuts', () => {
      * @returns {Ref<Object>} The current cut object.
      */
     function getCut(){
-        return cut
+        return cut.value
     }
 
 /**

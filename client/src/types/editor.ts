@@ -4,5 +4,7 @@ export type editorExtensions = {
     addRating: boolean,
     addPost: boolean,
     addHighlights: boolean,
-    addTextAlignments: boolean
+    addTextAlignments: boolean,
+    addYoutubeVideo: boolean,
+    addUnderline: boolean
 }

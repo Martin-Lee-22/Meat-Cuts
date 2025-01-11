@@ -21,7 +21,7 @@
     </section>
 </template>
 
-<style lang="css" scoped>
+<style lang="css">
     .animal-selector-container{
         display: flex;
         flex-direction: column;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import RecipeListSkeleton from './component/RecipeListSkeleton.vue';
-import RecipesHeader from './RecipesHeader.vue';
+    import RecipesHeader from './RecipesHeader.vue';
     import RecipesList from './RecipesList.vue';
 </script>
 

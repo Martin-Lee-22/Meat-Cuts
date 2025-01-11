@@ -1,32 +1,31 @@
 <script setup lang="ts">;
     import BaseUploadFile from '@/components/base/BaseUploadFile.vue';
     import RecipeHeaderInfo from './RecipeHeaderInfo.vue';
-    import RecipeHeaderSelect from './RecipeHeaderSelect.vue';
     import RecipeHeaderTitle from './RecipeHeaderTitle.vue';
     import BaseStarsRating from '@/components/base/BaseStarsRating.vue';
     import type { recipe } from '@/types/recipes';
 
-    const props = defineProps<{recipe: recipe, editMode: boolean}>();
+    defineProps<{recipe: recipe, editMode: boolean}>();
+    const recipeModel = defineModel('recipe');
 </script>
 
 <template>
     <div class="recipe-header-container">
         <img src="https://picsum.photos/200/100" alt="random image" class="recipe-header-image" v-if="!editMode"/>
         <BaseUploadFile v-else/>
-        <RecipeHeaderTitle :title="props.recipe.name" :edit-mode="editMode"/>
-        <div class="rating-container">
+        <RecipeHeaderTitle v-model:title="(recipeModel as recipe).name" :edit-mode="editMode"/>
+        <div v-if="!editMode" class="rating-container">
             <BaseStarsRating :rating="recipe.rating"/>
-            <p>({{props.recipe.reviews.length}}) Reviews</p>
+            <a href="#recipe-reviews">({{recipe.reviews.length}}) Reviews</a>
         </div>
-        <div class="article-container">
-            <RecipeHeaderInfo title="Author" :data="props.recipe.author" :edit-mode="editMode" type="text" :width="'100%'"/>
-            <RecipeHeaderInfo title="Published" :data="props.recipe.published" :edit-mode="editMode" type="date" :width="'90%'"/>
+        <div class="article-info-container">
+            <RecipeHeaderInfo title="Author" v-model:data="(recipeModel as recipe).author" :edit-mode="editMode" type="text" :width="'100%'"/>
+            <RecipeHeaderInfo title="Published" v-model:data="(recipeModel as recipe).published"  :edit-mode="editMode" type="date" :width="'90%'"/>
         </div>
         <div class="recipe-header-info-container">
-            <RecipeHeaderSelect title="Difficulty" :data="props.recipe.difficulty" :options="['Easy', 'Medium', 'Hard']" :edit-mode="editMode"/>
-            <RecipeHeaderInfo title="Servings" :data="props.recipe.servings" :edit-mode="editMode" type="number"/>
-            <RecipeHeaderInfo title="Calories" :data="props.recipe.calories" :edit-mode="editMode" type="number"/>
-            <RecipeHeaderInfo title="Duration (mins)" :data="props.recipe.duration" :edit-mode="editMode" type="number"/>
+            <RecipeHeaderInfo title="Servings" v-model:data="(recipeModel as recipe).servings" :edit-mode="editMode" type="number"/>
+            <RecipeHeaderInfo title="Calories" v-model:data="(recipeModel as recipe).calories" :edit-mode="editMode" type="number"/>
+            <RecipeHeaderInfo title="Duration (mins)" v-model:data="(recipeModel as recipe).duration" :edit-mode="editMode" type="number"/>
         </div>
     </div>
 </template>
@@ -35,17 +34,16 @@
     .recipe-header-container{
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
         row-gap: 15px;
-        & h1{
-            font-size: 1.5rem;
-        }
+        text-align: center;
     }
     .recipe-header-image{
         width: 100%;
         height: 325px;
     }
-    .article-container{
+    .article-info-container{
         display: flex;
         flex-direction: row;
         width: 100%;
@@ -69,15 +67,21 @@
         & p{
             text-wrap: nowrap;
         }
+        & a:link {
+            color: black;
+        }
+        & a:visited {
+            color: black;
+        }
     }
-    :deep(.recipe-header-info-container){
+    .recipe-header-info-container{
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: center;
         font-size: 0.9rem;
         & div{
-            width: 22%;
+            width: 30%;
             text-align: center;
             padding: 18px 0 18px 0;
             border-top: 2px solid #eee;

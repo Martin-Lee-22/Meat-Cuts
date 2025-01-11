@@ -1,0 +1,46 @@
+@media print{
+    .animal-selector-container *{
+        display: none;
+    }
+    .recipes-container[style]{
+        width: 100% !important;
+        &::before{
+            display: none !important;
+        }
+    }
+    .recipes-list-container{
+        display: none !important;
+    }
+    .recipe-header-image{
+        display: none;
+    }
+    .rating-container{
+        display: none;
+    }
+    .close-recipe-button{
+        display: none;
+    }
+    .recipe-reviews-container{
+        display: none;
+    }
+    .recipe-article{
+        display: none;
+    }
+    .recipe-social-toolbar-container{
+        display: none !important;
+    }
+    #__vue-devtools-container__{
+        display: none !important;
+    }
+
+    /* This is to make multiple pages to print instead of having everything on one page */
+    * { 
+        overflow: visible !important; 
+    } 
+}
+
+/* This is to get rid of title, URL, and date/time of a print page */
+@page { 
+    size: auto;  
+    margin: 8mm; 
+}

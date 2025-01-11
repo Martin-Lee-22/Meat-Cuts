@@ -1,10 +1,11 @@
 <script setup lang="ts">
-    import animals from '../../data/meat-cuts.json';
     import { useCutsStore } from '@/stores/cuts';
     import AnimalListItem from './AnimalListItem.vue';
     import { staggerListOnEnter, staggerListOnLeave } from '@/shared/animations';
+    import { cow } from '@/data/meat-cuts';
 
     const cutsStore = useCutsStore();
+    const animals = [cow]
 
 </script>
 

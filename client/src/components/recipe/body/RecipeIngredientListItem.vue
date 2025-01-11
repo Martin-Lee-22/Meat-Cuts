@@ -1,8 +1,11 @@
 <script setup lang="ts">
     import { ref, watch } from 'vue';
-
-    const props = defineProps(['ingredient', 'editMode']);
+    import { useRecipeStore } from '@/stores/recipe';
+    
+    const recipe = ref(useRecipeStore().getRecipe())
+    const props = defineProps(['ingredient', 'editMode', 'index']);
     const checked = ref(false);
+    const minIngredients = 1 // minimum amount of ingredients a recipe can have for the delete button to appear
 
     watch(()=>props.editMode, () => {
         if(props.editMode) checked.value = false
@@ -13,8 +16,8 @@
     <li>
         <input v-if="!editMode" type="checkbox" @change="checked = !checked" >
         <p v-if="!editMode" class="ingredient" :style="{'text-decoration': checked && !editMode ? 'line-through' : 'none'}">{{props.ingredient}}</p>
-        <textarea v-else :value="props.ingredient"/>
-        <button class="delete-button" v-if="editMode"><span class="material-symbols-outlined">delete</span></button>
+        <textarea placeholder="Write your ingredient here..." v-else @change="recipe.ingredients[index] = ($event.target as HTMLTextAreaElement).value" :value="props.ingredient"/>
+        <button class="delete-button" v-if="editMode && recipe.ingredients.length > minIngredients" @click="recipe.ingredients.splice(index, 1)"><span class="material-symbols-outlined">delete</span></button>
     </li>
 </template>
 
@@ -31,7 +34,8 @@
         resize: none;
         font-family: "Roboto Flex", sans-serif;
         font-weight: 300;
-        padding: 0.25rem;
+        padding: 0.5em;
+        field-sizing: content;
     }
     .ingredient{
         font-weight: 300;

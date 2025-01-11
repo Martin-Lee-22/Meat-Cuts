@@ -1,11 +1,17 @@
 <script setup lang="ts">
-    import { defineProps } from 'vue';
+    import { computed, defineProps} from 'vue';
+
     const props = defineProps(['animal', 'index', 'setAnimal']);
+    
+    // Get the image source due to build process of vite/vue
+    const imgSrc = computed(() => {
+        return new URL(`../../assets/images/${props.animal.type}.png`, import.meta.url).href
+    })
 </script>
 
 <template>
     <div class="animal-item" @click="props.setAnimal(props.animal)" :data-index="props.index">
-        {{props.animal.type}}
+        <img :src="imgSrc" :alt="props.animal.type"/>
     </div>
 </template>
 
@@ -17,16 +23,19 @@
         width: 160px;
         aspect-ratio: 1;
         border-radius: 10px;
-
-        /* These styles are for the gsap animation */
-        opacity: 0;
-        transform: translateY(60px);
-
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         &:hover{
             box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
         }
         &:active{
             box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
         }
+
+        /* These styles are for the gsap animation */
+        opacity: 0;
+        transform: translateY(60px);
     }
 </style>
