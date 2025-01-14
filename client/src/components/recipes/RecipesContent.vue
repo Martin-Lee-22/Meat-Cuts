@@ -9,6 +9,7 @@
     watch(recipeStore.getShowRecipe, () => {
 
     })
+    
 </script>
 
 <template>

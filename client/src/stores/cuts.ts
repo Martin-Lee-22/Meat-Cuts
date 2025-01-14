@@ -1,6 +1,6 @@
 import type { animal, cut } from "@/types/animals"
 import { defineStore } from "pinia"
-import { ref } from "vue"
+import { ref, watch } from "vue"
 
 export const useCutsStore = defineStore('cuts', () => {
     const animal = ref<animal>({} as animal)
@@ -53,17 +53,17 @@ export const useCutsStore = defineStore('cuts', () => {
         }
 
     /**
-     * Retrieves the current value of the cut object.
+     * Retrieves the cut object.
      * @returns {Ref<Object>} The current cut object.
      */
     function getCut(){
-        return cut.value
+        return cut
     }
 
-/**
- * Sets the cut object to the given value.
- * @param {cut} value - the value to set the cut object to
- */
+    /**
+     * Sets the cut object to the given value.
+     * @param {cut} value - the value to set the cut object to
+     */
     function setCut(value: cut){
         cut.value = value
     }

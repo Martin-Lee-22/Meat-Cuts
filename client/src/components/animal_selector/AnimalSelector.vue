@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import Animals from './Animals.vue';
-    import CutsCanvas from './CutsCanvas.vue';
+    import CutsSelector from './CutsSelector.vue';
     import { useCutsStore } from '@/stores/cuts';
     import { useResizeStore } from '@/stores/resize';
     import '../../shared/animations.css'
@@ -15,7 +15,7 @@
                 <Animals/>
             </div>
             <div class="cuts-container" v-else>
-                <CutsCanvas/>
+                <CutsSelector/>
             </div>
         </Transition>
     </section>

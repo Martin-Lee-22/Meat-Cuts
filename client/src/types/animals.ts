@@ -6,7 +6,6 @@ export type animal = {
 
 export type cut = {
     id: number,
-    title: string,
-    shape: string,
+    cut: string,
     coords: string
 }

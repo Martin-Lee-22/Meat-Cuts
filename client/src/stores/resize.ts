@@ -6,7 +6,7 @@ export const useResizeStore = defineStore('resize', () => {
 
     const initialWidth = 100 // Initial width of the first element
     const initialChangeWidth = 60
-    const minFirstElementWidth = 30
+    const minFirstElementWidth = 45
     const maxFirstElementWidth = 60
 
     const firstElementWidth = ref(initialWidth)
@@ -14,6 +14,7 @@ export const useResizeStore = defineStore('resize', () => {
 
     // Watch for changes in the animal object and update the width of the first and second element accordingly; Will reveal the recipes container.
     watch(useCutsStore().getCut(), ()=>{
+
         if(!useCutsStore().isCutEmpty()) {
             setFirstElementWidth(initialChangeWidth)
             setSecondElementWidth(initialWidth - initialChangeWidth)

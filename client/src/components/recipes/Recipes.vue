@@ -15,6 +15,7 @@
         resizeStore.resizeElement(e)
     }
 
+
     // Once the component is updated, the event listeners are added for resizing.
     onUpdated(() => {
         sectionRef.value?.addEventListener('mousedown', (e) => {
@@ -38,6 +39,7 @@
         position: absolute;
         right: 0;
         height: inherit;
+        background-color: white;
         &::before{
             content: '';
             position: absolute;
