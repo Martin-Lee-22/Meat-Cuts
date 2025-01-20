@@ -1,13 +1,15 @@
 <script setup lang="ts">
-    import {ref, useTemplateRef } from 'vue';
+    import {onUnmounted, ref, useTemplateRef } from 'vue';
     import {useRecipeStore} from '../../stores/recipe';
     import BaseButton from '../base/BaseButton.vue';
     import RecipeHeader from './header/RecipeHeader.vue';
     import RecipeBody from './body/RecipeBody.vue';
     import RecipeReviews from './reviews/RecipeReviews.vue';
     import RecipeFooter from './footer/RecipeFooter.vue';
+    import { useCutsStore } from '@/stores/cuts';
 
     const container = useTemplateRef('container')
+    const cutStore = useCutsStore()
     const recipeStore = useRecipeStore()
     const recipe = ref(recipeStore.getRecipe())
     const editMode = ref(false)
@@ -44,14 +46,27 @@
         console.log('submitted')
     }
 
+    /**
+     * Closes the recipe by clearing the current recipe and toggling the showRecipe flag off.
+     */
+    function closeRecipe(){
+        recipeStore.clearRecipe()
+        recipeStore.toggleShowRecipe()
+    }
 
+    /**
+     * clears recipe if user wants to select another animal.
+     */
+    onUnmounted(() => {
+        if(cutStore.isCutEmpty()) closeRecipe()
+    })
 </script>
 
 <template>
     <Transition appear mode="out-in" name="horizontal-move">
         <article class="recipe-container" ref="container">
             <button @click="formMode">Edit Mode</button>
-            <BaseButton :callBack="recipeStore.toggleShowRecipe" class="close-recipe-button">
+            <BaseButton :callBack="closeRecipe" class="close-recipe-button">
                 <span class="material-symbols-outlined">close</span>
             </BaseButton>
             <RecipeHeader v-model:recipe="recipe" :editMode="editMode"/>

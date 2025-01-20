@@ -1,7 +1,8 @@
 export type animal = {
     id: number,
     type: string,
-    cuts: cut[]
+    cuts: cut[],
+    viewBox: string
 }
 
 export type cut = {

@@ -44,11 +44,12 @@
         &:hover{
             cursor: pointer;
             transform: scale(1.01);
+            border: 3px solid gold;
         }
 
         /* These styles are for the gsap animation */
         opacity: 0;
-        transform: translateY(60px);
+        /* transform: translateY(60px); */
     }
     .recipes-list-item-title{
         margin-top: 2rem;
@@ -67,9 +68,6 @@
             margin-top: 0.25em;
             font-size: 0.6rem;
             font-weight: 200;
-        }
-        & h5{
-            
         }
     }
 </style>

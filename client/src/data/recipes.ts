@@ -5,7 +5,7 @@ const recipes:recipe[] = [
         "id": 0,
         "animal": "cow",
         "cut": "steak",
-        "name": "123456789012345678901234567890123456789012345678901234567890",
+        "name": "A",
         "description": "Delicious spaghetti recipe",
         "ingredients": [
             "1 pound spaghetti",
@@ -72,7 +72,7 @@ const recipes:recipe[] = [
     },
     {
         "id": 1,
-        "name": "Spaghetti",
+        "name": "B",
         "animal": "chicken",
         "cut": "breast",
         "description": "Delicious spaghetti recipe",
@@ -90,11 +90,11 @@ const recipes:recipe[] = [
         ],
         "tags": ["pasta", "spaghetti", "tomato sauce", "grated cheese"],
         "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc685?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "duration": 30,
-        "servings": 4,
-        "calories": 600,
+        "duration": 300,
+        "servings": 40,
+        "calories": 6000,
         "difficulty": "Easy",
-        "rating": 4,
+        "rating": 3,
         "reviews": [
             {
                 "id": 0,
@@ -132,7 +132,7 @@ const recipes:recipe[] = [
     },
     {
         "id": 2,
-        "name": "Spaghetti",
+        "name": "C",
         "animal": "sheep",
         "cut": "rack",
         "description": "Delicious spaghetti recipe",
@@ -150,11 +150,11 @@ const recipes:recipe[] = [
         ],
         "tags": ["pasta", "spaghetti", "tomato sauce", "grated cheese"],
         "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc685?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "duration": 30,
-        "servings": 4,
-        "calories": 600,
+        "duration": 3,
+        "servings": 2,
+        "calories": 60,
         "difficulty": "Easy",
-        "rating": 4,
+        "rating": 1,
         "reviews": [
             {
                 "id": 0,
@@ -192,7 +192,7 @@ const recipes:recipe[] = [
     },
     {
         "id": 3,
-        "name": "Spaghetti",
+        "name": "D",
         "animal": "duck",
         "cut": "wing",
         "description": "Delicious spaghetti recipe",
@@ -210,11 +210,11 @@ const recipes:recipe[] = [
         ],
         "tags": ["pasta", "spaghetti", "tomato sauce", "grated cheese"],
         "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc685?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        "duration": 30,
-        "servings": 4,
-        "calories": 600,
+        "duration": 20,
+        "servings": 5,
+        "calories": 300,
         "difficulty": "Easy",
-        "rating": 4,
+        "rating": 2,
         "reviews": [
             {
                 "id": 0,

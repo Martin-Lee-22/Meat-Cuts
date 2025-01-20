@@ -52,9 +52,9 @@
     watch(cutsStore.getCut(), () => {
         const element = document.getElementsByClassName('cuts-selector-container')[0] as HTMLElement
         if(element && !cutsStore.isCutEmpty()){
-            element.style.setProperty('--cuts-width', `${80}%`)
+            element.style.setProperty('--cuts-width', `${50}%`)
         } else {
-            element.style.setProperty('--cuts-width', `${60}%`)
+            element.style.setProperty('--cuts-width', `${50}%`)
         }
     })
 </script>
@@ -69,7 +69,7 @@
     <Transition mode="out-in" name="fade-upwards">
         <div class="cuts-selector-container">
             <img :src="imgSrc" usemap="#image-map">
-            <svg id="cut-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 579">
+            <svg id="cut-svg" xmlns="http://www.w3.org/2000/svg" :viewBox="selectedAnimal.viewBox">
                 <path v-for="cut in selectedAnimal.cuts" :key="cut.id" :d="cut.coords" :data-cut="JSON.stringify(cut)" fill="transparent"/>
             </svg>
     </div>
@@ -85,7 +85,7 @@
         float: left;
     }
     .cuts-selector-container{
-        --cuts-width: 60%;
+        --cuts-width: 50%;
         position: relative;
         width: 100%;
         display: flex;
@@ -96,6 +96,7 @@
         & img, svg{
             width: var(--cuts-width);
             margin-inline: auto;
+            transform: scale(0.85);
         }
         & svg{
             position: absolute;

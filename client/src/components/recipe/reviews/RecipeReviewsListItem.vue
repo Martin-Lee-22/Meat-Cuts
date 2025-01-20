@@ -13,7 +13,6 @@
 <template>
     <li class="recipe-reviews-list-item">
         <span class="reviewer-name">{{review.name}}</span>
-        <!-- <time>{{review.date}}</time> -->
         <time>{{formatDate(review.date)}}</time>
         <BaseStarsRating :rating="review.rating" :editMode="false"/>
         <RecipeReviewsListItemComment :comment="review.comment" :index="index"/>

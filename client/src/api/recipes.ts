@@ -23,6 +23,14 @@ function getRecipes(){
 }
 
 /**
+ * Updates the recipes data with the newRecipes parameter.
+ * @param {recipe[]} newRecipes The new recipes data to update the store with.
+ */
+function setRecipes(newRecipes:recipe[]){
+    recipes.value = newRecipes
+}
+
+/**
  * Returns true if the recipes array is empty, false otherwise.
  * @returns {boolean} true if recipes is empty
  */
@@ -30,4 +38,11 @@ function isRecipesEmpty(){
     return recipes.value.length === 0
 }
 
-export {getRecipes, getRecipesAPI, isRecipesEmpty}
+/**
+ * Clears the recipes array to an empty array.
+ */
+function clearRecipes(){
+    recipes.value = []
+}
+
+export {getRecipes, getRecipesAPI, isRecipesEmpty, clearRecipes, setRecipes}

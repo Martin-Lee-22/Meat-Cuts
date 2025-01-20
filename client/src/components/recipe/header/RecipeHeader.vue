@@ -30,7 +30,7 @@
     </div>
 </template>
 
-<style lang="css" scoped>
+<style lang="css">
     .recipe-header-container{
         display: flex;
         flex-direction: column;
@@ -95,6 +95,7 @@
             font-weight: 200;
         }
         & span{
+            font-size: 1rem;
             font-weight: 600;
         }
     }

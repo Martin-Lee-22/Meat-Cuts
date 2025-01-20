@@ -3,11 +3,17 @@
     import Recipe from '../recipe/Recipe.vue';
     import { useRecipeStore } from '@/stores/recipe';
     import { watch } from 'vue';
+    import { useCutsStore } from '@/stores/cuts';
 
     const recipeStore = useRecipeStore();
+    const cutsStore = useCutsStore();
 
-    watch(recipeStore.getShowRecipe, () => {
-
+    // Watch the cut changes, if the cut is not empty and the new cut object is different to the old, call clears the recipes
+    watch(cutsStore.getCut(), (newCut, oldCut) => {
+        if(newCut !== oldCut){
+            recipeStore.clearRecipe()
+            recipeStore.setShowRecipe(false)
+        }
     })
     
 </script>

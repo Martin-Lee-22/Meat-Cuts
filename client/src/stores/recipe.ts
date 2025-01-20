@@ -33,9 +33,9 @@ export const useRecipeStore = defineStore('recipe', () => {
 
     
     /**
-     * Resets the recipe object to an empty object.
+     * Clears the recipe object to an empty object.
      */
-    function resetRecipe(){
+    function clearRecipe(){
         recipe.value = {} as recipe
     }
 
@@ -48,6 +48,14 @@ export const useRecipeStore = defineStore('recipe', () => {
     }
 
     /**
+     * Sets the visibility state of the recipe to the given boolean value.
+     * @param {boolean} x - the value to set the visibility state to
+     */
+    function setShowRecipe(x: boolean){
+        showRecipe.value = x
+    }
+
+    /**
      * Retrieves the current visibility state of the recipe.
      * @returns {boolean} true if the recipe is visible, false otherwise
      */
@@ -55,5 +63,5 @@ export const useRecipeStore = defineStore('recipe', () => {
         return showRecipe.value
     }
 
-    return { getRecipe, isRecipeEmpty, setRecipe, resetRecipe, toggleShowRecipe, getShowRecipe }
+    return { getRecipe, isRecipeEmpty, setRecipe, clearRecipe, toggleShowRecipe, getShowRecipe, setShowRecipe }
 })

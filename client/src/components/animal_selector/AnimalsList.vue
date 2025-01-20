@@ -2,10 +2,9 @@
     import { useCutsStore } from '@/stores/cuts';
     import AnimalListItem from './AnimalListItem.vue';
     import { staggerListOnEnter, staggerListOnLeave } from '@/shared/animations';
-    import { cow } from '@/data/meat-cuts';
+    import { animals } from '@/data/meat-cuts';
 
     const cutsStore = useCutsStore();
-    const animals = [cow]
 
 </script>
 
@@ -23,5 +22,14 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
+    &:hover > * {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    }
+    &:hover > *:hover{
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    }
+    &:hover > *:active{
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    }
 }
 </style>

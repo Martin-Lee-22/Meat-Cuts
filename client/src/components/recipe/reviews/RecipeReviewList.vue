@@ -26,14 +26,14 @@
         {name:'Date (oldest)', function: sortByDateAsc},
         {name:'Highest Rating', function:sortByRatingDesc},
         {name:'Lowest Rating', function:sortByRatingAsc},
-    ]
+    ] 
 </script>
 
 <template>
     <div class="recipe-reviews-list-container">
         <div>
             <span>Sort by:</span>
-            <BaseSelect v-model="sortFunction" :options="options" default="Date (newest)"/>
+            <BaseSelect v-model="sortFunction" :options="options"/>
         </div>
         <div class="recipe-reviews-list-inner-container">
             <ul>
