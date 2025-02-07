@@ -10,20 +10,18 @@ import FileHandler from "@tiptap-pro/extension-file-handler";
 import Placeholder from "@tiptap/extension-placeholder";
 import Youtube from "@tiptap/extension-youtube";
 import HardBreak from "@tiptap/extension-hard-break";
-import { useRecipeStore } from "@/stores/recipe";
-import { ref } from "vue";
 import Underline from "@tiptap/extension-underline";
 
-const recipe = ref(useRecipeStore().getRecipe());
-const props = defineProps({
-  extensions: { type: Object },
-  content: { type: String },
+const contentModel = defineModel('contentModel');
+const ratingModel = defineModel('ratingModel');
+defineProps({
+  extensions: { type: Object }
 });
 
 const editor = useEditor({
-  content: props.content,
+  content: contentModel.value ? contentModel.value : '',
   onUpdate: ({ editor }) => {
-    recipe.value.article = editor.getHTML();
+    contentModel.value = editor.getHTML();
   },
   extensions: [
     StarterKit,
@@ -90,18 +88,14 @@ const editor = useEditor({
     }),
   ],
 });
-
-function onSubmit(e: Event) {
-  e.preventDefault();
-}
 </script>
 
 <template>
-  <form class="editor-container" @submit="onSubmit">
+  <div ref="editor-container" class="editor-container">
     <editor-content :editor="editor" />
-    <EditorPanel :editor="editor" :extensions="extensions" />
+    <EditorPanel v-model:ratingModel="ratingModel" :editor="editor" :extensions="extensions" />
     <input v-if="extensions?.addPost" type="submit" value="Post" />
-  </form>
+  </div>
 </template>
 
 <style lang="css" scoped>

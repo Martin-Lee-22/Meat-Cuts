@@ -4,11 +4,16 @@
     import TagList from './component/TagList.vue';
     import { useRecipeStore } from '@/stores/recipe';
     import { formatLength } from '@/utils/helperFunctions';
+    import { computed, ref } from 'vue';
 
     const props = defineProps<{recipe: recipe, index: number}>();
-    
+
     const maxLength = 37
     const name = formatLength(props.recipe.name, maxLength)
+    const imgSrc = ref('')
+    const imgSrcDefault = computed(() => {
+        return new URL('@/../public/default_recipe_img_2.png', import.meta.url).href
+    })
 
     const recipeStore = useRecipeStore();
 
@@ -23,7 +28,7 @@
 
 <template>
     <div class="recipes-list-item-container" @click="onClick" :data-index="index">
-        <img src="https://picsum.photos/175/255" alt="random image"/>
+        <img :src="imgSrc ? imgSrc : imgSrcDefault" alt="random image"/>
         <div class="recipe-list-item-info-container">
             <h5 class="recipes-list-item-title">{{name}}</h5>
             <Rating :rating="recipe.rating"/>

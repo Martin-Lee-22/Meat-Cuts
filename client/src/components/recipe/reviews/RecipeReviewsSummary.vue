@@ -11,11 +11,11 @@
 
 <template>
     <div class="recipe-reviews-summary-container">
-        <BaseStarsRating :rating="recipe.rating"/>
-        <span>{{recipe.rating}}</span>
+        <BaseStarsRating :rating="recipe.rating ? recipe.rating : 0"/>
+        <span>{{recipe.rating ? recipe.rating : 0}}</span>
         <div class="recipe-reviews-amount-container">
             <button @mouseover="showMenu = true" @mouseleave="showMenu = false">
-                <span class="recipe-reviews-amount">{{recipe.reviews.length}} comments</span>
+                <span class="recipe-reviews-amount">{{recipe.reviews ? recipe.reviews.length : 0}} comments</span>
                 <span class="material-symbols-outlined">keyboard_arrow_down</span>
             </button>
             <RecipeReviewsSummaryMenu v-if="showMenu" :reviews="recipe.reviews"/>

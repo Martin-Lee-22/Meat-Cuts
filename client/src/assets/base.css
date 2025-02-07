@@ -35,7 +35,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Montserrat", serif;
 }
 
-a, p, span, ::placeholder, input[type="text"], input[type="number"],input[type="submit"], input[type="checkbox"] ,label, option, select, textarea, time, tr {
+a, p, span, ::placeholder, input[type="text"], input[type="number"],input[type="submit"], input[type="checkbox"] ,label, option, select, textarea, time, tr, ::after, ::before {
   font-family: "Roboto Flex", sans-serif;
   font-weight: 300;
 }

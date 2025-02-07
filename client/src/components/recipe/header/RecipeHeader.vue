@@ -4,23 +4,28 @@
     import RecipeHeaderTitle from './RecipeHeaderTitle.vue';
     import BaseStarsRating from '@/components/base/BaseStarsRating.vue';
     import type { recipe } from '@/types/recipes';
+    import { computed, ref } from 'vue';
 
     defineProps<{recipe: recipe, editMode: boolean}>();
     const recipeModel = defineModel('recipe');
+    const imgSrc = ref('')
+    const imgSrcDefault = computed(() => {
+        return new URL('@/../public/default_recipe_img_4.png', import.meta.url).href
+    })
 </script>
 
 <template>
     <div class="recipe-header-container">
-        <img src="https://picsum.photos/200/100" alt="random image" class="recipe-header-image" v-if="!editMode"/>
+        <img :src="imgSrc ? imgSrc : imgSrcDefault" alt="random image" class="recipe-header-image" v-if="!editMode"/>
         <BaseUploadFile v-else/>
         <RecipeHeaderTitle v-model:title="(recipeModel as recipe).name" :edit-mode="editMode"/>
         <div v-if="!editMode" class="rating-container">
             <BaseStarsRating :rating="recipe.rating"/>
-            <a href="#recipe-reviews">({{recipe.reviews.length}}) Reviews</a>
+            <a href="#recipe-reviews">({{recipe.reviews ? recipe.reviews.length : '0'}}) Reviews</a>
         </div>
         <div class="article-info-container">
             <RecipeHeaderInfo title="Author" v-model:data="(recipeModel as recipe).author" :edit-mode="editMode" type="text" :width="'100%'"/>
-            <RecipeHeaderInfo title="Published" v-model:data="(recipeModel as recipe).published"  :edit-mode="editMode" type="date" :width="'90%'"/>
+            <RecipeHeaderInfo title="Published" v-model:data="(recipeModel as recipe).published" :edit-mode="editMode" type="date" :width="'90%'"/>
         </div>
         <div class="recipe-header-info-container">
             <RecipeHeaderInfo title="Servings" v-model:data="(recipeModel as recipe).servings" :edit-mode="editMode" type="number"/>

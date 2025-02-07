@@ -4,12 +4,19 @@
 
     const props = defineProps({rating: {type: Number, default: 0}, editMode: {type: Boolean, default: false}});
 
+    const ratingModel = defineModel('ratingModel');
+
     const maxNumberOfStars = 5;
     const numberOfFullStars = Math.floor(props.rating);
     const numberOfEmptyStars = maxNumberOfStars - numberOfFullStars;
 
     const rate = ref(0) // The official star rating the user has chosen. 
     const rating = ref(0) // The star rating that is displayed when user hovers over the stars.
+
+    function onClick(i:number){
+        rate.value = i
+        if(ratingModel) ratingModel.value = i
+    }
 </script>
 
 <template>
@@ -18,7 +25,7 @@
         <span v-for="i in numberOfEmptyStars" :key="i" class="material-symbols-outlined">&#9734;</span>
     </div>
     <div v-else class="stars-rating-container">
-        <span v-for="i in maxNumberOfStars" :key="i" :class="['star-edit-mode', rating >= i ? 'material-symbols-rounded' : 'material-symbols-outlined']" @mouseover="rating = i" @mouseleave="rating = rate" @click="rate = i">{{rating >= i ? '&#9733' : '&#9734'}}</span>
+        <span v-for="i in maxNumberOfStars" :key="i" :class="['star-edit-mode', rating >= i ? 'material-symbols-rounded' : 'material-symbols-outlined']" @mouseover="rating = i" @mouseleave="rating = rate" @click="onClick(i)">{{rating >= i ? '&#9733' : '&#9734'}}</span>
         <span class="rating-heading">{{rating > 0 ? ratingData.find(r => r.rating === rating)?.heading : ''}}</span>
     </div>
 </template>

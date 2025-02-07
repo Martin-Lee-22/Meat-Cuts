@@ -4,7 +4,7 @@
     import BaseSelect from '@/components/base/BaseSelect.vue';
     import {ref } from 'vue';
     
-    defineProps<{reviews: review[]}>();
+    defineProps<{reviews: review[] | undefined}>();
     const sortFunction = ref();
 
     function sortByDateAsc(a:any, b:any){
@@ -30,7 +30,7 @@
 </script>
 
 <template>
-    <div class="recipe-reviews-list-container">
+    <div v-if="reviews" class="recipe-reviews-list-container">
         <div>
             <span>Sort by:</span>
             <BaseSelect v-model="sortFunction" :options="options"/>

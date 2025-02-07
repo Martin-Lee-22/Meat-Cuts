@@ -6,6 +6,7 @@ import { ref, watch, useTemplateRef } from 'vue';
 defineProps({editor:{type: Object, default: null}, extensions:{type: Object}})
 const showMenu = ref(false)
 const menuContainer = useTemplateRef('editor-panel-menu-container')
+const ratingModel = defineModel('ratingModel');
 
 /**
  * Listens for mouseup events outside of the menu container and sets showMenu to false
@@ -28,7 +29,7 @@ watch(showMenu, () => {
 
 <template>
     <div class="editor-panel-container">
-        <BaseStarsRating v-if="extensions?.addRating" :rating="3" :edit-mode="true"/>
+        <BaseStarsRating v-if="extensions?.addRating" v-model:ratingModel="ratingModel" :rating="3" :edit-mode="true"/>
         <div class="editor-controls-container">
             <button title="Text Formatting" @click="showMenu = !showMenu">
                 <span class="material-symbols-outlined">match_case</span>

@@ -1,0 +1,107 @@
+scalar Date
+
+type Recipe {
+    id: ID!
+    name: String!
+    description: String!
+    ingredients: [String!]!
+    steps: [String!]!
+    tags: [String]
+    image: String
+    duration: Int!
+    servings: Int!
+    calories: Int
+    difficulty: String!
+    rating: Int
+    reviews: [Review]
+    author: String!
+    authorImage: String
+    views: Int
+    animal: String!
+    cut: String!
+    published: Date
+    article: String
+}
+
+type Rating {
+    id: ID!
+    heading: String!
+    rating: Int!
+}
+
+type Review{
+    id: ID!
+    name: String!
+    comment: String!
+    rating: Int!
+    date: Date
+    likes: Int
+    dislikes: Int
+}
+
+type Animal {
+    id: ID!
+    type: String!
+    cuts: [Cut]!
+    viewBox: String!
+}
+
+type Cut {
+    id: ID!
+    cut: String!
+    coords: String!
+}
+
+type Query {
+    recipes(animal:String!, cut:String!): [Recipe]
+    recipe(id: ID!): Recipe
+}
+
+type Mutation {
+    createRecipe(recipe: CreateRecipeInput!): Recipe
+    deleteRecipe(id: ID!): [Recipe]
+    updateRecipe(id: ID!, edits: UpdateRecipeInput): Recipe
+    deleteReview(id: ID!): [Review]
+}
+
+input CreateRecipeInput{
+    name: String!
+    description: String!
+    ingredients: [String!]!
+    steps: [String!]!
+    tags: [String]
+    image: String
+    duration: Int!
+    servings: Int!
+    calories: Int
+    difficulty: String!
+    rating: Int
+    author: String!
+    authorImage: String
+    views: Int
+    animal: String!
+    cut: String!
+    published: Date
+    article: String
+}
+
+input UpdateRecipeInput{
+    name: String
+    description: String
+    ingredients: [String!]
+    steps: [String!]
+    tags: [String]
+    image: String
+    duration: Int
+    servings: Int
+    calories: Int
+    difficulty: String
+    rating: Int
+    author: String
+    authorImage: String
+    views: Int
+    animal: String
+    cut: String
+    published: Date
+    article: String
+}

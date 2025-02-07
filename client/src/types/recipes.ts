@@ -1,9 +1,3 @@
-type ingredients = {
-    amount:number,
-    unit:string,
-    ingredient:string
-}
-
 type review = {
     id: number,
     name: string,

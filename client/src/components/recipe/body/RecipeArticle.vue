@@ -2,7 +2,8 @@
 import Editor from '../components/editor/Editor.vue';
 import type { editorExtensions } from '@/types/editor';
 
-defineProps<{article: string, editMode: boolean}>()
+defineProps<{article: string | undefined, editMode: boolean}>()
+const contentModel = defineModel('contentModel');
 
 const editorExtensions: editorExtensions = {
     addImages: false,
@@ -17,8 +18,9 @@ const editorExtensions: editorExtensions = {
 </script>
 
 <template>
-    <Editor v-if="editMode" :content="article" :extensions="editorExtensions"/>
-    <article v-else class="recipe-article" v-html="article"></article>
+    <h5 v-if="editMode">(Optional) Write an article about your recipe:</h5>
+    <Editor v-if="editMode" v-model:contentModel="contentModel" :extensions="editorExtensions"/>
+    <article v-else class="recipe-article" v-html="article ? article : ''"></article>
 </template>
 
 <style lang="css" scoped>

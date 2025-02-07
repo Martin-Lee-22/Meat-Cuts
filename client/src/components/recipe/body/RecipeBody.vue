@@ -1,21 +1,22 @@
 <script setup lang="ts">
-    import type { recipe } from '@/types/recipes';
+    import type { recipe as recipeType } from '@/types/recipes';
     import RecipeArticle from './RecipeArticle.vue';
     import RecipeIngredientList from './RecipeIngredientList.vue';
     import RecipeStepsList from './RecipeStepsList.vue';
     import RecipeSocialToolbar from './RecipeSocialToolbar.vue';
 
-    defineProps<{recipe: recipe, editMode: boolean}>();
+    defineProps<{recipe: recipeType, editMode: boolean}>();
+    const recipeModel = defineModel('recipe');
 </script>
 
 <template>
     <div class="recipe-body-container">
-        <a class="jump-to-recipe-link" href="#recipe-lists">Recipe<span class="material-symbols-outlined">arrow_downward</span></a>
-        <RecipeArticle :article="recipe.article" :editMode="editMode"/>
+        <a v-if="!editMode" class="jump-to-recipe-link" href="#recipe-lists">Recipe<span class="material-symbols-outlined">arrow_downward</span></a>
+        <RecipeArticle :article="recipe.article" v-model:contentModel="(recipeModel as recipeType).article" :editMode="editMode"/>
         <RecipeSocialToolbar v-if="!editMode"/>
         <div id="recipe-lists" class="recipe-body-list-container">
-            <RecipeIngredientList :ingredients="recipe.ingredients" :editMode="editMode"/>
-            <RecipeStepsList :steps="recipe.steps" :editMode="editMode"/>
+            <RecipeIngredientList v-model:ingredientsModel="(recipeModel as recipeType).ingredients" :ingredients="recipe.ingredients" :editMode="editMode"/>
+            <RecipeStepsList v-model:stepsModel="(recipeModel as recipeType).steps" :steps="recipe.steps" :editMode="editMode"/>
         </div>
     </div>
 </template>

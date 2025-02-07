@@ -1,11 +1,25 @@
 <script setup lang="ts">
+import { useRecipeStore } from '@/stores/recipe';
 import BaseButton from '../../base/BaseButton.vue';
+
+const editMode = defineModel('editMode')
+const recipeModel = defineModel('recipe')
+const recipeStore = useRecipeStore()
+
+function cancelRecipe(){
+    if(recipeStore.getAddRecipeMode()) {
+        recipeStore.setAddRecipeMode(false); 
+        recipeStore.setShowRecipe(false)
+    }
+    recipeModel.value = JSON.parse(JSON.stringify(recipeStore.getRecipe()))
+    editMode.value = false
+}
 </script>
 
 <template>
     <div class="recipe-footer-container">
-        <BaseButton :callBack="()=>{}" class="save-recipe-button">Save</BaseButton>
-        <BaseButton :callBack="()=>{}" class="cancel-recipe-button">Cancel</BaseButton>
+        <input form="form-recipe" type="submit" value="Save" class="save-recipe-input">
+        <BaseButton :callBack="cancelRecipe" class="cancel-recipe-button">Cancel</BaseButton>
     </div>
 </template>
 
@@ -18,7 +32,7 @@ import BaseButton from '../../base/BaseButton.vue';
     align-items: center;
     padding-right: 18px;
 }
-.save-recipe-button{
+.save-recipe-input{
     &:hover{
         background-color: rgb(34, 34, 251);
     }
@@ -28,7 +42,7 @@ import BaseButton from '../../base/BaseButton.vue';
         background-color: rgb(188, 188, 188);
     }
 }
-button{
+button, input[type="submit"]{
     min-width: 70px;
     border: 1px solid rgb(185, 185, 185);
     border-radius: 3px;

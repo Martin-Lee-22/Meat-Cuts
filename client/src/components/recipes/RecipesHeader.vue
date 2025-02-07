@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import BaseSearchBar from '../base/BaseSearchBar.vue';
 import BaseSelect from '../base/BaseSelect.vue';
 import { getRecipes,setRecipes } from '@/api/recipes';
+import BaseButton from '../base/BaseButton.vue';
+import { useRecipeStore } from '@/stores/recipe';
 
-
+const recipeStore = useRecipeStore();
 const sortFunction = ref();
 
 function sortByNameAsc(a:any, b:any){
@@ -57,15 +58,22 @@ function sortByServingsDesc(a: any, b: any){
 const options = [
     {name:'Name (descending)', function: sortByNameDesc}, 
     {name:'Name (ascending)', function: sortByNameAsc},
-    {name:'Highest Rating', function:sortByRatingDesc},
-    {name:'Lowest Rating', function:sortByRatingAsc},
-    {name:'Duration (descending)', function:sortByDurationDesc},
-    {name:'Duration (ascending)', function:sortByDurationAsc},
-    {name:'Calories (descending)', function:sortByCaloriesDesc},
-    {name:'Calories (ascending)', function:sortByCaloriesAsc},
-    {name:'Servings (descending)', function:sortByServingsDesc},
-    {name:'Servings (ascending)', function:sortByServingsAsc},
+    {name:'Rating: Highest', function:sortByRatingDesc},
+    {name:'Rating: Lowest', function:sortByRatingAsc},
+    {name:'Duration: Longest', function:sortByDurationDesc},
+    {name:'Duration: Shortest', function:sortByDurationAsc},
+    {name:'Calories: Highest', function:sortByCaloriesDesc},
+    {name:'Calories: Lowest', function:sortByCaloriesAsc},
+    {name:'Servings: Highest', function:sortByServingsDesc},
+    {name:'Servings: Lowest', function:sortByServingsAsc},
 ]
+
+function addRecipe(){
+    recipeStore.clearRecipe()
+    recipeStore.createDefaultRecipe()
+    recipeStore.setAddRecipeMode(true)
+    recipeStore.setShowRecipe(true)
+}
 
 watch(sortFunction, () => {
     setRecipes(getRecipes().sort(sortFunction.value))
@@ -74,7 +82,10 @@ watch(sortFunction, () => {
 
 <template>
     <header class="recipes-header">
-        <BaseSelect v-model="sortFunction" :options="options"/>
+        <span>Sort by: </span><BaseSelect v-model="sortFunction" :options="options"/>
+        <BaseButton title="Add Recipe" :callBack="() => {addRecipe()}">
+            <span class="material-symbols-outlined">add</span>
+        </BaseButton>
     </header>
 </template>
 
@@ -84,7 +95,13 @@ watch(sortFunction, () => {
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
+        column-gap: 0.5rem;
         padding: 1rem 0 1rem 0;
         position: relative;
+        & select{
+            height: 2rem;
+            padding: 0.25em;
+        }
     }
 </style>
