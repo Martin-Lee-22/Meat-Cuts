@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRecipeStore } from '@/stores/recipe';
 import BaseButton from '../../base/BaseButton.vue';
+import { deleteRecipeAPI } from '@/api/recipes';
 
 const editMode = defineModel('editMode')
 const recipeModel = defineModel('recipe')
@@ -14,12 +15,21 @@ function cancelRecipe(){
     recipeModel.value = JSON.parse(JSON.stringify(recipeStore.getRecipe()))
     editMode.value = false
 }
+
+async function deleteRecipe(){
+    await deleteRecipeAPI(recipeStore.getRecipe())
+    recipeStore.setShowRecipe(false)
+    editMode.value = false
+}
 </script>
 
 <template>
     <div class="recipe-footer-container">
-        <input form="form-recipe" type="submit" value="Save" class="save-recipe-input">
-        <BaseButton :callBack="cancelRecipe" class="cancel-recipe-button">Cancel</BaseButton>
+        <BaseButton :callBack="deleteRecipe" class="delete-recipe-button">Delete</BaseButton>
+        <div class="save-cancel-container">
+            <input form="form-recipe" type="submit" value="Save" class="save-recipe-input">
+            <BaseButton :callBack="cancelRecipe" class="cancel-recipe-button">Cancel</BaseButton>
+        </div>
     </div>
 </template>
 
@@ -28,9 +38,13 @@ function cancelRecipe(){
     display: flex;
     gap: 5px;
     flex-direction: row;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
-    padding-right: 18px;
+    padding-inline: 18px;
+}
+.save-cancel-container{
+    display: flex;
+    gap: 10px;
 }
 .save-recipe-input{
     &:hover{
@@ -39,7 +53,12 @@ function cancelRecipe(){
 }
 .cancel-recipe-button{
     &:hover{
-        background-color: rgb(188, 188, 188);
+        background-color: rgb(212, 212, 212);
+    }
+}
+.delete-recipe-button{
+    &:hover{
+        background-color: red;
     }
 }
 button, input[type="submit"]{

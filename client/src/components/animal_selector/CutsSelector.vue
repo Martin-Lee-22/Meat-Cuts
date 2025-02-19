@@ -3,6 +3,8 @@
     import BaseButton from '../base/BaseButton.vue';
     import { computed, onMounted, watch } from 'vue';
     import type { animal } from '@/types/animals';
+    import { useRecipeStore } from '@/stores/recipe';
+    import { clearRecipes } from '@/api/recipes';
 
     const cutsStore = useCutsStore();
     const selectedAnimal: animal = cutsStore.getAnimal()
@@ -43,6 +45,7 @@
                     removeClassFromElement('selected-cut')
                     target.classList.add('selected-cut')
                     cutsStore.setCut(JSON.parse(target.dataset.cut))
+                    clearRecipes()
                 }
             }
         )})

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import {onMounted, onUnmounted, onUpdated, ref, useTemplateRef, watch } from 'vue';
+    import {onMounted, onUnmounted, ref } from 'vue';
     import {useRecipeStore} from '../../stores/recipe';
     import BaseButton from '../base/BaseButton.vue';
     import RecipeHeader from './header/RecipeHeader.vue';
@@ -7,44 +7,17 @@
     import RecipeReviews from './reviews/RecipeReviews.vue';
     import RecipeFooter from './footer/RecipeFooter.vue';
     import { useCutsStore } from '@/stores/cuts';
+    import { getRecipes, getRecipesAPI, putRecipe } from '@/api/recipes';
+    import type { recipe as recipeType } from '@/types/recipes';
 
-    const container = useTemplateRef('container')
     const cutStore = useCutsStore()
     const recipeStore = useRecipeStore()
     const recipe = ref(JSON.parse(JSON.stringify(recipeStore.getRecipe())))
     const editMode = ref(true)
 
-    // watch(container, (newRecipe, oldRecipe) => {
-    //     if(!recipeStore.isRecipeEmpty() && newRecipe !== oldRecipe) recipeStore.toggleRecipe()
-    // })
+    function checkRequiredInputs(){
+        let completeRequiredInputs = true
 
-    /**
-     * Toggles between edit mode.
-     * In edit mode, the recipe is wrapped in a form element.
-     * In non-edit mode, the form element is removed.
-     */
-    function formMode(){
-        const article = document.querySelector('.recipe-container')!
-        editMode.value = !editMode.value
-        // if(!editMode.value) {
-        //     editMode.value = true
-        //     const form = document.createElement('form')
-        //     form.classList.add('form-recipe-container')
-        //     form.setAttribute("id", "form-recipe");
-        //     form.method = "POST";
-        //     form.onsubmit = onSubmit;
-        //     article?.parentNode?.insertBefore(form, article)
-        //     form.appendChild(article)
-        // } else {
-        //     editMode.value = false
-        //     const form = document.getElementById('form-recipe')!
-        //     form.replaceWith(...form.childNodes)
-        // }
-    }
-
-    function onSubmit(e: Event){
-        e.preventDefault()
-        let completeInputs = true
         const requiredInputs = [
             {key: 'name', ref:'.recipe-header-title-container', hasInput: true}, 
             {key: 'author', ref:'.recipe-header-info', hasInput: true}, 
@@ -55,7 +28,7 @@
             const requiredInput = requiredInputs.find((x)=>{return x.key === key})
             if(requiredInput) {
                 if(typeof(value) === 'string' && !value && !value.trim()){
-                    completeInputs = false
+                    completeRequiredInputs = false
                     let container = document.querySelector(requiredInput.ref) as HTMLDivElement
                     container.classList.add('has-error')
                     container.classList.add('empty-text-input')
@@ -68,15 +41,28 @@
                     )
                     if(nonWhiteSpaceArray.length === 0){
                         let container = document.querySelector(requiredInput.ref) as HTMLDivElement
-                        completeInputs = false
+                        completeRequiredInputs = false
                         container.classList.add('has-error')
                         container.classList.add('empty-list-input')
                     }
                 }
             }
         }
-        if(completeInputs) {
-            recipeStore.setRecipe(recipe.value)
+        return completeRequiredInputs
+    }
+
+    async function onSubmit(e: Event){
+        e.preventDefault()
+        if(checkRequiredInputs()) {
+            let newRecipe: recipeType = recipe.value
+            if(recipe.value.animal === '' && recipe.value.cut === ''){
+                newRecipe.animal = cutStore.getAnimal().type
+                newRecipe.cut = cutStore.getCut().value.cut
+                newRecipe.id = (getRecipes()[0].id + 1)
+            }
+            await putRecipe(newRecipe)
+            await getRecipesAPI(newRecipe.animal, newRecipe.cut)
+            recipeStore.setRecipe(newRecipe)
             editMode.value = false
         }
     }
@@ -104,24 +90,22 @@
         if(cutStore.isCutEmpty()) closeRecipe()
     })
 
-onUpdated(()=>{
-    console.log(recipe.value.published)
-        console.log(typeof(recipe.value.published))
-})
 </script>
 
 <template>
     <Transition appear mode="out-in" name="horizontal-move">
         <article class="recipe-container" ref="container">
-            <button @click="formMode">Edit Mode</button>
-            <BaseButton :callBack="closeRecipe" class="close-recipe-button">
+            <BaseButton title="Edit Recipe" :call-back="() => editMode = !editMode" class="edit-recipe-button">
+                <span class="material-symbols-outlined">edit</span>
+            </BaseButton>
+            <BaseButton title="Close Recipe" :callBack="closeRecipe" class="close-recipe-button">
                 <span class="material-symbols-outlined">close</span>
             </BaseButton>
             <RecipeHeader v-model:recipe="recipe" :editMode="editMode"/>
             <RecipeBody v-model:recipe="recipe" :editMode="editMode"/>
             <RecipeFooter v-if="editMode" v-model:editMode="editMode" v-model:recipe="recipe"/>
             <RecipeReviews v-if="!editMode" :recipe="recipe"/>
-            <form id="form-recipe" v-on:submit="onSubmit"></form>
+            <form id="form-recipe" method="P" v-on:submit="onSubmit"></form>
         </article>
     </Transition>
 </template>
@@ -137,6 +121,18 @@ onUpdated(()=>{
         & > div:nth-child(n + 4){
             margin-top: 20px;
         }
+    }
+
+    .edit-recipe-button{
+        border: 1px solid red;
+        color: rgb(76, 76, 76);
+        float: right;
+        margin-right: 5px;
+        margin-top: 5px;
+    }   
+
+    .close-recipe-button{
+        margin-top: 5px;
     }
 
     .has-error{

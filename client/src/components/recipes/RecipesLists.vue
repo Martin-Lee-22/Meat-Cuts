@@ -3,7 +3,7 @@
     import RecipeListSkeleton from './component/RecipeListSkeleton.vue';
     import RecipesHeader from './RecipesHeader.vue';
     import RecipesList from './RecipesList.vue';
-    import { clearRecipes, getRecipes} from '@/api/recipes';
+    import { clearRecipes} from '@/api/recipes';
     import { watch } from 'vue';
 
     const cutsStore = useCutsStore()
@@ -26,7 +26,7 @@
         <div class="recipes-list-container">
             <Suspense :key="cutsStore.getCut().value.cut"> 
                 <template #default>
-                    <RecipesList :recipes="getRecipes()"/>
+                    <RecipesList/>
                 </template>
                 <template #fallback>
                     <RecipeListSkeleton/>
