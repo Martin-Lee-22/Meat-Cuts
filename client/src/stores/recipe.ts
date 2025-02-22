@@ -12,7 +12,7 @@ export const useRecipeStore = defineStore('recipe', () => {
         name: '',
         ingredients: [''],
         steps: [''],
-        image: '',
+        image: "",
         duration: 0,
         servings: 0,
         calories: 0,

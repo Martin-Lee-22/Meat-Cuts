@@ -6,12 +6,13 @@
     import type { recipe } from '@/types/recipes';
     import { computed, ref } from 'vue';
 
-    defineProps<{recipe: recipe, editMode: boolean}>();
+    const props = defineProps<{recipe: recipe, editMode: boolean}>();
     const recipeModel = defineModel('recipe');
-    const imgSrc = ref('')
+    const imgSrc = ref(props.recipe.image)
     const imgSrcDefault = computed(() => {
         return new URL('@/../public/default_recipe_img_4.png', import.meta.url).href
     })
+    console.log(props.recipe)
 </script>
 
 <template>

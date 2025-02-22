@@ -7,7 +7,7 @@
     import RecipeReviews from './reviews/RecipeReviews.vue';
     import RecipeFooter from './footer/RecipeFooter.vue';
     import { useCutsStore } from '@/stores/cuts';
-    import { getRecipes, getRecipesAPI, putRecipe } from '@/api/recipes';
+    import { getRecipes, getRecipesAPI, putRecipe, putRecipeImage } from '@/api/recipes';
     import type { recipe as recipeType } from '@/types/recipes';
 
     const cutStore = useCutsStore()
@@ -53,18 +53,27 @@
 
     async function onSubmit(e: Event){
         e.preventDefault()
-        if(checkRequiredInputs()) {
-            let newRecipe: recipeType = recipe.value
-            if(recipe.value.animal === '' && recipe.value.cut === ''){
-                newRecipe.animal = cutStore.getAnimal().type
-                newRecipe.cut = cutStore.getCut().value.cut
-                newRecipe.id = (getRecipes()[0].id + 1)
-            }
-            await putRecipe(newRecipe)
-            await getRecipesAPI(newRecipe.animal, newRecipe.cut)
-            recipeStore.setRecipe(newRecipe)
-            editMode.value = false
+
+        const fileRef = document.querySelector('#image_input') as HTMLInputElement
+        let newRecipe: recipeType = recipe.value
+
+        if(fileRef.files) {
+            const imageKey = await putRecipeImage(fileRef.files[0])
+            if(imageKey) newRecipe.image = imageKey
         }
+
+        // if(checkRequiredInputs()) {
+        //     if(recipe.value.animal === '' && recipe.value.cut === ''){
+        //         newRecipe.animal = cutStore.getAnimal().type
+        //         newRecipe.cut = cutStore.getCut().value.cut
+        //         newRecipe.id = getRecipes()[0] ? getRecipes()[0].id + 1 : 0
+        //     }
+        //     console.log(newRecipe)
+        //     await putRecipe(newRecipe)
+        //     await getRecipesAPI(newRecipe.animal, newRecipe.cut)
+        //     recipeStore.setRecipe(newRecipe)
+        //     editMode.value = false
+        // }
     }
 
     /**

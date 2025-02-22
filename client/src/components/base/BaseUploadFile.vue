@@ -5,13 +5,14 @@
     const previewImgSrc = ref('')
 
     /**
-     * Previews a photo by reading the selected file from an input element.
+     * - Previews a photo by reading the selected file from an input element.
      * If a file is selected, it uses FileReader to read the file as a data URL
      * and sets the resulting data URL to the previewImgSrc ref for display.
      */
-    const previewPhoto = () => {
+    const onChange = () => {
         const file = input.value!.files;
         if (file) {
+            // Code belows is to preview the image
             const fileReader = new FileReader();
             fileReader.onload = function (event) {
                 if(event.target?.result) previewImgSrc.value = event.target.result as string
@@ -21,7 +22,7 @@
     }
 
     onMounted(()=>{
-        input.value?.addEventListener("change", previewPhoto);
+        input.value?.addEventListener("change", onChange);
     })
     
 </script>
@@ -29,7 +30,7 @@
 <template>
     <div class="upload-file-container" :style="{backgroundImage: 'url(' + previewImgSrc +')'}">
         <span class="material-symbols-outlined big-upload" v-if="!previewImgSrc" >upload</span>
-        <input type="file" id="image" name="image" accept="image/png, image/jpeg" ref="file-upload">
+        <input type="file" id="image_input" name="image" accept="image/png, image/jpeg" ref="file-upload">
         <label for="image" class="upload-file-label" v-if="!previewImgSrc">Drop or Click to upload image.</label>
         <span class="material-symbols-outlined small-upload" v-if="previewImgSrc">upload</span>
     </div>

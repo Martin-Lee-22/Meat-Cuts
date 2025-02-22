@@ -87,4 +87,23 @@ function formatElementTextSize(elementID: string, baseFontSize: number, reduceSi
     if(element) element.style.fontSize = baseFontSize - element.innerHTML.length / reduceSize + 'px';
 }
 
-export { formatDate, countLines, isValidDateFormat, formatLength, formatElementTextSize };
+/**
+ * Generates a random alphanumeric string of the specified length.
+ * The string includes uppercase and lowercase letters and digits.
+ * 
+ * @param {number} length - The length of the random string to be generated.
+ * @returns {string} A randomly generated string.
+ */
+
+function generateRandomString(length: number) {
+    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
+
+export { formatDate, countLines, isValidDateFormat, formatLength, formatElementTextSize, generateRandomString };
