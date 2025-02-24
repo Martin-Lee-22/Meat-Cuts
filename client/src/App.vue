@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import AnimalSelector from './components/animal_selector/AnimalSelector.vue';
 import Recipes from './components/recipes/Recipes.vue'
-import { deleteRecipeImage } from './api/recipes';
 
 
 </script>
 
 <template>
   <main class="main-container">
-    <button :onclick="()=>deleteRecipeImage('example1.png')">Delete</button>
+
     <AnimalSelector/>
     <Transition appear mode="out-in" name="fade-leftwards">
       <Recipes/>

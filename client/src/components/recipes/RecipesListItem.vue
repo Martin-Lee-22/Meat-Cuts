@@ -4,11 +4,13 @@
     import TagList from './component/TagList.vue';
     import { useRecipeStore } from '@/stores/recipe';
     import { formatLength } from '@/utils/helperFunctions';
-    import { computed, ref } from 'vue';
+    import { computed, onBeforeMount, onMounted, ref, useTemplateRef } from 'vue';
+import { getRecipeImageAPI } from '@/api/recipes';
 
     const props = defineProps<{recipe: recipe, index: number}>();
 
     const maxLength = 37
+    const imageRef = useTemplateRef('recipeImage')
     const name = formatLength(props.recipe.name, maxLength)
     const imgSrc = ref('')
     const imgSrcDefault = computed(() => {
@@ -24,11 +26,18 @@
         recipeStore.setRecipe(props.recipe)
         recipeStore.toggleShowRecipe()
     }
+
+    onMounted(async () => {
+        if(props.recipe.image) {
+            imgSrc.value = await getRecipeImageAPI(props.recipe.image)
+            imageRef.value!.src = imgSrc.value
+        }
+    })
 </script>
 
 <template>
     <div class="recipes-list-item-container" @click="onClick" :data-index="index">
-        <img :src="imgSrc ? imgSrc : imgSrcDefault" alt="random image"/>
+        <img :src="imgSrc ? imgSrc : imgSrcDefault" alt="random image" ref="recipeImage"/>
         <div class="recipe-list-item-info-container">
             <h5 class="recipes-list-item-title">{{name}}</h5>
             <Rating :rating="recipe.rating"/>

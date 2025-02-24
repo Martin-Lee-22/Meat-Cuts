@@ -7,16 +7,14 @@
     import RecipeReviewsListItemComment from './RecipeReviewsListItemComment.vue';
 
     defineProps<{review: review, index: number}>()
-
-
 </script>
 
 <template>
     <li class="recipe-reviews-list-item">
-        <span class="reviewer-name">{{review.name}}</span>
-        <time>{{formatDate(new Date(review.date))}}</time>
+        <span class="reviewer-name">{{review.userName}}</span>
+        <time>{{formatDate(new Date(review.published))}}</time>
         <BaseStarsRating :rating="review.rating" :editMode="false"/>
-        <RecipeReviewsListItemComment :comment="review.comment" :index="index"/>
+        <RecipeReviewsListItemComment :comment="review.review" :index="index"/>
         <BaseThumbsUpDown :likes="review.likes" :dislikes="review.dislikes"/>
         <RecipeReviewsListItemMore/>
     </li>

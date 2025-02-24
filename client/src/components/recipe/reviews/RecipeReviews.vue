@@ -4,17 +4,21 @@ import RecipeReviewsSummary from './RecipeReviewsSummary.vue';
 import Editor from '../components/editor/Editor.vue';
 import type { editorExtensions } from '@/types/editor';
 import { onMounted, ref, useTemplateRef, watch } from 'vue';
+import { getReviewsAPI, postReviewsAPI } from '@/api/reviews';
+import type { recipe, review as reviewType } from '@/types/recipes';
 
-defineProps(['recipe']);
+const props = defineProps<{recipe: recipe}>();
 
 const nameContainer = useTemplateRef('nameContainer');
 var container: HTMLDivElement | null = null
 var panelContainer: HTMLDivElement | null = null
 
-
+const reviews = ref<reviewType[]>([])
 const userName = ref('');
 const review = ref('');
 const rating = ref(0);
+const recipeId = props.recipe.id;
+const key = ref(0);
 
 const editorExtensions: editorExtensions = {
     addImages: false,
@@ -27,21 +31,42 @@ const editorExtensions: editorExtensions = {
     addUnderline: false
 }
 
-function onSubmit(e: Event){
+async function onSubmit(e: Event){
     e.preventDefault();
+    let validInputs = true
     if(userName.value.length === 0){
-        nameContainer.value?.classList.add('empty-text-input');
+        nameContainer.value?.classList.add('empty-text');
         nameContainer.value?.classList.add('has-error-input');
+        validInputs = false
     }
     if(review.value.length === 0 && container && panelContainer){
         container.classList.add('has-error')
-        panelContainer.classList.add('empty-text-input')
+        validInputs = false
+    }
+    const reviewData = {
+        reviewId: Date.now() + userName.value,
+        userName: userName.value,
+        review: review.value,
+        recipeId: recipeId,
+        rating: rating.value,
+        published: new Date(),
+        likes: 0,
+        dislikes: 0
+    }
+    if(validInputs) {
+        await postReviewsAPI(reviewData)
+        reviews.value = await getReviewsAPI(props.recipe.id)
+        userName.value = ''
+        review.value = ''
+        rating.value = 0
+        key.value++
     }
 }
 
-onMounted(()=>{
+onMounted(async ()=>{
     container = document.querySelector('.editor-container') as HTMLDivElement
     panelContainer = document.querySelector('.editor-panel-container') as HTMLDivElement
+    reviews.value = await getReviewsAPI(props.recipe.id)
 })
 
 watch(()=> review.value, () => {
@@ -70,9 +95,9 @@ watch(()=> userName.value, () => {
                 <label>Name:</label>
                 <input type='text' placeholder="Full name" v-model="userName" onkeydown="return /[a-z, ,-]/i.test(event.key)"/>
             </div>
-            <Editor v-model:contentModel="review" v-model:ratingModel="rating" :extensions="editorExtensions"/>   
+            <Editor :key="key" v-model:contentModel="review" v-model:ratingModel="rating" :extensions="editorExtensions"/>   
         </form>
-        <RecipeReviewList :reviews="recipe.reviews"/>
+        <RecipeReviewList :reviews="reviews"/>
     </div>
 </template>
 
@@ -96,13 +121,15 @@ watch(()=> userName.value, () => {
     }
     .empty-text{
         &::after{
-            content:'*Cannot be empty*';
+            content:'*Name & Review cannot be empty.*';
             color: red;
-            font-size: 0.95em;
+            text-align: center;
+            font-size: 0.8em;
         }
     }
     .has-error{
         border: 1px solid red;
+        border-radius: 8px;
     }
     .has-error-input{
         & input{

@@ -4,8 +4,9 @@ import { useRecipeStore } from '../stores/recipe';
 import { generateRandomString } from '@/utils/helperFunctions';
 
 const recipes = ref<recipe[]>([])
+const bucket = 'meat-cuts'
 const url = 'https://u1bltsp892.execute-api.us-east-2.amazonaws.com/dev/meat-cuts/'
-const s3Url = 'https://lj7wz9sr91.execute-api.us-east-2.amazonaws.com/dev/s3/meat-cuts/'
+const s3Url = `https://lj7wz9sr91.execute-api.us-east-2.amazonaws.com/dev/s3/${bucket}/`
 
 
 async function getRecipesAPI(animal:string, cut:string){
@@ -49,33 +50,42 @@ async function deleteRecipeAPI(recipe:recipe){
     }
 }
 
-async function putRecipeImage(file: File){
-    const key = generateRandomString(5) + '_' + file.name
+async function putRecipeImageAPI(file: File){
+    const fileName = generateRandomString(5) + '_' + file.name
     try{
-        const imgKey = await fetch(s3Url + `?keyId=${key}`, {
+        await fetch(s3Url + fileName, {
             method: 'PUT',
             body: file
-        }).then(response => response.json()).then(data => {
-            console.log('Image successfully uploaded!')
-            return data.imgKey
         })
-        return imgKey
+        console.log('Image Uploaded Successfully!')
+        return fileName
     }catch(e){
         console.log(`Error - Cannot upload image: ${e}`)
     }
     return ''
 }
 
-async function deleteRecipeImage(imgKey: string){
+async function deleteRecipeImageAPI(imgKey: string){
     try{
-        await fetch(s3Url, {
-            method: 'DELETE',
-            body: JSON.stringify({imgKey: imgKey})
+        await fetch(s3Url + imgKey, {
+            method: 'DELETE'
         })
         console.log('Image successfully deleted!')
     }catch(e){
         console.log(`Error - Cannot delete image: ${e}`)
     }
+}
+
+async function getRecipeImageAPI(imgKey: string): Promise<string>{
+    let url = ''
+    try{
+        return await fetch(s3Url + imgKey, {
+            method: 'GET'
+        }).then(async response => await response.blob()).then(blob => {return URL.createObjectURL(blob)})
+    }catch(e){
+        console.log(`Error - Cannot get image: ${e}`)
+    }
+    return url
 }
 
 /**
@@ -110,4 +120,4 @@ function clearRecipes(){
     recipes.value = []
 }
 
-export {getRecipes, getRecipesAPI, isRecipesEmpty, clearRecipes, setRecipes, postRecipe, putRecipe, deleteRecipeAPI, putRecipeImage, deleteRecipeImage}
+export {getRecipes, getRecipesAPI, isRecipesEmpty, clearRecipes, setRecipes, postRecipe, putRecipe, deleteRecipeAPI, putRecipeImageAPI, deleteRecipeImageAPI, getRecipeImageAPI}

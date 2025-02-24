@@ -4,15 +4,19 @@
     import RecipeHeaderTitle from './RecipeHeaderTitle.vue';
     import BaseStarsRating from '@/components/base/BaseStarsRating.vue';
     import type { recipe } from '@/types/recipes';
-    import { computed, ref } from 'vue';
+    import { computed, onMounted, ref } from 'vue';
+    import { getRecipeImageAPI } from '@/api/recipes';
 
     const props = defineProps<{recipe: recipe, editMode: boolean}>();
     const recipeModel = defineModel('recipe');
-    const imgSrc = ref(props.recipe.image)
+    const imgSrc = ref('')
     const imgSrcDefault = computed(() => {
         return new URL('@/../public/default_recipe_img_4.png', import.meta.url).href
     })
-    console.log(props.recipe)
+
+    onMounted(async () => {
+        if(props.recipe.image) imgSrc.value = await getRecipeImageAPI(props.recipe.image)
+    })
 </script>
 
 <template>

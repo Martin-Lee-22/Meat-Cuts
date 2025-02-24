@@ -8,11 +8,11 @@
     const sortFunction = ref();
 
     function sortByDateAsc(a:any, b:any){
-        return a.date - b.date;
+        return a.published - b.published;
     };
 
     function sortByDateDesc(a:any, b:any){
-        return b.date - a.date;
+        return b.published - a.published;
     };
 
     function sortByRatingAsc(a: any, b: any){
@@ -37,7 +37,7 @@
         </div>
         <div class="recipe-reviews-list-inner-container">
             <ul>
-                <RecipeReviewsListItem v-for="(review, index) in reviews.sort(sortFunction)" :key="review.id" :index="index" :review="review"/>
+                <RecipeReviewsListItem v-for="(review, index) in reviews.sort(sortFunction)" :key="review.reviewId" :index="index" :review="review"/>
             </ul>
         </div>
     </div>

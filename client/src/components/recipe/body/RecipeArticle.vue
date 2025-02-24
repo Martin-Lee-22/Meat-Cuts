@@ -28,4 +28,8 @@ const editorExtensions: editorExtensions = {
     display: block;
     margin-inline: auto;
 }
+
+.recipe-article{
+    padding: 1rem;
+}
 </style>

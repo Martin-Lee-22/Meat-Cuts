@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { countLines } from '@/utils/helperFunctions';
-import { onMounted } from 'vue';
+import {onMounted } from 'vue';
 
 const props = defineProps<{comment: string, index: number}>();
 const maxNumberOfLines = 3
@@ -19,8 +19,8 @@ onMounted(()=>{
 </script>
 
 <template>
-    <div class='review-comment-container cutoff-text' :name="`review-comment-container-${index}`">
-        <p id="review-comment" :name="`review-comment-${index}`">{{comment}}</p>
+    <div class='review-comment-container cutoff-text' ref="review-comment-container" :name="`review-comment-container-${index}`">
+        <article id="review-comment" :name="`review-comment-${index}`" v-html="comment ? comment : ''"></article>
     </div>
     <input type='checkbox' class="expand-btn" :name="`expand-btn-${index}`" value='Read More'/>
 </template>

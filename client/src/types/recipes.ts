@@ -1,12 +1,12 @@
 type review = {
-    id: number,
     recipeId: number,
-    name: string,
-    comment: string,
+    userName: string,
+    review: string,
     rating: number,
-    date: Date,
+    published: Date,
     likes: number,
-    dislikes: number
+    dislikes: number,
+    reviewId: string
 }
 
 type rating = {
