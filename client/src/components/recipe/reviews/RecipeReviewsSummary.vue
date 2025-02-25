@@ -1,24 +1,24 @@
 <script setup lang="ts">
     import BaseStarsRating from '@/components/base/BaseStarsRating.vue';
-    import type { recipe } from '@/types/recipes';
+    import type { review } from '@/types/recipes';
     import { ref } from 'vue';
     import RecipeReviewsSummaryMenu from './RecipeReviewsSummaryMenu.vue';
 
-    defineProps<{recipe: recipe}>()
-
+    defineProps<{reviews: review[], rating: number}>()
     const showMenu = ref(false)
+    
 </script>
 
 <template>
     <div class="recipe-reviews-summary-container">
-        <BaseStarsRating :rating="recipe.rating ? recipe.rating : 0"/>
-        <span>{{recipe.rating ? recipe.rating : 0}}</span>
+        <BaseStarsRating :rating="reviews.length ? rating : 0"/>
+        <span>{{rating ? rating : 0}}</span>
         <div class="recipe-reviews-amount-container">
             <button @mouseover="showMenu = true" @mouseleave="showMenu = false">
-                <span class="recipe-reviews-amount">{{recipe.reviews ? recipe.reviews.length : 0}} comments</span>
+                <span class="recipe-reviews-amount">{{reviews ? reviews.length : 0}} comments</span>
                 <span class="material-symbols-outlined">keyboard_arrow_down</span>
             </button>
-            <RecipeReviewsSummaryMenu v-if="showMenu" :reviews="recipe.reviews"/>
+            <RecipeReviewsSummaryMenu v-if="showMenu" :reviews="reviews"/>
         </div>
     </div>
 </template>

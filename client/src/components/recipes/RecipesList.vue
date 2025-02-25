@@ -27,6 +27,6 @@
 
 <template>
     <TransitionGroup appear @enter="staggerListOnEnter" v-if="!isRecipesEmpty()">
-        <RecipesListItem v-for="(recipe, index) in getRecipes()" :key="recipe.id && recipe.name" :recipe="recipe" :index="index"/>
+        <RecipesListItem v-for="(recipe, index) in getRecipes()" :key="recipe.name" :recipe="recipe" :index="index"/>
     </TransitionGroup>
 </template>

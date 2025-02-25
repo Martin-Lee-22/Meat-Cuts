@@ -31,11 +31,8 @@ watch(showMenu, () => {
     <div class="editor-panel-container">
         <BaseStarsRating v-if="extensions?.addRating" v-model:ratingModel="ratingModel" :rating="3" :edit-mode="true"/>
         <div class="editor-controls-container">
-            <button title="Text Formatting" @click="showMenu = !showMenu">
+            <button title="Text Formatting" type="button" @click="showMenu = !showMenu">
                 <span class="material-symbols-outlined">match_case</span>
-            </button>
-            <button v-if="extensions?.addImages" title="Add Image" @click="editor?.chain().focus().toggleBold().run()" :disabled="!editor?.can().chain().focus().toggleBold().run()" :class="{ 'is-active': editor?.isActive('bold') }">
-                <span class="material-symbols-outlined">image</span>
             </button>
             <div ref="editor-panel-menu-container">
                 <EditorPanelMenu v-if="showMenu" :editor="editor" :show-menu="showMenu" :extensions="extensions"/>

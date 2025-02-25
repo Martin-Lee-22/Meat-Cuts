@@ -2,17 +2,19 @@
     import type { review } from '@/types/recipes';
     import RecipeReviewsListItem from './RecipeReviewsListItem.vue';
     import BaseSelect from '@/components/base/BaseSelect.vue';
-    import {ref } from 'vue';
+    import {onMounted, ref } from 'vue';
+    import BaseLoadSpinner from '@/components/base/BaseLoadSpinner.vue';
     
-    defineProps<{reviews: review[] | undefined}>();
+    const props = defineProps<{reviews: review[] | undefined}>();
     const sortFunction = ref();
+    const loading = ref(true);
 
     function sortByDateAsc(a:any, b:any){
-        return a.published - b.published;
+        return (new Date(a.published) as any) - (new Date(b.published) as any)
     };
 
     function sortByDateDesc(a:any, b:any){
-        return b.published - a.published;
+        return (new Date(b.published) as any) - (new Date(a.published) as any)
     };
 
     function sortByRatingAsc(a: any, b: any){
@@ -27,15 +29,20 @@
         {name:'Highest Rating', function:sortByRatingDesc},
         {name:'Lowest Rating', function:sortByRatingAsc},
     ] 
+
+    onMounted(()=>{
+        if(props.reviews) loading.value = false
+    })
 </script>
 
 <template>
     <div v-if="reviews" class="recipe-reviews-list-container">
-        <div>
+        <div v-if="reviews.length > 0">
             <span>Sort by:</span>
             <BaseSelect v-model="sortFunction" :options="options"/>
         </div>
-        <div class="recipe-reviews-list-inner-container">
+        <div :class="reviews.length > 0 ? '' : 'empty-list' +' recipe-reviews-list-inner-container'">
+            <BaseLoadSpinner v-if="loading" spinner-height="100px" spinner-width="100px"/>
             <ul>
                 <RecipeReviewsListItem v-for="(review, index) in reviews.sort(sortFunction)" :key="review.reviewId" :index="index" :review="review"/>
             </ul>
@@ -51,6 +58,8 @@
         display: flex;
         justify-content: center;
         padding-right: 18px;
+        min-height: 200px;
+        position: relative;
     }
     ul{
         list-style: none;
@@ -66,5 +75,34 @@
         border: 0.5px solid lightgray;
         outline: none;
         padding: 0.2rem;
+    }
+    .empty-list{
+        &::before{
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            display: block;
+            width: 90px;
+            height: 90px;
+            background-image: url('../../../public/no_reviews.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        &::after{
+            content: 'No Reviews found. Be the first to write one!';
+            white-space: pre;
+            position: absolute;
+            text-align: center;
+            top: 80%;
+            left: 50%;
+            font-family: "Roboto Flex", sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: rgb(147, 147, 147);
+            transform: translate(-50%, -10%);
+        }
     }
 </style>

@@ -1,33 +1,21 @@
 <script setup lang="ts">
-import { useRecipeStore } from '@/stores/recipe';
 import BaseButton from '../../base/BaseButton.vue';
-import { deleteRecipeAPI } from '@/api/recipes';
+import BaseLoadSpinner from '@/components/base/BaseLoadSpinner.vue';
 
-const editMode = defineModel('editMode')
-const recipeModel = defineModel('recipe')
-const recipeStore = useRecipeStore()
-
-function cancelRecipe(){
-    if(recipeStore.getAddRecipeMode()) {
-        recipeStore.setAddRecipeMode(false); 
-        recipeStore.setShowRecipe(false)
-    }
-    recipeModel.value = JSON.parse(JSON.stringify(recipeStore.getRecipe()))
-    editMode.value = false
-}
-
-async function deleteRecipe(){
-    await deleteRecipeAPI(recipeStore.getRecipe())
-    recipeStore.setShowRecipe(false)
-    editMode.value = false
-}
+defineProps<{cancelRecipe: Function, deleteRecipe: Function, isCallingDeletingAPI: boolean, isCallingPutAPI: boolean}>()
 </script>
 
 <template>
     <div class="recipe-footer-container">
-        <BaseButton :callBack="deleteRecipe" class="delete-recipe-button">Delete</BaseButton>
+        <BaseButton :callBack="deleteRecipe" class="delete-recipe-button">
+            <BaseLoadSpinner v-if="isCallingDeletingAPI" spinner-height="18px" spinner-width="18px"/>
+            <span v-else>Delete</span>
+        </BaseButton>
         <div class="save-cancel-container">
-            <input form="form-recipe" type="submit" value="Save" class="save-recipe-input">
+            <button class="save-recipe-button" form="form-recipe" type="submit" :disabled="isCallingPutAPI ? true : false">
+                <BaseLoadSpinner v-if="isCallingPutAPI" spinner-height="18px" spinner-width="18px"/>
+                <span v-else>Save</span>
+            </button>
             <BaseButton :callBack="cancelRecipe" class="cancel-recipe-button">Cancel</BaseButton>
         </div>
     </div>
@@ -46,7 +34,7 @@ async function deleteRecipe(){
     display: flex;
     gap: 10px;
 }
-.save-recipe-input{
+.save-recipe-button{
     &:hover{
         background-color: rgb(34, 34, 251);
     }

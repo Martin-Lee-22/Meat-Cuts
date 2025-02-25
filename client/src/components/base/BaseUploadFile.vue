@@ -1,8 +1,9 @@
 <script setup lang="ts">
     import { onMounted, ref, useTemplateRef } from 'vue';
 
+    const props = defineProps<{imgSrc: string}>()
     const input = useTemplateRef('file-upload')
-    const previewImgSrc = ref('')
+    const previewImgSrc = ref(props.imgSrc)
 
     /**
      * - Previews a photo by reading the selected file from an input element.
@@ -42,6 +43,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        border: 1px solid lightgrey;
         align-items: center;
         background-size:contain;
         background-position: center;

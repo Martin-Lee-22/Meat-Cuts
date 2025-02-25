@@ -51,17 +51,19 @@ async function deleteRecipeAPI(recipe:recipe){
 }
 
 async function putRecipeImageAPI(file: File){
-    const fileName = generateRandomString(5) + '_' + file.name
-    try{
-        await fetch(s3Url + fileName, {
-            method: 'PUT',
-            body: file
-        })
-        console.log('Image Uploaded Successfully!')
-        return fileName
-    }catch(e){
-        console.log(`Error - Cannot upload image: ${e}`)
-    }
+    if(file){
+        const fileName = generateRandomString(5) + '_' + file.name
+        try{
+            await fetch(s3Url + fileName, {
+                method: 'PUT',
+                body: file
+            })
+            console.log('Image Uploaded Successfully!')
+            return fileName
+        }catch(e){
+            console.log(`Error - Cannot upload image: ${e}`)
+        }
+        }
     return ''
 }
 

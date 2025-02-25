@@ -11,11 +11,13 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Youtube from "@tiptap/extension-youtube";
 import HardBreak from "@tiptap/extension-hard-break";
 import Underline from "@tiptap/extension-underline";
+import BaseLoadSpinner from "@/components/base/BaseLoadSpinner.vue";
 
 const contentModel = defineModel('contentModel');
 const ratingModel = defineModel('ratingModel');
 defineProps({
-  extensions: { type: Object }
+  extensions: { type: Object },
+  isPosting: { type: Boolean },
 });
 
 const editor = useEditor({
@@ -94,7 +96,10 @@ const editor = useEditor({
   <div ref="editor-container" class="editor-container">
     <editor-content :editor="editor" />
     <EditorPanel v-model:ratingModel="ratingModel" :editor="editor" :extensions="extensions" />
-    <input v-if="extensions?.addPost" type="submit" value="Post" />
+    <button class="post-button" v-if="extensions?.addPost" type="submit" :disabled="isPosting ? true : false">
+      <BaseLoadSpinner v-if="isPosting" spinner-height="18px" spinner-width="18px"/>
+      <span v-else>Post</span>
+    </button>
   </div>
 </template>
 
@@ -103,7 +108,8 @@ const editor = useEditor({
   position: relative;
   margin-top: 20px;
 }
-input[type="submit"] {
+.post-button {
+  border: 1px solid red;
   float: right;
   margin-top: 0.75rem;
   background-color: transparent;

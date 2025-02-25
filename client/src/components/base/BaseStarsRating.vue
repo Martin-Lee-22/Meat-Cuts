@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { onMounted, onUpdated, ref } from 'vue';
     import ratingData from '../../data/ratings.json'
 
     const props = defineProps({rating: {type: Number, default: 0}, editMode: {type: Boolean, default: false}});
@@ -7,8 +7,8 @@
     const ratingModel = defineModel('ratingModel');
 
     const maxNumberOfStars = 5;
-    const numberOfFullStars = Math.floor(props.rating);
-    const numberOfEmptyStars = maxNumberOfStars - numberOfFullStars;
+    const numberOfFullStars = ref(Math.floor(props.rating));
+    const numberOfEmptyStars = ref(maxNumberOfStars - numberOfFullStars.value);
 
     const rate = ref(0) // The official star rating the user has chosen. 
     const rating = ref(0) // The star rating that is displayed when user hovers over the stars.
@@ -17,6 +17,11 @@
         rate.value = i
         if(ratingModel) ratingModel.value = i
     }
+
+    onUpdated(()=>{
+        numberOfFullStars.value = Math.floor(props.rating)
+        numberOfEmptyStars.value = maxNumberOfStars - numberOfFullStars.value
+    })
 </script>
 
 <template>

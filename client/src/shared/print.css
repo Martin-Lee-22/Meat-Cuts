@@ -32,6 +32,9 @@
     #__vue-devtools-container__{
         display: none !important;
     }
+    .jump-to-recipe-link{
+        visibility: hidden;
+    }
 
     /* This is to make multiple pages to print instead of having everything on one page */
     * { 

@@ -7,7 +7,7 @@
     import { computed, onMounted, ref } from 'vue';
     import { getRecipeImageAPI } from '@/api/recipes';
 
-    const props = defineProps<{recipe: recipe, editMode: boolean}>();
+    const props = defineProps<{recipe: recipe, editMode: boolean, reviewsLength: number, rating: number}>();
     const recipeModel = defineModel('recipe');
     const imgSrc = ref('')
     const imgSrcDefault = computed(() => {
@@ -22,11 +22,11 @@
 <template>
     <div class="recipe-header-container">
         <img :src="imgSrc ? imgSrc : imgSrcDefault" alt="random image" class="recipe-header-image" v-if="!editMode"/>
-        <BaseUploadFile v-else/>
+        <BaseUploadFile :imgSrc="imgSrc ? imgSrc : ''" v-else/>
         <RecipeHeaderTitle v-model:title="(recipeModel as recipe).name" :edit-mode="editMode"/>
         <div v-if="!editMode" class="rating-container">
-            <BaseStarsRating :rating="recipe.rating"/>
-            <a href="#recipe-reviews">({{recipe.reviews ? recipe.reviews.length : '0'}}) Reviews</a>
+            <BaseStarsRating :rating="rating"/>
+            <a href="#recipe-reviews">({{reviewsLength}}) Reviews</a>
         </div>
         <div class="article-info-container">
             <RecipeHeaderInfo title="Author" v-model:data="(recipeModel as recipe).author" :edit-mode="editMode" type="text" :width="'100%'"/>

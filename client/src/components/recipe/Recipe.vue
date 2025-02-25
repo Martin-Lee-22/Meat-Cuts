@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import {onMounted, onUnmounted, ref } from 'vue';
+    import {onMounted, onUnmounted, ref, watch } from 'vue';
     import {useRecipeStore} from '../../stores/recipe';
     import BaseButton from '../base/BaseButton.vue';
     import RecipeHeader from './header/RecipeHeader.vue';
@@ -7,13 +7,19 @@
     import RecipeReviews from './reviews/RecipeReviews.vue';
     import RecipeFooter from './footer/RecipeFooter.vue';
     import { useCutsStore } from '@/stores/cuts';
-    import { getRecipes, getRecipesAPI, putRecipe, putRecipeImageAPI } from '@/api/recipes';
-    import type { recipe as recipeType } from '@/types/recipes';
+    import { deleteRecipeAPI, deleteRecipeImageAPI, getRecipes, getRecipesAPI, putRecipe, putRecipeImageAPI } from '@/api/recipes';
+    import type { recipe as recipeType, review as reviewType } from '@/types/recipes';
+    import { getReviewsAPI } from '@/api/reviews';
 
     const cutStore = useCutsStore()
     const recipeStore = useRecipeStore()
     const recipe = ref(JSON.parse(JSON.stringify(recipeStore.getRecipe())))
     const editMode = ref(true)
+
+    const reviews = ref<reviewType[]>([])
+    const rating = ref(0)
+    const isCallingDeletingAPI = ref(false)
+    const isCallingPutAPI = ref(false)
 
     function checkRequiredInputs(){
         let completeRequiredInputs = true
@@ -51,27 +57,45 @@
         return completeRequiredInputs
     }
 
+    async function updateReviews(){
+        reviews.value = await getReviewsAPI(recipe.value.id)
+    }
+
+    function calculateRating(){
+        let totalRating = 0
+        if(reviews.value.length){
+            totalRating = Math.floor(reviews.value.reduce((total, review) => total + review.rating, 0) / reviews.value.length)
+        }
+        return totalRating
+    }
+
     async function onSubmit(e: Event){
         e.preventDefault()
 
         const fileRef = document.querySelector('#image_input') as HTMLInputElement
         let newRecipe: recipeType = recipe.value
 
-        if(fileRef.files) {
-            const imageKey = await putRecipeImageAPI(fileRef.files[0])
-            if(imageKey) newRecipe.image = imageKey
-        }
-
-        if(checkRequiredInputs()) {
-            if(recipe.value.animal === '' && recipe.value.cut === ''){
-                newRecipe.animal = cutStore.getAnimal().type
-                newRecipe.cut = cutStore.getCut().value.cut
-                newRecipe.id = getRecipes()[0] ? getRecipes()[0].id + 1 : 0
+        if(!isCallingPutAPI.value){
+            isCallingPutAPI.value = true
+            if(fileRef.files) {
+                const imageKey = await putRecipeImageAPI(fileRef.files[0])
+                if(imageKey) newRecipe.image = imageKey
             }
-            await putRecipe(newRecipe)
-            await getRecipesAPI(newRecipe.animal, newRecipe.cut)
-            recipeStore.setRecipe(newRecipe)
-            editMode.value = false
+
+            if(checkRequiredInputs()) {
+                if(recipe.value.animal === '' && recipe.value.cut === ''){
+                    newRecipe.animal = cutStore.getAnimal().type
+                    newRecipe.cut = cutStore.getCut().value.cut
+                    newRecipe.id = getRecipes()[0] ? getRecipes()[0].id + 1 : 0
+                }
+                await putRecipe(newRecipe)
+                await getRecipesAPI(newRecipe.animal, newRecipe.cut)
+                recipeStore.setRecipe(newRecipe)
+                editMode.value = false
+                recipeStore.setShowRecipe(false)
+                if(recipeStore.getAddRecipeMode()) recipeStore.setAddRecipeMode(false); 
+            }
+            isCallingPutAPI.value = false
         }
     }
 
@@ -84,11 +108,34 @@
         recipeStore.toggleShowRecipe()
     }
 
+    function cancelRecipe(){
+        if(recipeStore.getAddRecipeMode()) {
+            recipeStore.setAddRecipeMode(false); 
+            recipeStore.setShowRecipe(false)
+        }
+        recipe.value = JSON.parse(JSON.stringify(recipeStore.getRecipe()))
+        editMode.value = false
+    }
+
+    async function deleteRecipe(){
+        if(!isCallingDeletingAPI.value){
+            isCallingDeletingAPI.value = true
+            await deleteRecipeAPI(recipeStore.getRecipe())
+            await deleteRecipeImageAPI(recipeStore.getRecipe().image)
+            isCallingDeletingAPI.value = true
+            recipeStore.setShowRecipe(false)
+            editMode.value = false
+        }
+    }
+
     /**
-     * Sets the edit mode to false if the recipe is not in add recipe mode.
+     * - Sets the edit mode to false if the recipe is not in add recipe mode.
+     * - calls the reviews api to get the reviews.
      */
-    onMounted(() => {
+    onMounted(async () => {
         if(!recipeStore.getAddRecipeMode()) editMode.value = false 
+        reviews.value = await getReviewsAPI(recipe.value.id)
+        rating.value = calculateRating()
     })
 
     /**
@@ -96,6 +143,11 @@
      */
     onUnmounted(() => {
         if(cutStore.isCutEmpty()) closeRecipe()
+    })
+
+
+    watch(()=> reviews.value.length, () => {
+        rating.value = calculateRating()
     })
 
 </script>
@@ -109,10 +161,10 @@
             <BaseButton title="Close Recipe" :callBack="closeRecipe" class="close-recipe-button">
                 <span class="material-symbols-outlined">close</span>
             </BaseButton>
-            <RecipeHeader v-model:recipe="recipe" :editMode="editMode"/>
+            <RecipeHeader v-model:recipe="recipe" :editMode="editMode" :reviewsLength="reviews.length" :rating="rating"/>
             <RecipeBody v-model:recipe="recipe" :editMode="editMode"/>
-            <RecipeFooter v-if="editMode" v-model:editMode="editMode" v-model:recipe="recipe"/>
-            <RecipeReviews v-if="!editMode" :recipe="recipe"/>
+            <RecipeFooter v-if="editMode" :cancelRecipe="cancelRecipe" :deleteRecipe="deleteRecipe" :isCallingDeletingAPI="isCallingDeletingAPI" :isCallingPutAPI="isCallingPutAPI"/>
+            <RecipeReviews v-if="!editMode" :recipe="recipe" :reviews="reviews" :totalRating="rating" :updateReviews="updateReviews"/>
             <form id="form-recipe" method="P" v-on:submit="onSubmit"></form>
         </article>
     </Transition>

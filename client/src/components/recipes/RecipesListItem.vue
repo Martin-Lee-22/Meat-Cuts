@@ -4,8 +4,8 @@
     import TagList from './component/TagList.vue';
     import { useRecipeStore } from '@/stores/recipe';
     import { formatLength } from '@/utils/helperFunctions';
-    import { computed, onBeforeMount, onMounted, ref, useTemplateRef } from 'vue';
-import { getRecipeImageAPI } from '@/api/recipes';
+    import { computed, onMounted, ref, useTemplateRef } from 'vue';
+    import { getRecipeImageAPI } from '@/api/recipes';
 
     const props = defineProps<{recipe: recipe, index: number}>();
 

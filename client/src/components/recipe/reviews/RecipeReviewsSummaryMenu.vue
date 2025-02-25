@@ -13,6 +13,7 @@
     <table class="recipe-reviews-summary-menu-container">
         <tr v-for="(rating) in ratingsData" :key="rating.id" class="recipe-reviews-summary-menu-item">
             <th>{{rating.heading}}</th>
+            <td>({{reviews.filter(review => review.rating === rating.rating).length}})</td>
             <td>
                 <span class="recipe-reviews-amount-bar" :style="{background: `linear-gradient(to right, ${color} ${Math.round(((reviews.filter(review => review.rating === rating.rating).length) / totalReviews) * 100)}%, ${backgroundColor} 0)`}"/>
             </td>
@@ -26,7 +27,7 @@
         position: absolute;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         padding: 0.5rem;
-        z-index: 1;
+        z-index: 2;
         background-color: white;
         column-gap: 5px;
         border-spacing: 5px;

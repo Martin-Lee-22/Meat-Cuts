@@ -4,20 +4,20 @@ import RecipeReviewsSummary from './RecipeReviewsSummary.vue';
 import Editor from '../components/editor/Editor.vue';
 import type { editorExtensions } from '@/types/editor';
 import { onMounted, ref, useTemplateRef, watch } from 'vue';
-import { getReviewsAPI, postReviewsAPI } from '@/api/reviews';
+import { postReviewsAPI } from '@/api/reviews';
 import type { recipe, review as reviewType } from '@/types/recipes';
 
-const props = defineProps<{recipe: recipe}>();
+const props = defineProps<{recipe: recipe, reviews: reviewType[], updateReviews: Function, totalRating: number}>();
 
 const nameContainer = useTemplateRef('nameContainer');
 var container: HTMLDivElement | null = null
 var panelContainer: HTMLDivElement | null = null
 
-const reviews = ref<reviewType[]>([])
 const userName = ref('');
 const review = ref('');
 const rating = ref(0);
 const recipeId = props.recipe.id;
+const isPosting = ref(false);
 const key = ref(0);
 
 const editorExtensions: editorExtensions = {
@@ -43,6 +43,7 @@ async function onSubmit(e: Event){
         container.classList.add('has-error')
         validInputs = false
     }
+    isPosting.value = true
     const reviewData = {
         reviewId: Date.now() + userName.value,
         userName: userName.value,
@@ -55,7 +56,8 @@ async function onSubmit(e: Event){
     }
     if(validInputs) {
         await postReviewsAPI(reviewData)
-        reviews.value = await getReviewsAPI(props.recipe.id)
+        isPosting.value = false
+        props.updateReviews()
         userName.value = ''
         review.value = ''
         rating.value = 0
@@ -66,7 +68,6 @@ async function onSubmit(e: Event){
 onMounted(async ()=>{
     container = document.querySelector('.editor-container') as HTMLDivElement
     panelContainer = document.querySelector('.editor-panel-container') as HTMLDivElement
-    reviews.value = await getReviewsAPI(props.recipe.id)
 })
 
 watch(()=> review.value, () => {
@@ -89,13 +90,13 @@ watch(()=> userName.value, () => {
 <template>
     <div id="recipe-reviews" class="recipe-reviews-container">
         <h3>Reviews</h3>
-        <RecipeReviewsSummary :recipe="recipe"/>
+        <RecipeReviewsSummary :key="reviews.length" :reviews="reviews" :rating="totalRating"/>
         <form id="form-review" @submit="onSubmit">
             <div ref="nameContainer" class="name-container">
                 <label>Name:</label>
                 <input type='text' placeholder="Full name" v-model="userName" onkeydown="return /[a-z, ,-]/i.test(event.key)"/>
             </div>
-            <Editor :key="key" v-model:contentModel="review" v-model:ratingModel="rating" :extensions="editorExtensions"/>   
+            <Editor :key="key" v-model:contentModel="review" v-model:ratingModel="rating" :isPosting="isPosting" :extensions="editorExtensions"/>   
         </form>
         <RecipeReviewList :reviews="reviews"/>
     </div>
@@ -105,6 +106,7 @@ watch(()=> userName.value, () => {
     .recipe-reviews-container{
         padding-left: 18px;
         padding-right: 15px;
+        position: relative;
     }
     .name-container{
         display: flex;
