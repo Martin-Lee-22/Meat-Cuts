@@ -6,8 +6,8 @@ import { generateRandomString } from '@/utils/helperFunctions';
 // The recipes array stores the recipes data.
 const recipes = ref<recipe[]>([])
 
-const url = process.env.VUE_APP_RECIPES_URL
-const s3Url =  process.env.VUE_APP_RECIPE_IMAGE_URL
+const url = import.meta.env.VITE_RECIPES_URL
+const s3Url = import.meta.env.VITE_RECIPE_IMAGE_URL
 
 /**
  * Retrieves recipes for the given animal and cut from the API and stores them in the recipes array.

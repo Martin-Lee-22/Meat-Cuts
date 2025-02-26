@@ -1,6 +1,6 @@
 import type { review } from '@/types/recipes';
 
-const url: string | undefined =  process.env.VUE_APP_REVIEWS_URL
+const url: string | undefined = import.meta.env.VITE_REVIEWS_URL
 
 /**
  * Retrieves reviews for the given recipe from the API and returns them as an array of review objects.
