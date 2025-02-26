@@ -20,7 +20,7 @@
     })
 
     // Watch the recipe changes, if the recipe is not empty, remove empty-list class from recipes-list-container
-    watch(getRecipes(), () => {
+    watch(() => getRecipes().length, () => {
         if(getRecipes().length > 0) {
             document.getElementsByClassName('recipes-list-container')[0].classList.remove('empty-list')
         }
