@@ -1,6 +1,6 @@
 import type { review } from '@/types/recipes';
 
-const url = 'https://4chbsj911i.execute-api.us-east-2.amazonaws.com/dev/'
+const url: string | undefined =  process.env.REVIEWS_URL
 
 /**
  * Retrieves reviews for the given recipe from the API and returns them as an array of review objects.
@@ -29,7 +29,7 @@ export async function getReviewsAPI(recipeId: number): Promise<review[]> {
  */
 export async function postReviewsAPI(review: review): Promise<void> {
     try{
-        await fetch(url, {
+        if(url) await fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(review)

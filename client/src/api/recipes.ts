@@ -6,9 +6,8 @@ import { generateRandomString } from '@/utils/helperFunctions';
 // The recipes array stores the recipes data.
 const recipes = ref<recipe[]>([])
 
-const bucket = 'meat-cuts'
-const url = 'https://u1bltsp892.execute-api.us-east-2.amazonaws.com/dev/meat-cuts/'
-const s3Url = `https://lj7wz9sr91.execute-api.us-east-2.amazonaws.com/dev/s3/${bucket}/`
+const url = process.env.RECIPES_URL
+const s3Url =  process.env.RECIPE_IMAGE_URL
 
 /**
  * Retrieves recipes for the given animal and cut from the API and stores them in the recipes array.
