@@ -112,7 +112,7 @@
             display: block;
             width: 90px;
             height: 90px;
-            background-image: url('../../../public/no_reviews.png');
+            background-image: url('../../../../public/no_reviews.png');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
