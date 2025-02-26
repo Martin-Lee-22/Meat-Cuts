@@ -3,13 +3,19 @@ import type { recipe } from '@/types/recipes';
 import { useRecipeStore } from '../stores/recipe';
 import { generateRandomString } from '@/utils/helperFunctions';
 
+// The recipes array stores the recipes data.
 const recipes = ref<recipe[]>([])
+
 const bucket = 'meat-cuts'
 const url = 'https://u1bltsp892.execute-api.us-east-2.amazonaws.com/dev/meat-cuts/'
 const s3Url = `https://lj7wz9sr91.execute-api.us-east-2.amazonaws.com/dev/s3/${bucket}/`
 
-
-async function getRecipesAPI(animal:string, cut:string){
+/**
+ * Retrieves recipes for the given animal and cut from the API and stores them in the recipes array.
+ * @param {string} animal - The animal for which to retrieve recipes.
+ * @param {string} cut - The cut for which to retrieve recipes.
+ */
+export async function getRecipesAPI(animal:string, cut:string): Promise<void> {
     try{
         await fetch(url + `${animal}/${cut}`, {
             method: 'GET'
@@ -21,7 +27,12 @@ async function getRecipesAPI(animal:string, cut:string){
     }
 }
 
-async function postRecipe(recipe:recipe, id: number){
+/**
+ * Posts the given recipe to the API and updates the current recipe in the recipe store.
+ * @param {recipe} recipe - The recipe to post.
+ * @param {number} id - The id of the recipe to post.
+ */
+export async function postRecipe(recipe:recipe, id: number): Promise<void> {
     const recipeStore = useRecipeStore()
     fetch(url  + `${recipe.animal}/${recipe.cut}/${id}`, {
         method: 'POST',
@@ -30,7 +41,12 @@ async function postRecipe(recipe:recipe, id: number){
     }).then(response => response.json()).then(data => recipeStore.setRecipe(data))
 }
 
-async function putRecipe(recipe:recipe){
+/**
+ * Updates an existing recipe in the API and updates the recipe store with the response.
+ * @param {recipe} recipe - The recipe object containing updated details to be stored.
+ */
+
+export async function putRecipe(recipe:recipe): Promise<void> {
     const recipeStore = useRecipeStore()
     await fetch(url  + `${recipe.animal}/${recipe.cut}/${recipe.id}`, {
         method: 'PUT',
@@ -39,7 +55,11 @@ async function putRecipe(recipe:recipe){
     }).then(response => response.json()).then(data => recipeStore.setRecipe(data))
 }
 
-async function deleteRecipeAPI(recipe:recipe){
+/**
+ * Deletes the given recipe from the API.
+ * @param {recipe} recipe - The recipe object to delete.
+ */
+export async function deleteRecipeAPI(recipe:recipe): Promise<void> {
     try{
         await fetch(url  + `${recipe.animal}/${recipe.cut}/${recipe.id}`, {
             method: 'DELETE'
@@ -50,7 +70,13 @@ async function deleteRecipeAPI(recipe:recipe){
     }
 }
 
-async function putRecipeImageAPI(file: File){
+/**
+ * Uploads a file to the AWS S3 bucket with a generated random string.
+ * Returns the filename with the random string prepended if the upload is successful.
+ * @param {File} file - The file object to upload.
+ * @returns {string} The filename with a random string prepended, or an empty string if the upload failed.
+ */
+export async function putRecipeImageAPI(file: File): Promise<string> {
     if(file){
         const fileName = generateRandomString(5) + '_' + file.name
         try{
@@ -67,7 +93,11 @@ async function putRecipeImageAPI(file: File){
     return ''
 }
 
-async function deleteRecipeImageAPI(imgKey: string){
+/**
+ * Deletes the given image from the AWS S3 bucket.
+ * @param {string} imgKey - The filename of the image to delete.
+ */
+export async function deleteRecipeImageAPI(imgKey: string): Promise<void> {
     try{
         await fetch(s3Url + imgKey, {
             method: 'DELETE'
@@ -78,8 +108,15 @@ async function deleteRecipeImageAPI(imgKey: string){
     }
 }
 
-async function getRecipeImageAPI(imgKey: string): Promise<string>{
-    let url = ''
+/**
+ * Retrieves an image from the AWS S3 bucket using the given image key.
+ * Converts the image blob into a URL and returns it.
+ * @param {string} imgKey - The filename of the image to retrieve.
+ * @returns {Promise<string>} A promise that resolves to a URL representing the image object,
+ * or an empty string if the retrieval fails.
+ */
+
+export async function getRecipeImageAPI(imgKey: string): Promise<string>{
     try{
         return await fetch(s3Url + imgKey, {
             method: 'GET'
@@ -87,7 +124,7 @@ async function getRecipeImageAPI(imgKey: string): Promise<string>{
     }catch(e){
         console.log(`Error - Cannot get image: ${e}`)
     }
-    return url
+    return ''
 }
 
 /**
@@ -95,7 +132,7 @@ async function getRecipeImageAPI(imgKey: string): Promise<string>{
  * changes in the cuts store.
  * @return {recipe[]} The recipes data.
  */
-function getRecipes(): recipe[] {
+export function getRecipes(): recipe[] {
     return recipes.value
 }
 
@@ -103,7 +140,7 @@ function getRecipes(): recipe[] {
  * Updates the recipes data with the newRecipes parameter.
  * @param {recipe[]} newRecipes The new recipes data to update the store with.
  */
-function setRecipes(newRecipes:recipe[]){
+export function setRecipes(newRecipes:recipe[]): void {
     recipes.value = newRecipes
 }
 
@@ -111,15 +148,13 @@ function setRecipes(newRecipes:recipe[]){
  * Returns true if the recipes array is empty, false otherwise.
  * @returns {boolean} true if recipes is empty
  */
-function isRecipesEmpty(){
+export function isRecipesEmpty(): boolean {
     return recipes.value.length === 0
 }
 
 /**
  * Clears the recipes array to an empty array.
  */
-function clearRecipes(){
+export function clearRecipes(): void {
     recipes.value = []
 }
-
-export {getRecipes, getRecipesAPI, isRecipesEmpty, clearRecipes, setRecipes, postRecipe, putRecipe, deleteRecipeAPI, putRecipeImageAPI, deleteRecipeImageAPI, getRecipeImageAPI}

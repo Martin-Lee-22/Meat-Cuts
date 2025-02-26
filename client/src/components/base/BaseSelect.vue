@@ -10,9 +10,9 @@
 </template>
 
 <style lang="css" scoped>
-select, option{
-    font-family: "Roboto Flex", sans-serif;
-    font-weight: 300;
-    font-size: 0.9em;
-}
+    select, option{
+        font-family: "Roboto Flex", sans-serif;
+        font-weight: 300;
+        font-size: 0.9em;
+    }
 </style>

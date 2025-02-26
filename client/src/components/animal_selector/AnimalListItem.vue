@@ -30,7 +30,6 @@
         & img{
             transform: scale(0.8);
         }
-
         /* These styles are for the gsap animation */
         opacity: 0;
         transform: translateY(60px);

@@ -25,7 +25,6 @@
     onMounted(()=>{
         input.value?.addEventListener("change", onChange);
     })
-    
 </script>
 
 <template>

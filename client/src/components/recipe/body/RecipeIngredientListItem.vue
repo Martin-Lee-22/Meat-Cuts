@@ -10,6 +10,12 @@
         if(props.editMode) checked.value = false
     })
 
+    /**
+     * Updates the ingredient at the specified index in the ingredientsModel array
+     * with the value from the textarea input when a change event occurs.
+     * 
+     * @param {Event} e - The change event triggered by the textarea input.
+     */
     function onChange(e: Event) {
         const target = e.target as HTMLTextAreaElement
         if(ingredientsModel.value) ingredientsModel.value[props.index] = target.value
@@ -21,7 +27,7 @@
         <input v-if="!editMode" type="checkbox" @change="checked = !checked" >
         <p v-if="!editMode" class="ingredient" :style="{'text-decoration': checked && !editMode ? 'line-through' : 'none'}">{{ingredient}}</p>
         <textarea placeholder="Write your ingredient here..." v-else @change="onChange" :value="ingredient"/>
-        <button class="delete-button" v-if="editMode && ingredients.length > minIngredients" @click="ingredientsModel.splice(index, 1)"><span class="material-symbols-outlined">delete</span></button>
+        <button class="delete-button" v-if="editMode && ingredients.length > minIngredients" @click="ingredientsModel?.splice(index, 1)"><span class="material-symbols-outlined">delete</span></button>
     </li>
 </template>
 

@@ -1,9 +1,13 @@
+
+/* A collection of helper functions */
+
+
 /**
  * Formats a date as a string in the format "Year-Month-Day".
  * @param {Date} date - The date to be formatted.
  * @returns {string} The formatted string.
  */
-function formatDate(date: Date) {
+export function formatDate(date: Date): string {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based, so we add 1
     const day = String(date.getDate()).padStart(2, '0'); // Pad day with leading zero if needed
@@ -19,7 +23,7 @@ function formatDate(date: Date) {
  * @param {string} dateStr - The date string to be checked.
  * @returns {boolean} true if the date string is valid, false otherwise.
  */
-function isValidDateFormat(dateStr: string) {
+export function isValidDateFormat(dateStr: string): boolean {
     // Regular expression for detecting the format "Month Day, Year"
     const regex = /^(January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4}$/;
     return regex.test(dateStr);
@@ -35,7 +39,7 @@ function isValidDateFormat(dateStr: string) {
  * Returns 0 if the parent or text element is not found.
  */
 
-function countLines(parentElement: string, textElement: string, index:number) {
+export function countLines(parentElement: string, textElement: string, index:number): number {
     var parent = document.querySelector(`[name="${parentElement + index}"]`);
     var text =  document.querySelector(`[name="${textElement + index}"]`);
     if(parent && text) {
@@ -54,7 +58,7 @@ function countLines(parentElement: string, textElement: string, index:number) {
      * Otherwise, use the number of data (e.g. 500 data)
      * @return {string}
      */
-function formatViews(data: number){
+export function formatViews(data: number): string{
     if(data > 10000 && data < 1000000){
         return (data / 1000) + 'K views';
     }
@@ -70,7 +74,7 @@ function formatViews(data: number){
  * @param {number} maxLength - The maximum length of the string
  * @returns {string} The formatted string
  */
-function formatLength(data: string, maxLength: number){
+export function formatLength(data: string, maxLength: number): string{
     if(data.length > 15) return data.substring(0, maxLength) + '...'
     return data
 }
@@ -82,7 +86,7 @@ function formatLength(data: string, maxLength: number){
  * @param baseFontSize - The initial font size to start from.
  * @param reduceSize - The divisor used to reduce the font size based on the content length.
  */
-function formatElementTextSize(elementID: string, baseFontSize: number, reduceSize: number){
+export function formatElementTextSize(elementID: string, baseFontSize: number, reduceSize: number): void {
     const element = document.getElementById(elementID)
     if(element) element.style.fontSize = baseFontSize - element.innerHTML.length / reduceSize + 'px';
 }
@@ -95,7 +99,7 @@ function formatElementTextSize(elementID: string, baseFontSize: number, reduceSi
  * @returns {string} A randomly generated string.
  */
 
-function generateRandomString(length: number) {
+export function generateRandomString(length: number): string {
     const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     const charactersLength = characters.length;
@@ -105,5 +109,3 @@ function generateRandomString(length: number) {
 
     return result;
 }
-
-export { formatDate, countLines, isValidDateFormat, formatLength, formatElementTextSize, generateRandomString };

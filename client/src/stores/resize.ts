@@ -2,6 +2,8 @@ import { defineStore } from "pinia"
 import { ref, watch } from "vue"
 import { useCutsStore } from "./cuts"
 
+/* A store that manages/shares the resize variables/functions throughout the application */
+
 export const useResizeStore = defineStore('resize', () => {
 
     const initialWidth = 100 // Initial width of the first element
@@ -31,7 +33,7 @@ export const useResizeStore = defineStore('resize', () => {
      * window's width.
      * @param {MouseEvent} event - the mouse event used to calculate the new width of the first element
      */
-    function resizeElement(event: MouseEvent) {
+    function resizeElement(event: MouseEvent): void {
         let windowWidth = window.innerWidth
         let mouseXCoordinate = event.clientX
         let percentage = (mouseXCoordinate / windowWidth) * 100
@@ -41,19 +43,35 @@ export const useResizeStore = defineStore('resize', () => {
         }
     }
 
-    function getFirstElementWidth() {
+    /**
+     * Retrieves the current width of the first element in pixels.
+     * @returns {number} The current width of the first element in pixels.
+     */
+    function getFirstElementWidth(): number {
         return firstElementWidth.value
     }
 
-    function setFirstElementWidth(width: number) {
+    /**
+     * Sets the width of the first element to the given value in pixels.
+     * @param {number} width - The new width of the first element in pixels.
+     */
+    function setFirstElementWidth(width: number): void {
         firstElementWidth.value = width
     }
 
-    function getSecondElementWidth() {
+    /**
+     * Retrieves the current width of the second element in pixels.
+     * @returns {number} The current width of the second element in pixels.
+     */
+    function getSecondElementWidth(): number {
         return secondElementWidth.value
     }
 
-    function setSecondElementWidth(width: number) {
+    /**
+     * Sets the width of the second element to the given value in pixels.
+     * @param {number} width - The new width of the second element in pixels.
+     */
+    function setSecondElementWidth(width: number): void {
         secondElementWidth.value = width
     }
     return { getFirstElementWidth, setFirstElementWidth, getSecondElementWidth, setSecondElementWidth, resizeElement }

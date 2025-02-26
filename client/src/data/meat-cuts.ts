@@ -1,5 +1,7 @@
 import type { animal } from "@/types/animals"
 
+/* This file contains all the 'cuts' coordinates for each animal.*/
+
 const cow: animal = {
     id: 0,
     type: "cow",

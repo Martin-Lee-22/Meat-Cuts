@@ -1,11 +1,9 @@
 <script setup lang="ts">
     import BaseButton from '@/components/base/BaseButton.vue';
     import RecipeIngredientListItem from './RecipeIngredientListItem.vue';
-    import { useRecipeStore } from '@/stores/recipe';
-    import { onMounted, onUpdated, ref, useTemplateRef, watch } from 'vue';
-import type { recipe as recipeType } from '@/types/recipes';
-
-    // const recipe = ref(useRecipeStore().getRecipe())
+    import { onMounted, onUpdated, useTemplateRef } from 'vue';
+    import type { recipe as recipeType } from '@/types/recipes';
+    
     const ingredientsModel = defineModel<string[]>('ingredientsModel');
     const listRef = useTemplateRef('listRef')
     const props = defineProps<{ingredients: recipeType['ingredients'], editMode: boolean}>();
@@ -14,6 +12,9 @@ import type { recipe as recipeType } from '@/types/recipes';
         if(ingredientsModel.value && props.ingredients.length === 0) ingredientsModel?.value.push('')
     })
 
+    /**
+     * Checks to see if the ingredientsModel array is empty and if so, adds an empty string to it. 
+     */
     onUpdated(()=>{
         if(listRef.value?.classList.contains('empty-list-input') && listRef.value?.classList.contains('has-error') && 
             (props.ingredients && props.ingredients.filter((x)=>{return /\S/.test(x)}))) {
@@ -22,6 +23,10 @@ import type { recipe as recipeType } from '@/types/recipes';
         }
     })
 
+    /**
+     * Adds an empty string to the ingredientsModel array, used to dynamically add new input fields for recipe ingredients.
+     * This function is called when the user clicks the "Add ingredient" button in the recipe form.
+     */
     function addIngredient() {
         if(ingredientsModel.value) ingredientsModel.value.push('')
     }

@@ -19,7 +19,7 @@
 <template>
     <li>
         <div>
-            <button class="delete-button" v-if="editMode && stepsLength > minSteps" @click="stepsModel.splice(index, 1)"><span class="material-symbols-outlined">delete</span></button>
+            <button class="delete-button" v-if="editMode && stepsLength > minSteps" @click="stepsModel?.splice(index, 1)"><span class="material-symbols-outlined">delete</span></button>
             <input v-if="!editMode" type="checkbox" @change="checked = !checked">
             <span class="step" :style="{'text-decoration': checked && !editMode ? 'line-through' : 'none'}">Step {{index + 1}}</span> 
         </div>
@@ -32,24 +32,30 @@
     li{
         line-height: 1.5rem;
     }
+
     input[type="checkbox"]{
         margin-right: 8px;
     }
+
     span{
         font-weight: 600;
         font-size: 0.95rem;
     }
+
     p{
         margin-top: 6px;
         font-size: 1rem;
         font-weight: 300;
     }
+
     button{
         float: right;
     }
+
     .step{
         display: inline-block;
     }
+    
     textarea{
         padding: 0.5em;
         width: 100%;

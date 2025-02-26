@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import BaseButton from '@/components/base/BaseButton.vue';
 
-/**
- * Prints the recipe.
- */
 function printRecipe(){
     print()
 }
@@ -22,24 +19,24 @@ function printRecipe(){
 </template>
 
 <style lang="css" scoped>
-.recipe-social-toolbar-container{
-    display: flex;
-    gap: 5px;
-    flex-direction: row;
-    padding-right: 18px;
-    justify-content: end;
-    align-items: center;
-    & button{
-        border: 1px solid rgb(205, 205, 205);
-        border-radius: 50%;
-        cursor:pointer;
-        font-size: 0.8em;
+    .recipe-social-toolbar-container{
+        display: flex;
+        gap: 5px;
+        flex-direction: row;
+        padding-right: 18px;
+        justify-content: end;
+        align-items: center;
+        & button{
+            border: 1px solid rgb(205, 205, 205);
+            border-radius: 50%;
+            cursor:pointer;
+            font-size: 0.8em;
+        }
+        & a{
+            color: black;
+        }
     }
-    & a{
-        color: black;
+    iframe{
+        display:none;
     }
-}
-iframe{
-    display:none;
-}
 </style>

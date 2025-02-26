@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { onMounted, onUpdated, ref } from 'vue';
+    import { onUpdated, ref } from 'vue';
     import ratingData from '../../data/ratings.json'
 
     const props = defineProps({rating: {type: Number, default: 0}, editMode: {type: Boolean, default: false}});
@@ -13,7 +13,12 @@
     const rate = ref(0) // The official star rating the user has chosen. 
     const rating = ref(0) // The star rating that is displayed when user hovers over the stars.
 
-    function onClick(i:number){
+    /**
+     * Handles click events on the stars. Updates the rating and the number of
+     * full stars and empty stars when a star is clicked.
+     * @param {number} i - The index of the star that was clicked.
+     */
+    function onClick(i:number):void{
         rate.value = i
         if(ratingModel) ratingModel.value = i
     }

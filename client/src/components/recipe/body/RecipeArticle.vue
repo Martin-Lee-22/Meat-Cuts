@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import Editor from '../components/editor/Editor.vue';
-import type { editorExtensions } from '@/types/editor';
+    import Editor from '../components/editor/Editor.vue';
+    import type { editorExtensions } from '@/types/editor';
 
-defineProps<{article: string | undefined, editMode: boolean}>()
-const contentModel = defineModel('contentModel');
+    defineProps<{article: string | undefined, editMode: boolean}>()
+    const contentModel = defineModel('contentModel');
 
-const editorExtensions: editorExtensions = {
-    addImages: false,
-    addHeadings: true, 
-    addRating: false,
-    addPost: false,
-    addHighlights: true,
-    addTextAlignments: true,
-    addYoutubeVideo: true,
-    addUnderline: true
-}
+    const editorExtensions: editorExtensions = {
+        addImages: false,
+        addHeadings: true, 
+        addRating: false,
+        addPost: false,
+        addHighlights: true,
+        addTextAlignments: true,
+        addYoutubeVideo: true,
+        addUnderline: true
+    }
 </script>
 
 <template>
@@ -24,12 +24,12 @@ const editorExtensions: editorExtensions = {
 </template>
 
 <style lang="css" scoped>
-:deep(iframe){
-    display: block;
-    margin-inline: auto;
-}
+    :deep(iframe){
+        display: block;
+        margin-inline: auto;
+    }
 
-.recipe-article{
-    padding: 1rem;
-}
+    .recipe-article{
+        padding: 1rem;
+    }
 </style>

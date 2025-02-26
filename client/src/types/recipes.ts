@@ -1,4 +1,4 @@
-type review = {
+export type review = {
     recipeId: number,
     userName: string,
     review: string,
@@ -9,13 +9,13 @@ type review = {
     reviewId: string
 }
 
-type rating = {
+export type rating = {
     id: number,
     heading: string,
     rating: number
 }
 
-type recipe = {
+export type recipe = {
         id: number,
         name: string,
         ingredients: string[],
@@ -32,5 +32,3 @@ type recipe = {
         published: Date,
         article: string
 }
-
-export type {recipe, review, rating}

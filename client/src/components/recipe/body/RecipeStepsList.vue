@@ -17,6 +17,10 @@
         }
     })
 
+    /**
+     * Adds an empty string to the stepsModel array, used to dynamically add new input fields for recipe steps.
+     * This function is called when the user clicks the "Add step" button in the recipe form.
+     */
     function addStep(){
         if(stepsModel.value) stepsModel.value.push('')
     }

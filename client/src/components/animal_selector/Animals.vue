@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AnimalsList from './AnimalsList.vue';
+    import AnimalsList from './AnimalsList.vue';
 </script>
 
 <template>

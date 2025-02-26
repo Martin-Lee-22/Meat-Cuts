@@ -1,7 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
     <div class="search-bar-container">
         <button class="search-button"><span class="material-symbols-outlined">search</span></button>

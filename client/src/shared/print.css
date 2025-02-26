@@ -1,3 +1,5 @@
+/* Used to hide certain elements from the print page */
+
 @media print{
     .animal-selector-container *{
         display: none;

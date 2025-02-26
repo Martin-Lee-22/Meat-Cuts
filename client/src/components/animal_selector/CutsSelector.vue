@@ -3,7 +3,6 @@
     import BaseButton from '../base/BaseButton.vue';
     import { computed, onMounted, watch } from 'vue';
     import type { animal } from '@/types/animals';
-    import { useRecipeStore } from '@/stores/recipe';
     import { clearRecipes } from '@/api/recipes';
 
     const cutsStore = useCutsStore();
@@ -16,7 +15,7 @@
     /**
      * Resets the current animal and cut selection in the cuts store.
      */
-    function resetAnimal(){
+    function resetAnimal(): void{
         cutsStore.resetAnimal()
         cutsStore.resetCut()
     }
@@ -25,7 +24,7 @@
      * Removes the given class from the first element found with the given class.
      * @param {string} x - The class to be removed.
      */
-    function removeClassFromElement(x: string){
+    function removeClassFromElement(x: string): void{
         const element = document.getElementsByClassName(x)[0] as HTMLElement
         if(element) element.classList.remove(x)
     }

@@ -5,7 +5,6 @@
     import { animals } from '@/data/meat-cuts';
 
     const cutsStore = useCutsStore();
-
 </script>
 
 <template>
