@@ -3,12 +3,11 @@
     import RecipeListSkeleton from './component/RecipeListSkeleton.vue';
     import RecipesHeader from './RecipesHeader.vue';
     import RecipesList from './RecipesList.vue';
-    import { clearRecipes} from '@/api/recipes';
+    import { clearRecipes, getRecipes} from '@/api/recipes';
     import { watch } from 'vue';
     import { useRecipeStore } from '@/stores/recipe';
 
     const cutsStore = useCutsStore()
-    const recipesStore = useRecipeStore()
 
     // Watch the cut changes, if the cut is not empty and the new cut object is different to the old, call clears the recipes
     // and refresh the RecipesList component so it can fetch the new recipes in an async call. Also remove empty-list class
@@ -21,8 +20,8 @@
     })
 
     // Watch the recipe changes, if the recipe is not empty, remove empty-list class from recipes-list-container
-    watch(recipesStore.getRecipe(), () => {
-        if(recipesStore.getRecipe()) {
+    watch(getRecipes(), () => {
+        if(getRecipes().length > 0) {
             document.getElementsByClassName('recipes-list-container')[0].classList.remove('empty-list')
         }
     })
