@@ -9,20 +9,46 @@
     const sortFunction = ref();
     const loading = ref(true);
 
-    function sortByDateAsc(a:any, b:any){
+    /**
+     * Sorts reviews in ascending order by date.
+     * @param {any} a The first review to compare.
+     * @param {any} b The second review to compare.
+     * @returns {number} A negative number if a should be ordered before b, a positive number if a should be ordered after b, or 0 if the order is equal.
+     */
+    function sortByDateAsc(a:any, b:any):number{
         return (new Date(a.published) as any) - (new Date(b.published) as any)
     };
 
-    function sortByDateDesc(a:any, b:any){
+    /**
+     * Sorts reviews in descending order by date.
+     * @param {any} a The first review to compare.
+     * @param {any} b The second review to compare.
+     * @returns {number} A negative number if a should be ordered before b, a positive number if a should be ordered after b, or 0 if the order is equal.
+     */
+    function sortByDateDesc(a:any, b:any):number{
         return (new Date(b.published) as any) - (new Date(a.published) as any)
     };
 
-    function sortByRatingAsc(a: any, b: any){
+    /**
+     * Sorts reviews in ascending order by rating.
+     * @param {any} a The first review to compare.
+     * @param {any} b The second review to compare.
+     * @returns {number} A negative number if a should be ordered before b, a positive number if a should be ordered after b, or 0 if the order is equal.
+     */
+    function sortByRatingAsc(a: any, b: any):number{
         return a.rating - b.rating
     }
-    function sortByRatingDesc(a: any, b: any){
+
+    /**
+     * Sorts reviews in descending order by rating.
+     * @param {any} a The first review to compare.
+     * @param {any} b The second review to compare.
+     * @returns {number} A negative number if a should be ordered before b, a positive number if a should be ordered after b, or 0 if the order is equal.
+     */
+    function sortByRatingDesc(a: any, b: any):number{
         return b.rating - a.rating
     }
+    
     const options = [
         {name:'Date (newest)', function: sortByDateDesc}, 
         {name:'Date (oldest)', function: sortByDateAsc},

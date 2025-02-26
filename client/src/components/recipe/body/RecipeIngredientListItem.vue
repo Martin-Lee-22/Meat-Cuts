@@ -16,7 +16,7 @@
      * 
      * @param {Event} e - The change event triggered by the textarea input.
      */
-    function onChange(e: Event) {
+    function onChange(e: Event): void{
         const target = e.target as HTMLTextAreaElement
         if(ingredientsModel.value) ingredientsModel.value[props.index] = target.value
     }

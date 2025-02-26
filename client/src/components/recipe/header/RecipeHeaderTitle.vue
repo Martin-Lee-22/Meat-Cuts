@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import { formatElementTextSize } from '@/utils/helperFunctions';
-import { onMounted, onUpdated, useTemplateRef } from 'vue';
+    import { formatElementTextSize } from '@/utils/helperFunctions';
+    import { onMounted, onUpdated, useTemplateRef } from 'vue';
+
     defineProps<{editMode: boolean}>();
     const title = defineModel('title');
     const containerRef = useTemplateRef('containerRef')
     const inputRef = useTemplateRef('inputRef')
 
+    // Sets the size of the title element
     onMounted(()=>{
         formatElementTextSize('recipe-header-title', 30, 6)
     })
+
+    // Removes the error classes if the input is valid.
     onUpdated(()=>{
         if(containerRef.value?.classList.contains('empty-text-input') && containerRef.value?.classList.contains('has-error') && 
             inputRef.value) {

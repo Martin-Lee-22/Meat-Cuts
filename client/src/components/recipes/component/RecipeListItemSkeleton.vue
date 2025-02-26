@@ -1,6 +1,3 @@
-<script setup lang="ts">
-</script>
-
 <template>
     <div class="recipe-list-item-skeleton-container skeleton-bg">
         <div class="recipe-list-item-skeleton-info-container">
@@ -32,18 +29,15 @@
         justify-content: space-around;
         padding: 0 0.5rem 0.25rem 0.5rem;
     }
-
     .recipe-list-item-skeleton-title{
         margin-top: 2rem;
         width: 80%;
         height: 1rem;
     }
-
     .recipe-list-item-skeleton-rating{
         width: 50%;
         height: 1rem;
     }
-
     .recipe-list-item-skeleton-tags{
         width: 100%;
         height: 2rem;

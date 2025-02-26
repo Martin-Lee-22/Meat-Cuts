@@ -10,7 +10,7 @@
      * If a file is selected, it uses FileReader to read the file as a data URL
      * and sets the resulting data URL to the previewImgSrc ref for display.
      */
-    const onChange = () => {
+    const onChange = (): void => {
         const file = input.value!.files;
         if (file) {
             // Code belows is to preview the image

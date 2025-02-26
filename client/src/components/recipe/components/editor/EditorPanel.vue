@@ -1,30 +1,29 @@
 <script setup lang="ts">
-import BaseStarsRating from '@/components/base/BaseStarsRating.vue';
-import EditorPanelMenu from './EditorPanelMenu.vue';
-import { ref, watch, useTemplateRef } from 'vue';
+    import BaseStarsRating from '@/components/base/BaseStarsRating.vue';
+    import EditorPanelMenu from './EditorPanelMenu.vue';
+    import { ref, watch, useTemplateRef } from 'vue';
 
-defineProps({editor:{type: Object, default: null}, extensions:{type: Object}})
-const showMenu = ref(false)
-const menuContainer = useTemplateRef('editor-panel-menu-container')
-const ratingModel = defineModel('ratingModel');
+    defineProps({editor:{type: Object, default: null}, extensions:{type: Object}})
+    const showMenu = ref(false)
+    const menuContainer = useTemplateRef('editor-panel-menu-container')
+    const ratingModel = defineModel('ratingModel');
 
-/**
- * Listens for mouseup events outside of the menu container and sets showMenu to false
- * @param {MouseEvent} e - The mouse event triggered on mouse up.
- */
-function onOutsideClick(e: MouseEvent) {
-    const target = e.target as HTMLElement
-    if(!menuContainer.value?.contains(target)) showMenu.value = false
-}
-
-watch(showMenu, () => {
-    if(showMenu.value) {
-        document.addEventListener('mouseup', onOutsideClick)
-    } else {
-        document.removeEventListener('mouseup', onOutsideClick)
+    /**
+     * Listens for mouseup events outside of the menu container and sets showMenu to false
+     * @param {MouseEvent} e - The mouse event triggered on mouse up.
+     */
+    function onOutsideClick(e: MouseEvent): void {
+        const target = e.target as HTMLElement
+        if(!menuContainer.value?.contains(target)) showMenu.value = false
     }
-})
 
+    watch(showMenu, () => {
+        if(showMenu.value) {
+            document.addEventListener('mouseup', onOutsideClick)
+        } else {
+            document.removeEventListener('mouseup', onOutsideClick)
+        }
+    })
 </script>
 
 <template>

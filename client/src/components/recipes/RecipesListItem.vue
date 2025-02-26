@@ -8,7 +8,7 @@
     import { getRecipeImageAPI } from '@/api/recipes';
 
     const props = defineProps<{recipe: recipe, index: number}>();
-
+    const recipeStore = useRecipeStore();
     const maxLength = 37
     const imageRef = useTemplateRef('recipeImage')
     const name = formatLength(props.recipe.name, maxLength)
@@ -17,12 +17,10 @@
         return new URL('@/../public/default_recipe_img_2.png', import.meta.url).href
     })
 
-    const recipeStore = useRecipeStore();
-
     /**
      * Sets the current recipe in the recipe store and toggles the recipe panel
      */
-    function onClick(){
+    function onClick(): void {
         recipeStore.setRecipe(props.recipe)
         recipeStore.toggleShowRecipe()
     }

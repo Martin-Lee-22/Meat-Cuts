@@ -10,5 +10,3 @@
         <BaseSelect :title=title :selected=data :options="options"/>
     </div>
 </template>
-
-<style lang="css" scoped></style>

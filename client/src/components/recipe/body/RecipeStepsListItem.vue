@@ -10,6 +10,10 @@
         if(props.editMode) checked.value = false
     })
 
+    /**
+     * Updates the step at the specified index in the stepsModel array with the value from the textarea input when a change event occurs.
+     * @param {Event} e - The change event triggered by the textarea input.
+     */
     function onChange(e: Event){
         const target = e.target as HTMLTextAreaElement
         if(stepsModel.value) stepsModel.value[props.index] = target.value

@@ -6,7 +6,6 @@
 
     defineProps<{reviews: review[], rating: number}>()
     const showMenu = ref(false)
-    
 </script>
 
 <template>

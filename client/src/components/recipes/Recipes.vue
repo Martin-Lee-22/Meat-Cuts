@@ -6,15 +6,13 @@
 
     const cutsStore = useCutsStore();
     const resizeStore = useResizeStore();
-
     const sectionRef = useTemplateRef('recipes-section');
     const borderWidth = 5 // border width in px; should be the same as the value in the CSS
 
     // a function for the event listeners below that recalls the resize function in the resize store.
-    function resize(e: MouseEvent){
+    function resize(e: MouseEvent): void{
         resizeStore.resizeElement(e)
     }
-
 
     // Once the component is updated, the event listeners are added for resizing.
     onUpdated(() => {

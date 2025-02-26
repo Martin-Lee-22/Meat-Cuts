@@ -1,18 +1,14 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+    import { defineProps } from 'vue';
 
-const props = defineProps({editor:{type: Object, default: null}, extensions:{type: Object}})
+    const props = defineProps({editor:{type: Object, default: null}, extensions:{type: Object}})
 
-/**
- * Prompt the user for a YouTube URL and insert a YouTube video into the editor at the user's current position.
- */
-function addVideo() {
-    const url = prompt('Enter YouTube URL')
-    props.editor.commands.setYoutubeVideo({
-        src: url,
-        width: 500,
-        height: 300,
-    })
+    /**
+     * Prompt the user for a YouTube URL and insert a YouTube video into the editor at the user's current position.
+     */
+    function addVideo(): void {
+        const url = prompt('Enter YouTube URL')
+        props.editor.commands.setYoutubeVideo({src: url, width: 500, height: 300})
     }
 </script>
 
@@ -33,15 +29,15 @@ function addVideo() {
 </template>
 
 <style lang="css" scoped>
-.editor-panel-menu-container{
-    position: absolute;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 5px;
-    right: 0;
-    display: flex;
-}
-.active-button{
-    color: black;
-}
+    .editor-panel-menu-container{
+        position: absolute;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 5px;
+        right: 0;
+        display: flex;
+    }
+    .active-button{
+        color: black;
+    }
 </style>

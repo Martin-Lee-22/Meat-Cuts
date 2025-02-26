@@ -17,7 +17,6 @@
             clearRecipes()
         }
     })
-
 </script>
 
 <template>
@@ -48,7 +47,6 @@
             align-content: start;
             gap: 8px;
     }
-    
     .empty-list{
         &::before{
             content: "";

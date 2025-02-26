@@ -18,7 +18,7 @@
      * has been liked or disliked, and ensures that a user cannot like and dislike
      * simultaneously.
      */
-    function onClick(e: MouseEvent) {
+    function onClick(e: MouseEvent): void {
     const button = e.currentTarget as HTMLButtonElement;
 
     if(button.name === 'thumbs-up-button'){

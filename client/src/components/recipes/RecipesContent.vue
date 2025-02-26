@@ -15,7 +15,6 @@
             recipeStore.setShowRecipe(false)
         }
     })
-    
 </script>
 
 <template>

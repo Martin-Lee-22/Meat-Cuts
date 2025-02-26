@@ -1,21 +1,20 @@
 <script setup lang="ts">
-import { countLines } from '@/utils/helperFunctions';
-import {onMounted } from 'vue';
+    import { countLines } from '@/utils/helperFunctions';
+    import {onMounted } from 'vue';
 
-const props = defineProps<{comment: string, index: number}>();
-const maxNumberOfLines = 3
+    const props = defineProps<{comment: string, index: number}>();
+    const maxNumberOfLines = 3
 
-onMounted(()=>{ 
-    // If the comment has more lines than the max number of lines, show the expand button and keep the 'cutoff-text' class.
-    const numberOfLines = countLines('review-comment-container-','review-comment-', props.index)
-    const expandBtn = document.querySelector(`[name=expand-btn-${props.index}]`) as HTMLInputElement
-    const divElement = document.querySelector(`[name=review-comment-container-${props.index}]`) as HTMLDivElement
-    if(expandBtn && divElement && numberOfLines < maxNumberOfLines){
-        expandBtn.style.display = 'none'
-        divElement.classList.remove('cutoff-text')
-    }
-})
-
+    onMounted(()=>{ 
+        // If the comment has more lines than the max number of lines, show the expand button and keep the 'cutoff-text' class.
+        const numberOfLines = countLines('review-comment-container-','review-comment-', props.index)
+        const expandBtn = document.querySelector(`[name=expand-btn-${props.index}]`) as HTMLInputElement
+        const divElement = document.querySelector(`[name=review-comment-container-${props.index}]`) as HTMLDivElement
+        if(expandBtn && divElement && numberOfLines < maxNumberOfLines){
+            expandBtn.style.display = 'none'
+            divElement.classList.remove('cutoff-text')
+        }
+    })
 </script>
 
 <template>
@@ -48,7 +47,6 @@ onMounted(()=>{
         pointer-events:none;
         background: linear-gradient(to bottom, transparent, white)
     }
-
     .expand-btn{
         appearance:none;
         border: 1px solid rgb(205, 205, 205);
@@ -64,15 +62,12 @@ onMounted(()=>{
             display: none;
         }
     }
-
     .expand-btn:hover{
         background-color: rgb(243, 243, 243);
     }
-
     .expand-btn::before{
         content:'Show More';
     }
-
     .cutoff-text:has(+ .expand-btn:checked){
         max-height:100%;
     }

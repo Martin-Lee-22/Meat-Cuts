@@ -8,11 +8,12 @@
      * Listens for mouseup events outside of the menu container and sets showMenu to false
      * @param {MouseEvent} e - The mouse event triggered on mouse up.
      */
-    function onOutsideClick(e: MouseEvent) {
+    function onOutsideClick(e: MouseEvent): void {
         const target = e.target as HTMLElement
         if(!moreContainer.value?.contains(target)) showMenu.value = false
     }
 
+    // Watch for changes in showMenu and add or remove event listeners
     watch(showMenu, () => {
         if(showMenu.value) {
             document.addEventListener('mouseup', onOutsideClick)

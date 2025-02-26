@@ -1,23 +1,24 @@
 <script setup lang="ts">
-import { useRecipeStore } from '@/stores/recipe';
-import { formatDate } from '@/utils/helperFunctions';
-import { onMounted, onUpdated, useTemplateRef } from 'vue';
+    import { formatDate } from '@/utils/helperFunctions';
+    import { onMounted, onUpdated, useTemplateRef } from 'vue';
 
-const props = defineProps(['title', 'data', 'editMode', 'type', 'width']);
-const data = defineModel('data');
-const inputRef = useTemplateRef('inputRef')
-const containerRef = useTemplateRef('containerRef')
+    const props = defineProps(['title', 'data', 'editMode', 'type', 'width']);
+    const data = defineModel('data');
+    const inputRef = useTemplateRef('inputRef')
+    const containerRef = useTemplateRef('containerRef')
 
-// onMounted is needed to format the date to the correct format due to v-model directive.
-onMounted(()=>{
-    if(props.type === 'date' && inputRef.value) {
-        inputRef.value.value = formatDate(new Date())
-    }
-    if(props.type === 'date') {
-        data.value = formatDate(new Date(data.value as Date)); 
-    }
-})
-onUpdated(()=>{
+    // Format the date to the correct format due to v-model directive.
+    onMounted(()=>{
+        if(props.type === 'date' && inputRef.value) {
+            inputRef.value.value = formatDate(new Date())
+        }
+        if(props.type === 'date') {
+            data.value = formatDate(new Date(data.value as Date)); 
+        }
+    })
+
+    // Removes the error classes if the input is valid.
+    onUpdated(()=>{
         if(containerRef.value?.classList.contains('empty-text-input') && containerRef.value?.classList.contains('has-error') && 
             inputRef.value) {
             containerRef.value.classList.remove('empty-text-input')

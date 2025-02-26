@@ -21,9 +21,18 @@
     const isCallingDeletingAPI = ref(false)
     const isCallingPutAPI = ref(false)
 
-    function checkRequiredInputs(){
+    /**
+     * Validates that all required inputs in the recipe object have been provided.
+     * 
+     * This function checks the 'name', 'author', 'ingredients', and 'steps' fields 
+     * of the recipe to ensure they are not empty or whitespace. If any required field 
+     * is missing or invalid, it adds error classes to the respective DOM elements 
+     * and returns false. Otherwise, it returns true.
+     * @returns {boolean} - Returns true if all required inputs are complete; 
+     *                      otherwise, false.
+     */
+    function checkRequiredInputs(): boolean {
         let completeRequiredInputs = true
-
         const requiredInputs = [
             {key: 'name', ref:'.recipe-header-title-container', hasInput: true}, 
             {key: 'author', ref:'.recipe-header-info', hasInput: true}, 
@@ -57,11 +66,21 @@
         return completeRequiredInputs
     }
 
-    async function updateReviews(){
+    /**
+     * Updates the reviews for the current recipe by calling the getReviewsAPI.
+     * The updated reviews are stored in the reviews reactive reference.
+     * @returns {Promise<void>}
+     */
+    async function updateReviews(): Promise<void>{
         reviews.value = await getReviewsAPI(recipe.value.id)
     }
 
-    function calculateRating(){
+    /**
+     * Calculates the average rating from the list of reviews for the current recipe.
+     * If there are no reviews, it returns 0.
+     * @returns {number} - The average rating of the reviews, rounded down to the nearest whole number.
+     */
+    function calculateRating(): number{
         let totalRating = 0
         if(reviews.value.length){
             totalRating = Math.floor(reviews.value.reduce((total, review) => total + review.rating, 0) / reviews.value.length)
@@ -69,7 +88,13 @@
         return totalRating
     }
 
-    async function onSubmit(e: Event){
+    /**
+     * Handles the submission of a recipe by preventing the default form action, 
+     * validating the inputs, posting the recipe to the server, and updating the recipes list.
+     * @param {Event} e - The submit event.
+     * @returns {Promise<void>}
+     */
+    async function onSubmit(e: Event): Promise<void>{
         e.preventDefault()
 
         const fileRef = document.querySelector('#image_input') as HTMLInputElement
@@ -102,13 +127,18 @@
     /**
      * Closes the recipe by clearing the current recipe and toggling the showRecipe flag off.
      */
-    function closeRecipe(){
+    function closeRecipe(): void{
         if(recipeStore.getAddRecipeMode()) recipeStore.setAddRecipeMode(false)
         recipeStore.clearRecipe()
         recipeStore.toggleShowRecipe()
     }
 
-    function cancelRecipe(){
+    /**
+     * Cancels the current recipe by clearing the addRecipeMode flag, and 
+     * resetting the recipe to the current recipe in the recipe store. If the 
+     * recipe is not in add recipe mode, it sets the edit mode to false.
+     */
+    function cancelRecipe(): void{
         if(recipeStore.getAddRecipeMode()) {
             recipeStore.setAddRecipeMode(false); 
             recipeStore.setShowRecipe(false)
@@ -117,7 +147,12 @@
         editMode.value = false
     }
 
-    async function deleteRecipe(){
+    /**
+     * Deletes the current recipe by calling the deleteRecipeAPI and deleteRecipeImageAPI functions and
+     * toggling the showRecipe flag off. This function is only called if the isCallingDeletingAPI flag is false.
+     * @returns {Promise<void>}
+     */
+    async function deleteRecipe(): Promise<void>{
         if(!isCallingDeletingAPI.value){
             isCallingDeletingAPI.value = true
             await deleteRecipeAPI(recipeStore.getRecipe())
@@ -145,7 +180,9 @@
         if(cutStore.isCutEmpty()) closeRecipe()
     })
 
-
+    /**
+     * Watch for changes in the length of the reviews array and update the rating accordingly.
+     */
     watch(()=> reviews.value.length, () => {
         rating.value = calculateRating()
     })
