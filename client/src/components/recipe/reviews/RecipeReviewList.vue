@@ -78,7 +78,7 @@
 
 <style lang="css" scoped>
     .recipe-reviews-list-container{
-        margin-top: 65px;
+        margin-top: 50px;
     }
     .recipe-reviews-list-inner-container{
         display: flex;
@@ -106,7 +106,7 @@
         &::before{
             content: "";
             position: absolute;
-            top: 50%;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -60%);
             display: block;
@@ -122,7 +122,7 @@
             white-space: pre;
             position: absolute;
             text-align: center;
-            top: 80%;
+            top: 70%;
             left: 50%;
             font-family: "Roboto Flex", sans-serif;
             font-weight: 500;

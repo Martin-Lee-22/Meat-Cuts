@@ -5,7 +5,6 @@
     import RecipesList from './RecipesList.vue';
     import { clearRecipes, getRecipes} from '@/api/recipes';
     import { watch } from 'vue';
-    import { useRecipeStore } from '@/stores/recipe';
 
     const cutsStore = useCutsStore()
 
@@ -20,7 +19,7 @@
     })
 
     // Watch the recipe changes, if the recipe is not empty, remove empty-list class from recipes-list-container
-    watch(() => getRecipes().length, () => {
+    watch(getRecipes(), () => {
         if(getRecipes().length > 0) {
             document.getElementsByClassName('recipes-list-container')[0].classList.remove('empty-list')
         }
@@ -33,7 +32,7 @@
         <div class="recipes-list-container">
             <Suspense :key="cutsStore.getCut().value.cut"> 
                 <template #default>
-                    <RecipesList/>
+                    <RecipesList :key="getRecipes().length"/>
                 </template>
                 <template #fallback>
                     <RecipeListSkeleton/>

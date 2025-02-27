@@ -6,7 +6,7 @@ export type review = {
     published: Date,
     likes: number,
     dislikes: number,
-    reviewId: string
+    reviewId: string,
 }
 
 export type rating = {
