@@ -10,6 +10,7 @@
     import { deleteRecipeAPI, deleteRecipeImageAPI, getRecipes, getRecipesAPI, putRecipe, putRecipeImageAPI } from '@/api/recipes';
     import type { recipe as recipeType, review as reviewType } from '@/types/recipes';
     import { getReviewsAPI } from '@/api/reviews';
+    import { calculateRating } from '@/utils/helperFunctions';
     
     const cutStore = useCutsStore()
     const recipeStore = useRecipeStore()
@@ -67,25 +68,13 @@
     }
 
     /**
-     * Updates the reviews for the current recipe by calling the getReviewsAPI.
-     * The updated reviews are stored in the reviews reactive reference.
+     * Updates the reviews and ratings for the current recipe by calling the getReviewsAPI & putRecipeAPI.
+     * The updated reviews are stored in the reviews reference.
      * @returns {Promise<void>}
      */
-    async function updateReviews(): Promise<void>{
+    async function updateReviewsAndRatings(): Promise<void>{
         reviews.value = await getReviewsAPI(recipe.value.id)
-    }
-
-    /**
-     * Calculates the average rating from the list of reviews for the current recipe.
-     * If there are no reviews, it returns 0.
-     * @returns {number} - The average rating of the reviews, rounded down to the nearest whole number.
-     */
-    function calculateRating(): number{
-        let totalRating = 0
-        if(reviews.value.length){
-            totalRating = Math.floor(reviews.value.reduce((total, review) => total + review.rating, 0) / reviews.value.length)
-        }
-        return totalRating
+        await putRecipe({...recipe.value, rating: calculateRating(reviews.value)}, false)
     }
 
     /**
@@ -94,7 +83,7 @@
      * @param {Event} e - The submit event.
      * @returns {Promise<void>}
      */
-    async function onSubmit(e: Event): Promise<void>{
+    async function onSubmitRecipe(e: Event): Promise<void>{
         e.preventDefault()
 
         const fileRef = document.querySelector('#image_input') as HTMLInputElement
@@ -165,12 +154,12 @@
 
     /**
      * - Sets the edit mode to false if the recipe is not in add recipe mode.
-     * - calls the reviews api to get the reviews.
+     * - calls the reviews api to get the reviews and calculates the rating.
      */
     onMounted(async () => {
         if(!recipeStore.getAddRecipeMode()) editMode.value = false 
         reviews.value = await getReviewsAPI(recipe.value.id)
-        rating.value = calculateRating()
+        rating.value = calculateRating(reviews.value)
     })
 
     /**
@@ -184,7 +173,7 @@
      * Watch for changes in the length of the reviews array and update the rating accordingly.
      */
     watch(()=> reviews.value.length, () => {
-        rating.value = calculateRating()
+        rating.value = calculateRating(reviews.value)
     })
 
 </script>
@@ -201,8 +190,8 @@
             <RecipeHeader v-model:recipe="recipe" :editMode="editMode" :reviewsLength="reviews.length" :rating="rating"/>
             <RecipeBody v-model:recipe="recipe" :editMode="editMode"/>
             <RecipeFooter v-if="editMode" :cancelRecipe="cancelRecipe" :deleteRecipe="deleteRecipe" :isCallingDeletingAPI="isCallingDeletingAPI" :isCallingPutAPI="isCallingPutAPI"/>
-            <RecipeReviews v-if="!editMode" :recipe="recipe" :reviews="reviews" :totalRating="rating" :updateReviews="updateReviews"/>
-            <form id="form-recipe" method="P" v-on:submit="onSubmit"></form>
+            <RecipeReviews v-if="!editMode" :recipe="recipe" :reviews="reviews" :totalRating="rating" :updateReviews="updateReviewsAndRatings"/>
+            <form id="form-recipe" method="P" @submit="onSubmitRecipe"></form>
         </article>
     </Transition>
 </template>

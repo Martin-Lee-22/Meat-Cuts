@@ -38,7 +38,7 @@
         <img :src="imgSrc ? imgSrc : imgSrcDefault" alt="random image" ref="recipeImage"/>
         <div class="recipe-list-item-info-container">
             <h5 class="recipes-list-item-title">{{name}}</h5>
-            <Rating :rating="recipe.rating"/>
+            <Rating  :rating="recipe.rating"/>
             <TagList :recipe="recipe"/>
         </div>
     </div>

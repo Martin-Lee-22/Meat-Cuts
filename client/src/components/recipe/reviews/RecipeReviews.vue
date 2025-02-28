@@ -35,7 +35,7 @@
      * Handles the submission of a review by preventing the default form action, validating the inputs, posting the review to the server, and updating the reviews list.
      * @param {Event} e - The submit event.
      */
-    async function onSubmit(e: Event): Promise<void> {
+    async function onSubmitReview(e: Event): Promise<void> {
         e.preventDefault();
         let validInputs = true
         if(userName.value.length === 0){
@@ -102,7 +102,7 @@
     <div id="recipe-reviews" class="recipe-reviews-container">
         <h3>Reviews</h3>
         <RecipeReviewsSummary :key="reviews.length" :reviews="reviews" :rating="totalRating"/>
-        <form id="form-review" @submit="onSubmit">
+        <form id="form-review" @submit="onSubmitReview">
             <div ref="nameContainer" class="name-container">
                 <label>Name:</label>
                 <input type='text' placeholder="Full name" v-model="userName" onkeydown="return /[a-z, ,-]/i.test(event.key)"/>

@@ -1,6 +1,8 @@
 
 /* A collection of helper functions */
 
+import type { review } from "@/types/recipes";
+
 
 /**
  * Formats a date as a string in the format "Year-Month-Day".
@@ -108,4 +110,17 @@ export function generateRandomString(length: number): string {
     }
 
     return result;
+}
+
+/**
+ * Calculates the average rating from the list of reviews for the current recipe.
+ * If there are no reviews, it returns 0.
+ * @returns {number} - The average rating of the reviews, rounded down to the nearest whole number.
+ */
+export function calculateRating(reviews: review[]): number{
+    let totalRating = 0
+    if(reviews.length){
+        totalRating = Math.floor(reviews.reduce((total, review) => total + review.rating, 0) / reviews.length)
+    }
+    return totalRating
 }

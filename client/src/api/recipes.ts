@@ -46,7 +46,7 @@ export async function postRecipe(recipe:recipe, id: number): Promise<void> {
  * Updates an existing recipe in the API and updates the recipe store with the response.
  * @param {recipe} recipe - The recipe object containing updated details to be stored.
  */
-export async function putRecipe(recipe:recipe): Promise<void> {
+export async function putRecipe(recipe:recipe, toast: boolean = true): Promise<void> {
     const recipeStore = useRecipeStore()
     try{
         await fetch(url  + `${recipe.animal}/${recipe.cut}/${recipe.id}`, {
@@ -54,7 +54,7 @@ export async function putRecipe(recipe:recipe): Promise<void> {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(recipe)
         }).then(response => response.json()).then(data => recipeStore.setRecipe(data))
-        callToast(TYPE.SUCCESS, 'Success! Recipe saved.')
+        if(toast) callToast(TYPE.SUCCESS, 'Success! Recipe saved.')
     }catch(e){
         console.log(`Error: ${e}`)
         callToast(TYPE.ERROR, 'ERROR: Recipe not saved. Please try again later.')

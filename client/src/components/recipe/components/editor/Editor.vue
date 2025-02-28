@@ -72,7 +72,7 @@ const editor = useEditor({
   <div ref="editor-container" class="editor-container">
     <editor-content :editor="editor" />
     <EditorPanel v-model:ratingModel="ratingModel" :editor="editor" :extensions="extensions" />
-    <button class="post-button" v-if="extensions?.addPost" type="submit" :disabled="isPosting ? true : false">
+    <button form="form-review" class="post-button" v-if="extensions?.addPost" type="submit" :disabled="isPosting ? true : false">
       <BaseLoadSpinner v-if="isPosting" spinner-height="18px" spinner-width="18px"/>
       <span v-else>Post</span>
     </button>
