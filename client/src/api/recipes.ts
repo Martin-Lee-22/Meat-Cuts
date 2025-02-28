@@ -2,6 +2,8 @@ import { ref } from 'vue';
 import type { recipe } from '@/types/recipes';
 import { useRecipeStore } from '../stores/recipe';
 import { generateRandomString } from '@/utils/helperFunctions';
+import { callToast } from '@/shared/toast';
+import { TYPE } from 'vue-toastification';
 
 // The recipes array stores the recipes data.
 const recipes = ref<recipe[]>([])
@@ -44,14 +46,19 @@ export async function postRecipe(recipe:recipe, id: number): Promise<void> {
  * Updates an existing recipe in the API and updates the recipe store with the response.
  * @param {recipe} recipe - The recipe object containing updated details to be stored.
  */
-
 export async function putRecipe(recipe:recipe): Promise<void> {
     const recipeStore = useRecipeStore()
-    await fetch(url  + `${recipe.animal}/${recipe.cut}/${recipe.id}`, {
-        method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(recipe)
-    }).then(response => response.json()).then(data => recipeStore.setRecipe(data))
+    try{
+        await fetch(url  + `${recipe.animal}/${recipe.cut}/${recipe.id}`, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(recipe)
+        }).then(response => response.json()).then(data => recipeStore.setRecipe(data))
+        callToast(TYPE.SUCCESS, 'Success! Recipe saved.')
+    }catch(e){
+        console.log(`Error: ${e}`)
+        callToast(TYPE.ERROR, 'ERROR: Recipe not saved. Please try again later.')
+    }
 }
 
 /**
@@ -63,9 +70,10 @@ export async function deleteRecipeAPI(recipe:recipe): Promise<void> {
         await fetch(url  + `${recipe.animal}/${recipe.cut}/${recipe.id}`, {
             method: 'DELETE'
         })
-        console.log('Recipe Successfully deleted!')
+        callToast(TYPE.SUCCESS, 'Success! Recipe Deleted.')
     }catch(e){
         console.log('Error: Could not delete recipe: ' + e)
+        callToast(TYPE.ERROR, 'ERROR: Recipe not deleted. Please try again later.')
     }
 }
 
@@ -88,7 +96,7 @@ export async function putRecipeImageAPI(file: File): Promise<string> {
         }catch(e){
             console.log(`Error - Cannot upload image: ${e}`)
         }
-        }
+    }
     return ''
 }
 

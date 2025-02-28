@@ -10,7 +10,7 @@
     import { deleteRecipeAPI, deleteRecipeImageAPI, getRecipes, getRecipesAPI, putRecipe, putRecipeImageAPI } from '@/api/recipes';
     import type { recipe as recipeType, review as reviewType } from '@/types/recipes';
     import { getReviewsAPI } from '@/api/reviews';
-
+    
     const cutStore = useCutsStore()
     const recipeStore = useRecipeStore()
     const recipe = ref(JSON.parse(JSON.stringify(recipeStore.getRecipe())))

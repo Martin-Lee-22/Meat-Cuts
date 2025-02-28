@@ -1,4 +1,6 @@
+import { callToast } from '@/shared/toast';
 import type { review } from '@/types/recipes';
+import { TYPE } from 'vue-toastification';
 
 const url: string | undefined = import.meta.env.VITE_REVIEWS_URL
 
@@ -34,8 +36,9 @@ export async function postReviewsAPI(review: review): Promise<void> {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(review)
         })
-        console.log('Review Posted!')
+        callToast(TYPE.SUCCESS, 'Success! Review Posted.')
     }catch(e){
         console.log(`Error: ${e}`)
+        callToast(TYPE.ERROR, 'ERROR: Review cannot be posted. Please try again later.')
     }
 }
