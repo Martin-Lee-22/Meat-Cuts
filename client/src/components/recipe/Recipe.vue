@@ -145,7 +145,7 @@
         if(!isCallingDeletingAPI.value){
             isCallingDeletingAPI.value = true
             await deleteRecipeAPI(recipeStore.getRecipe())
-            await deleteRecipeImageAPI(recipeStore.getRecipe().image)
+            if(recipeStore.getRecipe().image) await deleteRecipeImageAPI(recipeStore.getRecipe().image)
             isCallingDeletingAPI.value = true
             recipeStore.setShowRecipe(false)
             editMode.value = false
@@ -175,7 +175,6 @@
     watch(()=> reviews.value.length, () => {
         rating.value = calculateRating(reviews.value)
     })
-
 </script>
 
 <template>

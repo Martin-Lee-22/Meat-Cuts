@@ -42,9 +42,11 @@ export async function postRecipe(recipe:recipe, id: number): Promise<void> {
     }).then(response => response.json()).then(data => recipeStore.setRecipe(data))
 }
 
+
 /**
- * Updates an existing recipe in the API and updates the recipe store with the response.
- * @param {recipe} recipe - The recipe object containing updated details to be stored.
+ * Updates the given recipe in the API and updates the current recipe in the recipe store.
+ * @param {recipe} recipe - The recipe to update.
+ * @param {boolean} [toast=true] - Whether to show a toast notification when the recipe is updated.
  */
 export async function putRecipe(recipe:recipe, toast: boolean = true): Promise<void> {
     const recipeStore = useRecipeStore()
