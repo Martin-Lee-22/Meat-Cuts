@@ -31,7 +31,7 @@ The reason I created this web application is to try out and gain experience with
 - Cypress
 <br/>
 
-## What I learned:
+## What I Learned:
 - Vue.js as frontend.
 - Amazon Web services as backend:
   - Created IAM accounts to and assign permissions/policies/roles.
