@@ -39,4 +39,5 @@ The reason I created this web application is to try out and gain experience with
   - Created tables in DynamoDB to store objects (ex: recipe data).
   - Created and maintain backend logic, such as CRUD, in Lambda.
   - Created APIs' using API gateway to perform CRUD actions.
+  - Learned how to host the web app via Amplify
 - Cypress to create tests and debug problems.
