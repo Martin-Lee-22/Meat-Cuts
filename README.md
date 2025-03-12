@@ -16,9 +16,12 @@ Link: https://main.d8rion2fc0020.amplifyapp.com/
  
 - to view/submit/edit/delete a recipe.
 
-   <img src="https://default-martin-bucket.s3.us-east-2.amazonaws.com/meat-cuts-3.gif" width="500" alt="Select a recipe to view and edit"/>
+  <img src="https://default-martin-bucket.s3.us-east-2.amazonaws.com/meat-cuts-3.gif" width="500" alt="Select a recipe to view and edit"/>
+   
 ## Why I created this App:
 The reason I created this web application is to try out and gain experience with Vue.js, Amazon Web Services (AWS), and practice modern web techniques.
+
+<br/>
 
 ## Tech Stack:
 - Vue.js
@@ -26,6 +29,7 @@ The reason I created this web application is to try out and gain experience with
 - TypeScript
 - GSAP
 - Cypress
+<br/>
 
 ## What I learned:
 - Vue.js as frontend.
