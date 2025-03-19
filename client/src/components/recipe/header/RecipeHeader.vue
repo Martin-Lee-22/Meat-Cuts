@@ -52,6 +52,7 @@
     .recipe-header-image{
         width: 100%;
         height: 325px;
+        object-fit: cover;
     }
     .article-info-container{
         display: flex;

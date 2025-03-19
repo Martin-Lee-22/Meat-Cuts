@@ -151,7 +151,7 @@
 <template>
     <header class="recipes-header">
         <span>Sort by: </span><BaseSelect v-model="sortFunction" :options="options"/>
-        <BaseButton title="Add Recipe" :callBack="() => {addRecipe()}">
+        <BaseButton title="Add Recipe" class="add-recipe-button" :callBack="() => {addRecipe()}">
             <span class="material-symbols-outlined">add</span>
         </BaseButton>
     </header>

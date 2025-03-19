@@ -4,7 +4,7 @@
 
 <template>
     <Transition appear mode="out-in" name="fade-upwards">
-        <h1>Select an animal</h1>
+        <h1 class="animal-selector-header">Select an animal</h1>
     </Transition>
     <AnimalsList/>
 </template>

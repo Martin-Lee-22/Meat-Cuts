@@ -72,7 +72,7 @@
         <div class="cuts-selector-container">
             <img :src="imgSrc" usemap="#image-map">
             <svg id="cut-svg" xmlns="http://www.w3.org/2000/svg" :viewBox="selectedAnimal.viewBox">
-                <path v-for="cut in selectedAnimal.cuts" :key="cut.id" :d="cut.coords" :data-cut="JSON.stringify(cut)" fill="transparent"/>
+                <path v-for="cut in selectedAnimal.cuts" :key="cut.id" :data-name="cut.cut" :d="cut.coords" :data-cut="JSON.stringify(cut)" fill="transparent"/>
             </svg>
     </div>
     </Transition>
